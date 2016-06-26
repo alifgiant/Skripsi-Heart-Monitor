@@ -24,6 +24,13 @@ import com.mikepenz.google_material_typeface_library.GoogleMaterial;
 import com.mikepenz.iconics.IconicsDrawable;
 import com.motion.lab.pulse.adapter.DeviceViewAdapter;
 import com.motion.lab.pulse.model.PulseDevice;
+import com.motion.lab.pulse.network.MqttHandler;
+
+import org.eclipse.paho.client.mqttv3.IMqttActionListener;
+import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
+import org.eclipse.paho.client.mqttv3.IMqttToken;
+import org.eclipse.paho.client.mqttv3.MqttCallback;
+import org.eclipse.paho.client.mqttv3.MqttMessage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +40,7 @@ public class HomeActivity extends AppCompatActivity {
     private ArrayList<PulseDevice> deviceList = new ArrayList<>();
 
     private RecyclerView recyclerView;
+    private MqttHandler mqttHandler;
     private DeviceViewAdapter deviceViewAdapter;
     private FloatingActionButton fab;
     private EditText input;
@@ -60,8 +68,36 @@ public class HomeActivity extends AppCompatActivity {
         }
 
         setUpRecyclerView();
+        //setupMqtt();
     }
 
+
+    // region menu selection
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_home, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_sign_out) {
+            AppConfig.movePageAndFinish(HomeActivity.this, LoginActivity.class);
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+    // endregion
+
+    // region button listener
     View.OnClickListener addButtonClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
@@ -93,6 +129,7 @@ public class HomeActivity extends AppCompatActivity {
             hideOrShowEmpty();
         }
     };
+    // endregion
 
     void setUpRecyclerView(){
         recyclerView = (RecyclerView) findViewById(R.id.device_list_view);
@@ -101,11 +138,13 @@ public class HomeActivity extends AppCompatActivity {
 
         deviceViewAdapter = new DeviceViewAdapter(HomeActivity.this, deviceList);
         recyclerView.setAdapter(deviceViewAdapter);
-        RecyclerTouchListener touchListener = new RecyclerTouchListener(HomeActivity.this, recyclerView, clickListener);
+        RecyclerTouchListener touchListener = new RecyclerTouchListener(HomeActivity.this,
+                recyclerView, clickListener);
         recyclerView.addOnItemTouchListener(touchListener);
         hideOrShowEmpty();
     }
 
+    // region Recycler
     PulseDevice device;
     ClickListener clickListener = new ClickListener() {
         @Override
@@ -141,32 +180,8 @@ public class HomeActivity extends AppCompatActivity {
             (findViewById(R.id.empty_list_view)).setVisibility(View.VISIBLE);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_home, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_sign_out) {
-            AppConfig.movePageAndFinish(HomeActivity.this, LoginActivity.class);
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
     public interface ClickListener {
         void onClick(View view, int position);
-
         void onLongClick(View view, int position);
     }
 
@@ -212,4 +227,5 @@ public class HomeActivity extends AppCompatActivity {
 
         }
     }
+    // endregion
 }
