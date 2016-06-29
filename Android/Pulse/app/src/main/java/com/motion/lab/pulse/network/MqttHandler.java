@@ -8,11 +8,8 @@ import org.eclipse.paho.client.mqttv3.IMqttActionListener;
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
 import org.eclipse.paho.client.mqttv3.IMqttToken;
 import org.eclipse.paho.client.mqttv3.MqttCallback;
-import org.eclipse.paho.client.mqttv3.MqttClient;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -20,19 +17,31 @@ import java.util.ArrayList;
  * Handling MqttConnection Publish and Subscribe
  */
 public class MqttHandler {
-    private final String TAG = "MqttHandler";
+    private final static String TAG = "MqttHandler";
     public enum QOS {QOS_FIRE, QOS_AT_LEAST_ONCE, QOS_EXACT_ONCE}
 
     private static MqttHandler mqttHandler;
 
-    private Context context;
     private String clientId;
     private MqttAndroidClient client;
     private ArrayList<MqttMessageListener> messageListeners;
 
+    public static MqttHandler GetInstance(Context context) throws MqttException{
+        if (mqttHandler == null) {
+            throw new MqttException(new Throwable("Null mqtt handler, cant create Client Id not exist," +
+                    " Invoke GetInstance(Context, ClientId"));
+        }else {
+            mqttHandler.client.registerResources(context);
+        }
+        return mqttHandler;
+    }
+
     public static MqttHandler GetInstance(Context context, String clientId) {
-        if (mqttHandler == null)
+        if (mqttHandler == null) {
             mqttHandler = new MqttHandler(context, clientId);
+        }else {
+            mqttHandler.client.registerResources(context);
+        }
         return mqttHandler;
     }
 
@@ -51,7 +60,6 @@ public class MqttHandler {
     }
 
     private MqttHandler(Context context, String clientId) {
-        this.context = context;
         this.clientId = clientId;
         this.client = new MqttAndroidClient(context, Nethelper.getMqttDomain(context), clientId);
         this.messageListeners = new ArrayList<>();
@@ -76,9 +84,6 @@ public class MqttHandler {
         client.setCallback(mqttCallback);
     }
 
-
-
-
     public void connect(IMqttActionListener mqttActionListener){
         try {
             IMqttToken token = client.connect();
@@ -86,6 +91,14 @@ public class MqttHandler {
         }catch (MqttException e){
             e.printStackTrace();
         }
+    }
+
+    public String getClientId() {
+        return clientId;
+    }
+
+    public void unBind(){
+        client.unregisterResources();
     }
 
     public void disconnect() {
@@ -104,7 +117,7 @@ public class MqttHandler {
             case QOS_EXACT_ONCE: qos = 2; break;
         }
         try {
-            IMqttToken subscToken = client.subscribe(topic, qos);
+            IMqttToken subscToken = client.subscribe("sensor/"+topic, qos);
             subscToken.setActionCallback(new IMqttActionListener() {
                 @Override
                 public void onSuccess(IMqttToken asyncActionToken) {
@@ -157,7 +170,7 @@ public class MqttHandler {
         messageListeners.remove(pos);
     }
 
-    interface MqttMessageListener{
+    public interface MqttMessageListener{
         void onMessageArrive (String topic, MqttMessage message);
     }
     // endregion

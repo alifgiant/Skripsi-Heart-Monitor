@@ -1,11 +1,16 @@
 package com.motion.lab.pulse.model;
 
+import android.util.Log;
+
+import com.motion.lab.pulse.adapter.DeviceViewAdapter;
+import com.motion.lab.pulse.network.MqttHandler;
+
+import org.eclipse.paho.client.mqttv3.MqttMessage;
+
 import io.realm.RealmObject;
+import io.realm.annotations.Ignore;
 import io.realm.annotations.PrimaryKey;
 
-/**
- * Created by maaakbar on 4/28/16.
- */
 public class PulseDevice extends RealmObject{
     @PrimaryKey
     private String id;
@@ -14,6 +19,11 @@ public class PulseDevice extends RealmObject{
     private String lastChecked;
     private boolean isMale;
     private int status;
+
+    @Ignore
+    private DeviceViewAdapter.ViewHolder viewHolder;
+    @Ignore
+    private MqttHandler.MqttMessageListener messageListener;
 
     public String getId() {
         return id;
@@ -66,6 +76,32 @@ public class PulseDevice extends RealmObject{
 
     public PulseDevice setStatus(int status) {
         this.status = status;
+        return this;
+    }
+
+    public DeviceViewAdapter.ViewHolder getViewHolder() {
+        return viewHolder;
+    }
+
+    public PulseDevice setViewHolder(DeviceViewAdapter.ViewHolder viewHolder) {
+        this.viewHolder = viewHolder;
+        return this;
+    }
+
+    public MqttHandler.MqttMessageListener getMessageListener() {
+        return messageListener;
+    }
+
+    public PulseDevice createMessageListener() {
+        this.messageListener = new MqttHandler.MqttMessageListener() {
+            @Override
+            public void onMessageArrive(String topic, MqttMessage message) {
+                Log.i("PulseDevice", "onMessageArrive topic: "+topic+ " message : "+message);
+                if (viewHolder!=null){
+                    viewHolder.addData(Float.parseFloat(message.toString()), name);
+                }
+            }
+        };
         return this;
     }
 }

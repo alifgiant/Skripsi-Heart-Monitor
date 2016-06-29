@@ -68,13 +68,12 @@
                 android:layout_height="40dp"
                 android:layout_marginLeft="12dp"/>
         </LinearLayout>
-        <TextView
+        <com.github.mikephil.charting.charts.LineChart
             android:id="@+id/device_quick_result"
-            android:text="HERE IS THE QUICK RESULT GRAPH"
             android:gravity="center"
             android:visibility="gone"
             android:layout_width="match_parent"
-            android:layout_height="150dp"/>
+            android:layout_height="150dp" />
     </LinearLayout>
 </android.support.v7.widget.CardView>
 

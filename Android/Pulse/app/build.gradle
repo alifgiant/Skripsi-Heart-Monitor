@@ -31,6 +31,7 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:24.0.0'
     apt 'com.jakewharton:butterknife-compiler:8.1.0'
     compile 'com.jakewharton:butterknife:8.1.0'
+    compile 'com.github.PhilJay:MPAndroidChart:v2.2.5'
     // FONT DRAWABLE
     compile 'com.mikepenz:iconics-core:2.5.8@aar'
     compile 'com.mikepenz:google-material-typeface:2.2.0.1.original@aar'

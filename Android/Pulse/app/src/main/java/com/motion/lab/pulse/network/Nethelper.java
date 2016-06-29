@@ -40,6 +40,7 @@ public class Nethelper {
 
     public static void post(String url, RequestParams params, AsyncHttpResponseHandler responseHandler) {
         AsyncHttpClient client = new AsyncHttpClient();
+        client.setMaxRetriesAndTimeout(1, 1000);
         client.post(url, params, responseHandler);
     }
     public static void post(Context context, String url, HttpEntity entity, String contentType,

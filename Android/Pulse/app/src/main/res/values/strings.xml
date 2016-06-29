@@ -17,9 +17,6 @@
         completions."
     </string>
 
-    <!--EXTRA BUNDLE-->
-    <string name="extra">extra</string>
-
     <!--address server-->
     <!--<string name="domain_url">10.5.13.114</string>-->
     <string name="domain_url">10.0.2.2</string>

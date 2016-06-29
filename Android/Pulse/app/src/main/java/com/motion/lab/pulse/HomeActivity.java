@@ -11,14 +11,13 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.InputType;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.mikepenz.google_material_typeface_library.GoogleMaterial;
 import com.mikepenz.iconics.IconicsDrawable;
@@ -26,24 +25,25 @@ import com.motion.lab.pulse.adapter.DeviceViewAdapter;
 import com.motion.lab.pulse.model.PulseDevice;
 import com.motion.lab.pulse.network.MqttHandler;
 
-import org.eclipse.paho.client.mqttv3.IMqttActionListener;
-import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
-import org.eclipse.paho.client.mqttv3.IMqttToken;
-import org.eclipse.paho.client.mqttv3.MqttCallback;
-import org.eclipse.paho.client.mqttv3.MqttMessage;
+import org.eclipse.paho.client.mqttv3.MqttException;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class HomeActivity extends AppCompatActivity {
+    private static final String TAG = "HomeActivity";
     private ArrayList<PulseDevice> deviceList = new ArrayList<>();
 
-    private RecyclerView recyclerView;
+    @BindView(R.id.device_list_view) RecyclerView recyclerView;
     private MqttHandler mqttHandler;
     private DeviceViewAdapter deviceViewAdapter;
-    private FloatingActionButton fab;
+    @BindView(R.id.fab) FloatingActionButton fab;
     private EditText input;
+
+    private String clientId;
 
     IconicsDrawable plusIcon;
     void setupIcon(){
@@ -57,20 +57,30 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        setupIcon();
+        ButterKnife.bind(this);
 
-        fab = (FloatingActionButton) findViewById(R.id.fab);
-        if (fab!=null) {
-            fab.setImageDrawable(plusIcon);
-            fab.setOnClickListener(addButtonClickListener);
+        if (!AppConfig.isLoggedIn(HomeActivity.this)){
+            AppConfig.movePageAndFinish(HomeActivity.this, LoginActivity.class);
+        }else {
+            Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+            setSupportActionBar(toolbar);
+            setupIcon();
+
+            if (fab != null) {
+                fab.setImageDrawable(plusIcon);
+                fab.setOnClickListener(addButtonClickListener);
+            }
+
+            setUpRecyclerView();
+
+            try {
+                mqttHandler = MqttHandler.GetInstance(HomeActivity.this);
+            }catch (MqttException e){
+                e.printStackTrace();
+                Log.e(TAG, "onCreate: "+e.getMessage());
+            }
         }
-
-        setUpRecyclerView();
-        //setupMqtt();
     }
-
 
     // region menu selection
     @Override
@@ -90,6 +100,9 @@ public class HomeActivity extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_sign_out) {
             AppConfig.movePageAndFinish(HomeActivity.this, LoginActivity.class);
+            AppConfig.saveLoggedStatus(HomeActivity.this, AppConfig.LOGGED_OUT);
+            // mqttHandler.disconnect();
+            MqttHandler.RemoveInstance();
             return true;
         }
 
@@ -97,7 +110,7 @@ public class HomeActivity extends AppCompatActivity {
     }
     // endregion
 
-    // region button listener
+    // region activity button listener
     View.OnClickListener addButtonClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
@@ -121,35 +134,42 @@ public class HomeActivity extends AppCompatActivity {
     DialogInterface.OnClickListener addDeviceId = new DialogInterface.OnClickListener() {
         @Override
         public void onClick(DialogInterface dialog, int which) {
-            deviceList.add(new PulseDevice().setId(input.getText().toString())
+            mqttHandler.subscribe(input.getText().toString(), MqttHandler.QOS.QOS_AT_LEAST_ONCE);
+            PulseDevice aDevice = new PulseDevice().setId(input.getText().toString())
                     .setName(input.getText().toString())
-                    .setHeartBeat(new Random().nextInt(100)));
+                    .setHeartBeat(new Random().nextInt(100))
+                    .createMessageListener();
+            deviceList.add(aDevice);
+            mqttHandler.registerListener(aDevice.getMessageListener());
+
             Snackbar.make(fab, "Device added", Snackbar.LENGTH_LONG)
-                    .setAction("OK", null).show();deviceViewAdapter.notifyDataSetChanged();
+                    .setAction("OK", null).show();
+            deviceViewAdapter.notifyDataSetChanged();
             hideOrShowEmpty();
         }
     };
     // endregion
 
     void setUpRecyclerView(){
-        recyclerView = (RecyclerView) findViewById(R.id.device_list_view);
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(HomeActivity.this);
         recyclerView.setLayoutManager(mLayoutManager);
 
         deviceViewAdapter = new DeviceViewAdapter(HomeActivity.this, deviceList);
         recyclerView.setAdapter(deviceViewAdapter);
         RecyclerTouchListener touchListener = new RecyclerTouchListener(HomeActivity.this,
-                recyclerView, clickListener);
+                recyclerView, recyclerOnItemClick);
         recyclerView.addOnItemTouchListener(touchListener);
         hideOrShowEmpty();
     }
 
     // region Recycler
     PulseDevice device;
-    ClickListener clickListener = new ClickListener() {
+    ClickListener recyclerOnItemClick = new ClickListener() {
         @Override
         public void onClick(View view, int position) {
             device = deviceList.get(position);
+
+            Log.i(TAG, "isViewHolder exist: "+ (deviceList.get(position).getViewHolder()==null));
 
             View res = view.findViewById(R.id.device_quick_result);
             res.setVisibility(res.getVisibility() == View.VISIBLE ? View.GONE:View.VISIBLE);
