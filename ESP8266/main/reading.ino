@@ -18,21 +18,53 @@ Reading::Reading(int ms) {
 	this->ms = ms;
 }
 
-// void Reading::stop() {
-// 	repeater.detach();
-// }
+//convertToVoltage()
+//Does the calculation to convert the Arduino's analog-to-digital
+//converter number to a voltage. This function then returns the
+//value to the rest of the program.
+float convertToVoltage(float ADC_Val)
+{
+	float volt = 0;
+
+	//please put your calculation in between
+	//the "=" and the ";"
+	//NOTE: you will use the variable "ADC_Val" for your
+	//calculation. It is case senstive and must be written with
+	//the underscore as well. It does not include the quotation
+	//marks (of course). It is the value currently outputted
+	//by your analog to digital converter
+
+	volt = 5 * (ADC_Val / 1023);
+
+	return volt;
+}
 
 void Reading::readPulse() {
 	int Signal;     // holds the incoming raw data
-
 	Signal = analogRead(pulsePin);              // read the Pulse Sensor
-	Serial.println(Signal);
 
-	bool QRS_detected = detectQRS(Signal);
+	//float volt = convertToVoltage(Signal);
+	//boolean QRS_detected = detectQRS(volt);
+ boolean QRS_detected = detectQRS(Signal);
+	unsigned long bpm = 0;
+
 	if (QRS_detected)
 	{
-		/* code */
+		bpm = calculateBPM();
 	}
+	char str_temp[6];
+	dtostrf(volt, 4, 2, str_temp);
+
+  //Serial.println(volt);
+  //Serial.println(Signal);
+	Serial.printf("raw: %s, qrs: %s, bpm: %d\n", str_temp, QRS_detected ? "true" : "false", bpm);
+}
+
+unsigned long Reading::calculateBPM () {
+	foundTimeMicros = micros();
+	unsigned long bpm = (60.0 / (((float) (foundTimeMicros - old_foundTimeMicros)) / 1000000.0));
+	old_foundTimeMicros = foundTimeMicros;
+	return bpm;
 }
 
 
@@ -69,7 +101,7 @@ int win_idx = 0;
 // numebr of starting iterations, used determine when moving windows are filled
 int number_iter = 0;
 
-bool Reading::detectQRS(float new_ecg_pt){
+bool Reading::detectQRS(float new_ecg_pt) {
 	// copy new point into circular buffer, increment index
 	ecg_buff[ecg_buff_WR_idx++] = new_ecg_pt;
 	ecg_buff_WR_idx %= (M + 1);

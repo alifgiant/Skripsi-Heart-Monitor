@@ -23,4 +23,5 @@ public:
 	Reading(int ms);
 	static void readPulse();
 	static bool detectQRS(float new_ecg);
+	static unsigned long calculateBPM ();
 };
