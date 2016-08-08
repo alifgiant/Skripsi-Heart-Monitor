@@ -40,12 +40,16 @@ float convertToVoltage(float ADC_Val)
 }
 
 void Reading::readPulse() {
+	int claimedIndex = ECG_BUFF_IDX++;
+	ECG_BUFF_IDX %= ECG_BUFF_SIZE;
+
 	int Signal;     // holds the incoming raw data
 	Signal = analogRead(pulsePin);              // read the Pulse Sensor
 
-	//float volt = convertToVoltage(Signal);
+	float volt = convertToVoltage(Signal);
 	//boolean QRS_detected = detectQRS(volt);
- boolean QRS_detected = detectQRS(Signal);
+	boolean QRS_detected = detectQRS(Signal);
+
 	unsigned long bpm = 0;
 
 	if (QRS_detected)
@@ -55,9 +59,12 @@ void Reading::readPulse() {
 	char str_temp[6];
 	dtostrf(volt, 4, 2, str_temp);
 
-  //Serial.println(volt);
-  //Serial.println(Signal);
+	//Serial.println(volt);
+	//Serial.println(Signal);
 	Serial.printf("raw: %s, qrs: %s, bpm: %d\n", str_temp, QRS_detected ? "true" : "false", bpm);
+	buffer_ecg[claimedIndex].volt = volt;
+	buffer_ecg[claimedIndex].isQrs = QRS_detected;
+	buffer_ecg[claimedIndex].bpm = bpm;
 }
 
 unsigned long Reading::calculateBPM () {

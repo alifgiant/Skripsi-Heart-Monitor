@@ -16,3 +16,7 @@ csv.fromPath("Data/106/samples.csv", {headers : ["sample", "MLII", "V1"]})
 	})
 	.on("end", onParseCompleteListener);
 
+
+var Reading = function function_name(argument) {
+	// body...
+}
