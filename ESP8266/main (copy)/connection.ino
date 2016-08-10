@@ -5,11 +5,11 @@ const char* sensor_id = "1";
 
 WiFiClient espClient;
 PubSubClient client(espClient);
-const char* ssid = "TL-WN72N";
-const char* password = "qwerty123";
+const char* ssid = "Motion Laboratory";
+const char* password = "motionf206";
 
 // const char* mqtt_server = "192.168.137.1"; //my pc IP
-const char* mqtt_server = "10.42.0.1"; //dede pc IP
+const char* mqtt_server = "tcp://10.5.13.29"; //my pc IP
 const int mqtt_port = 1883;
 
 void setup_connection() {
@@ -44,10 +44,10 @@ void reconnect() {
 	while (!client.connected()) {
 		Serial.print("Attempting MQTT connection...");
 		// Attempt to connect
-		if (client.connect("patient-02/02WXO01")) {
+		if (client.connect("ESP8266Client")) {
 			Serial.println("connected");
 			// Once connected, publish an announcement...
-			client.publish("outTopic", "reconnecting");
+			client.publish("outTopic", "hello world");
 			//Serial.println("setup read");
 			//setup_ticker();
 			//Serial.println("after setup");
@@ -61,32 +61,25 @@ void reconnect() {
 	}
 }
 
-void send_message() {
-  //Serial.println(SENDER_BUFF_IDX );
-  //Serial.println("ada" + String(SENDER_BUFF_IDX % ECG_BUFF_SIZE));
-	if (SENDER_BUFF_IDX < ECG_BUFF_IDX || (SENDER_BUFF_IDX==99 and ECG_BUFF_IDX==0))
-	{
-		Serial.println("ada data");
-		if (client.connected()) {
-			Serial.println("kirim");
-			//client.publish(sensor_id, "tes1");
-			char message_buff [30];
-      //String pubString = "{\"raw\":" + String(buffer_ecg[SENDER_BUFF_IDX++]) + "}";			
-      //String pubString = "{\"raw\":"+ String(buffer_ecg[SENDER_BUFF_IDX++])+",\"count\":" + String(data_send_counter++)+"}";
-      String pubString = String(buffer_ecg[SENDER_BUFF_IDX++])+"," + String(data_send_counter++);
-			SENDER_BUFF_IDX %= ECG_BUFF_SIZE;
-      data_send_counter %= 20000;
-			pubString.toCharArray(message_buff, 30);
-			//Serial.println(pubString);
-			//sprintf (message_buff, "%03i", data);
-			client.publish("stream/patient-02/02WXO01", message_buff);
-		}else{
-      reconnect();
-		}
-	}	
+void send_message(int data) {
+	Serial.println("ada");
+	if (client.connected()) {
+		Serial.println("kirim");
+		//client.publish(sensor_id, "tes1");
+		char message_buff [30];
+		String pubString = "{\"report\":{\"signal\": \"" + String(data) + "\"}}";
+		pubString.toCharArray(message_buff, 30);
+		//Serial.println(pubString);
+		//sprintf (message_buff, "%03i", data);
+		client.publish("outTopic", message_buff);
+	}
 }
 
 void connection_loop() {
-  send_message();
+	if (!client.connected()) {		
+		reconnect();
+	}else{
+		//send_message();
+	}
 }
 

@@ -42,9 +42,9 @@ function Detection() {
                 prediction[2] = isBundleBranchBlock(R_distance);
             }
 
-            prediction[3] = isSVT(bpm);
-            prediction[5] = isTargetHeartRate(bpm, 22);
+            prediction[3] = isSVT(bpm);            
             prediction[4] = isBd(bpm);
+            prediction[5] = isTargetHeartRate(bpm, 22);
 
             R_distance = 0;
         }
