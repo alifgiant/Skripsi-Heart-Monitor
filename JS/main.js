@@ -4,6 +4,10 @@
 var Detection = require('./Detection.js');
 
 
-var Detector = new Detection();
+var detector = new Detection();
+
+detector.addData(10);
+
+//var asd = new Array(20);
 //
-Detector.addData(10);
+//console.log(asd);

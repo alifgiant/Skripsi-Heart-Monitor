@@ -99,13 +99,13 @@ float hp_sum = 0;
 float lp_sum = 0;
 
 // working variables for adaptive thresholding
-float treshold = 0;
+float threshold = 0;
 boolean triggered = false;
 int trig_time = 0;
 float win_max = 0;
 int win_idx = 0;
 
-// numebr of starting iterations, used determine when moving windows are filled
+// number of starting iterations, used determine when moving windows are filled
 int number_iter = 0;
 
 bool Reading::detectQRS(float new_ecg_pt) {
@@ -178,8 +178,8 @@ bool Reading::detectQRS(float new_ecg_pt) {
 	/* Adapative thresholding beat detection */
 	// set initial threshold
 	if (number_iter < winSize) {
-		if (next_eval_pt > treshold) {
-			treshold = next_eval_pt;
+		if (next_eval_pt > threshold) {
+			threshold = next_eval_pt;
 		}
 
 		// only increment number_iter iff it is less than winSize
@@ -201,7 +201,7 @@ bool Reading::detectQRS(float new_ecg_pt) {
 	if (next_eval_pt > win_max) win_max = next_eval_pt;
 
 	// find if we are above adaptive threshold
-	if (next_eval_pt > treshold && !triggered) {
+	if (next_eval_pt > threshold && !triggered) {
 		triggered = true;
 
 		return true;
@@ -222,7 +222,7 @@ bool Reading::detectQRS(float new_ecg_pt) {
 		float alpha = 0.01 + ( ((float) random(0, RAND_RES) / (float) (RAND_RES)) * ((0.1 - 0.01)));
 
 		// compute new threshold
-		treshold = alpha * gamma * win_max + (1 - alpha) * treshold;
+		threshold = alpha * gamma * win_max + (1 - alpha) * treshold;
 
 		// reset current window index
 		win_idx = 0;
