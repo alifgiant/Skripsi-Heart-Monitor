@@ -27,45 +27,45 @@ function Detection() {
     	return [isPAC(current_R), isAtrialtachycardia(), isBundleBranchBlock(current_R), isSVT(bpm), isBd(bpm), isTargetHeartRate(bpm, 22)];
     }
 
-    this.addData = function (signal) {
-        console.log(signal);
+    // this.addData = function (signal, counter) {
+    //     console.log(signal);
 
-        var volt = convertAdcToVolt(signal);
-        R_distance++;
+    //     var volt = convertAdcToVolt(signal);        
 
-        //boolean QRS_detected = detectQRS(volt);
-        var isQrs = algo.isQrs(signal);
+    //     //boolean QRS_detected = detectQRS(volt);
+    //     var isQrs = algo.isQrs(signal);
 
-        var bpm = 0;
-        var prediction = [false, false, false, false, false, true];
+    //     var bpm = 0;
+    //     var prediction = [false, false, false, false, false, true];
 
-        if (isQrs) {
-            R_buffer[R_BUFFER_IDX++] = R_distance;
-            R_BUFFER_IDX %= R_BUFFER_SIZE;
+    //     if (isQrs) {
+    //         R_buffer[R_BUFFER_IDX++] = R_distance;
+    //         R_BUFFER_IDX %= R_BUFFER_SIZE;
 
-            bpm = calculateBPM(R_distance);
+    //         R_distance = counter - lastCounter;
+    //         bpm = calculateBPM(R_distance);
 
-            if (R_iter < R_BUFFER_SIZE) R_iter += 1;
-            else {
-                prediction[0] = isPAC(R_distance);
-                prediction[1] = isAtrialtachycardia();
-                prediction[2] = isBundleBranchBlock(R_distance);
-            }
+    //         if (R_iter < R_BUFFER_SIZE) R_iter += 1;
+    //         else {
+    //             prediction[0] = isPAC(R_distance);
+    //             prediction[1] = isAtrialtachycardia();
+    //             prediction[2] = isBundleBranchBlock(R_distance);
+    //         }
 
-            prediction[3] = isSVT(bpm);            
-            prediction[4] = isBd(bpm);
-            prediction[5] = isTargetHeartRate(bpm, 22);
+    //         prediction[3] = isSVT(bpm);            
+    //         prediction[4] = isBd(bpm);
+    //         prediction[5] = isTargetHeartRate(bpm, 22);
 
-            R_distance = 0;
-        }
+    //         lastCounter = counter;
+    //     }
 
-        return [signal, volt, isQrs, bpm, prediction];
-    };
+    //     return [signal, volt, isQrs, bpm, prediction];
+    // };
 
     this.convertAdcToVolt = function (adc_val) {
         var volt = 5 * (adc_val / 1023);
         return volt;
-    }
+    };
 
     function calculateBPM(current_R) {
         var bpm = 60.0 / (current_R) / 1000.0;
