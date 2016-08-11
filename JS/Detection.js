@@ -22,7 +22,7 @@ function Detection() {
 
     this.addData = function (bpm, counterWhenQRS) {
     	if (counterWhenQRS < lastCounter) counterWhenQRS += 20000;
-    	current_R = counterWhenQRS - lastCounter;
+    	current_R = (counterWhenQRS - lastCounter)* SAMPLING_SPEED;
     	lastCounter = counterWhenQRS;
     	return [isPAC(current_R), isAtrialtachycardia(), isBundleBranchBlock(current_R), isSVT(bpm), isBd(bpm), isTargetHeartRate(bpm, 22)];
     }
@@ -68,7 +68,7 @@ function Detection() {
     }
 
     function calculateBPM(current_R) {
-        var bpm = 60.0 / (current_R * SAMPLING_SPEED) / 1000.0;
+        var bpm = 60.0 / (current_R) / 1000.0;
         return bpm;
     }
 

@@ -64,8 +64,8 @@ void Reading::readPulse() {
     foundTimeMicros = currentMicros;
     bpm = calculateBPM();
   }
-  char str_temp[6];
-  dtostrf(volt, 4, 2, str_temp);
+  //char str_temp[6];
+  //dtostrf(volt, 4, 2, str_temp);
 
   //Serial.println(volt);
   //Serial.println(Signal);
