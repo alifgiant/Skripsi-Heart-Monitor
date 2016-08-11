@@ -1,7 +1,7 @@
 typedef void (*timer_callback)(void);
 
 struct ECG {
-	float volt;
+	int raw;
 	bool isQrs;
 	float bpm;
 };

@@ -18,6 +18,15 @@ function Detection() {
 
     var R_distance = 0;
 
+    var lastCounter = 0
+
+    this.addData = function (bpm, counterWhenQRS) {
+    	if (counterWhenQRS < lastCounter) counterWhenQRS += 20000;
+    	current_R = counterWhenQRS - lastCounter;
+    	lastCounter = counterWhenQRS;
+    	return [isPAC(current_R), isAtrialtachycardia(), isBundleBranchBlock(current_R), isSVT(bpm), isBd(bpm), isTargetHeartRate(bpm, 22)];
+    }
+
     this.addData = function (signal) {
         console.log(signal);
 
@@ -53,7 +62,7 @@ function Detection() {
         return [signal, volt, isQrs, bpm, prediction];
     };
 
-    function convertAdcToVolt(adc_val) {
+    this.convertAdcToVolt = function (adc_val) {
         var volt = 5 * (adc_val / 1023);
         return volt;
     }

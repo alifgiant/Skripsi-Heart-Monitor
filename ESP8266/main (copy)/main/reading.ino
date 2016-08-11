@@ -48,7 +48,7 @@ void Reading::readPulse() {
   int Signal;     // holds the incoming raw data
   Signal = analogRead(pulsePin);              // read the Pulse Sensor
 
-  float volt = convertToVoltage(Signal);
+  //float volt = convertToVoltage(Signal);
   //boolean QRS_detected = detectQRS(volt);
   boolean QRS_detected = detectQRS(Signal);
 
@@ -69,8 +69,8 @@ void Reading::readPulse() {
 
   //Serial.println(volt);
   //Serial.println(Signal);
-  Serial.printf("raw: %s, qrs: %s, bpm: %d\n", str_temp, QRS_detected ? "true" : "false", bpm);
-  buffer_ecg[claimedIndex].volt = volt;
+  //Serial.printf("raw: %s, qrs: %s, bpm: %d\n", str_temp, QRS_detected ? "true" : "false", bpm);
+  buffer_ecg[claimedIndex].raw = Signal;
   buffer_ecg[claimedIndex].isQrs = QRS_detected;
   buffer_ecg[claimedIndex].bpm = bpm;
 }
