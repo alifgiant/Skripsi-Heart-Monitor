@@ -23,12 +23,12 @@ void setup() {
 
 	// Put reading process to ticker. Ticker Callback will be called (readPulse)
 	Serial.println("Reading begin");
-	//repeater.attach_ms(reader.ms, reader.readPulse);
+	repeater.attach_ms(reader.ms, reader.readPulse);
 
-	setup_connection();
+	//setup_connection();
 }
 
 void loop() {
 	// try to send data
-	connection_loop();
+	//connection_loop();
 }

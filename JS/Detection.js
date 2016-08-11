@@ -22,6 +22,7 @@ function Detection() {
         console.log(signal);
 
         var volt = convertAdcToVolt(signal);
+        R_distance++;
 
         //boolean QRS_detected = detectQRS(volt);
         var isQrs = algo.isQrs(signal);
