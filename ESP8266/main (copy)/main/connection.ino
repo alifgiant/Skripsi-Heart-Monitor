@@ -7,8 +7,8 @@ const char * sensor_id = "02WXO01";
 const char * topic_head = "stream/";
 const char * ssid = "G40-Onboard";
 const char * password = "qwerty123";
-// const char* mqtt_server = "192.168.137.1"; //my pc IP
-const char * mqtt_server = "10.42.0.1"; //dede pc IP
+const char* mqtt_server = "192.168.137.1"; //my pc IP
+// const char * mqtt_server = "10.42.0.1"; //dede pc IP
 const int mqtt_port = 1883;
 void setup_connection() {
   setup_wifi();
@@ -57,9 +57,9 @@ void send_message() {
   //Serial.println(SENDER_BUFF_IDX );
   //Serial.println("ada" + String(SENDER_BUFF_IDX % ECG_BUFF_SIZE));
   if (SENDER_BUFF_IDX < ECG_BUFF_IDX || (SENDER_BUFF_IDX == 99 and ECG_BUFF_IDX == 0)) {
-    Serial.println("ada data");
+    //Serial.println("ada data");
     if (client.connected()) {
-      Serial.println("kirim");
+      //Serial.println("kirim");
       //client.publish(sensor_id, "tes1");
       char message_buff[30];      
       

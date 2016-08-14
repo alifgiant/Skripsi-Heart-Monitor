@@ -9,6 +9,10 @@ unsigned long foundTimeMicros = 0;        // time at which last QRS was found
 unsigned long old_foundTimeMicros = 0;        // time at which QRS before last was found
 unsigned long currentMicros   = 0;        // current time
 
+// LP filter outputs a single point for every input point
+// This goes straight to adaptive filtering for eval
+float next_eval_pt = 0;
+
 #define LED_ON_TIME_MICROS   200000
 
 // resolution of RNG (Random forget rate)
@@ -48,7 +52,7 @@ void Reading::readPulse() {
   int Signal;     // holds the incoming raw data
   Signal = analogRead(pulsePin);              // read the Pulse Sensor
 
-  //float volt = convertToVoltage(Signal);
+  float volt = convertToVoltage(Signal);
   //boolean QRS_detected = detectQRS(volt);
   boolean QRS_detected = detectQRS(Signal);
 
@@ -64,13 +68,13 @@ void Reading::readPulse() {
     foundTimeMicros = currentMicros;
     bpm = calculateBPM();
   }
-  //char str_temp[6];
-  //dtostrf(volt, 4, 2, str_temp);
+  char str_temp[6];
+  dtostrf(volt, 4, 2, str_temp);
 
   //Serial.println(volt);
   //Serial.println(Signal);
-  //Serial.printf("raw: %s, qrs: %s, bpm: %d\n", str_temp, QRS_detected ? "true" : "false", bpm);
-  buffer_ecg[claimedIndex].raw = Signal;
+  Serial.printf("raw: %s, qrs: %s, bpm: %d\n", str_temp, QRS_detected ? "true" : "false", bpm);
+  buffer_ecg[claimedIndex].raw = next_eval_pt;
   buffer_ecg[claimedIndex].isQrs = QRS_detected;
   buffer_ecg[claimedIndex].bpm = bpm;
 }
@@ -83,7 +87,7 @@ unsigned long Reading::calculateBPM () {
 }
 
 
-/* Portion pertaining to Pan-Tompkins QRS detection */
+/* Portion pertaininnext_eval_ptg to Pan-Tompkins QRS detection */
 
 
 // circular buffer for input ecg signal
@@ -97,10 +101,6 @@ int ecg_buff_RD_idx = 0;
 float hp_buff[N + 1] = {0};
 int hp_buff_WR_idx = 0;
 int hp_buff_RD_idx = 0;
-
-// LP filter outputs a single point for every input point
-// This goes straight to adaptive filtering for eval
-float next_eval_pt = 0;
 
 // running sums for HP and LP filters, values shifted in FILO
 float hp_sum = 0;

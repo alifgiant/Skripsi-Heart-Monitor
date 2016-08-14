@@ -1,6 +1,6 @@
 #include <Ticker.h>
 #include "reading.h"
-#define ECG_BUFF_SIZE 100
+#define ECG_BUFF_SIZE 150
 
 const int sampleDelay = 3; // ms
 
