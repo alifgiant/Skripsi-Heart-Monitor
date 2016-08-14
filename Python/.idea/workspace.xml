@@ -1,0 +1,906 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="9decabf2-5f6d-48f6-8af2-cda29a987672" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CsvLoader.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/PanTom.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/PanTom_depricated.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/PanTomkins_single.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/__init__.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/main.py" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/100/100.atr" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/100/100.dat" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/100/100.hea" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/100/annotations.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/100/samples.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/101/101.atr" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/101/101.dat" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/101/101.hea" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/101/annotations.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/101/samples.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/102/annotations.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/103/103.atr" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/103/103.dat" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/103/103.hea" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/103/annotations.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/103/samples.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/104/104.atr" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/104/104.dat" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/104/104.hea" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/104/annotations.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/104/samples.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/105/105.atr" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/105/105.dat" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/105/105.hea" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/105/annotations.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/105/samples.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/106/106.atr" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/106/106.dat" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/106/106.hea" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/106/annotations.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/106/samples.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/107/107.atr" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/107/107.dat" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/107/107.hea" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/107/annotations.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/107/samples.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/108/108.atr" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/108/108.dat" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/108/108.hea" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/108/annotations.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/108/samples.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/109/109.atr" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/109/109.dat" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/109/109.hea" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/109/annotations.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/109/samples.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/111/111.atr" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/111/111.dat" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/111/111.hea" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/111/annotations.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/111/samples.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/112/112.atr" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/112/112.dat" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/112/112.hea" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/112/annotations.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/112/samples.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/113/113.atr" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/113/113.dat" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/113/113.hea" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/113/annotations.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/113/samples.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/114/114.atr" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/114/114.dat" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/114/114.hea" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/114/annotations.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/114/samples.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/115/115.atr" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/115/115.dat" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/115/115.hea" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/115/annotations.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/115/samples.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/116/116.atr" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/116/116.dat" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/116/116.hea" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/116/annotations.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/116/samples.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/117/117.atr" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/117/117.dat" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/117/117.hea" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/117/annotations.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/117/samples.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/118/118.atr" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/118/118.dat" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/118/118.hea" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/118/annotations.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/118/samples.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/119/119.atr" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/119/119.dat" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/119/119.hea" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/119/annotations.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/119/samples.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/121/121.atr" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/121/121.dat" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/121/121.hea" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/121/annotations.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/121/samples.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/122/122.atr" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/122/122.dat" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/122/122.hea" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/122/annotations.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/122/samples.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/123/123.atr" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/123/123.dat" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/123/123.hea" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/123/annotations.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/123/samples.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/200/200.atr" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/200/200.dat" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/200/200.hea" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/200/annotations.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/200/samples.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/201/201.atr" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/201/201.dat" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/201/201.hea" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/201/annotations.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/201/samples.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/202/202.atr" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/202/202.dat" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/202/202.hea" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/202/annotations.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/202/samples.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/203/203.atr" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/203/203.dat" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/203/203.hea" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/203/annotations.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/203/samples.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/205/205.atr" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/205/205.dat" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/205/205.hea" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/205/annotations.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/205/samples.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/207/207.atr" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/207/207.dat" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/207/207.hea" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/207/annotations.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/207/samples.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/208/208.atr" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/208/208.dat" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/208/208.hea" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/208/annotations.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/208/samples.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/209/209.atr" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/209/209.dat" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/209/209.hea" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/209/annotations.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/209/samples.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/210/210.atr" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/210/210.dat" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/210/210.hea" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/210/annotations.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/210/samples.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/212/212.atr" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/212/212.dat" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/212/212.hea" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/212/annotations.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/212/samples.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/213/213.atr" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/213/213.dat" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/213/213.hea" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/213/annotations.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/213/samples.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/214/214.atr" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/214/214.dat" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/214/214.hea" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/214/annotations.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/214/samples.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/215/215.atr" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/215/215.dat" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/215/215.hea" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/215/annotations.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/215/samples.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/217/217.atr" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/217/217.dat" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/217/217.hea" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/217/annotations.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/217/samples.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/219/219.atr" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/219/219.dat" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/219/219.hea" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/219/annotations.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/219/samples.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/220/220.atr" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/220/220.dat" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/220/220.hea" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/220/annotations.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/220/samples.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/221/221.atr" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/221/221.dat" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/221/221.hea" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/221/annotations.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/221/samples.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/222/222.atr" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/222/222.dat" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/222/222.hea" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/222/annotations.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/222/samples.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/223/223.atr" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/223/223.dat" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/223/223.hea" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/223/annotations.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/223/samples.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/228/228.atr" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/228/228.dat" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/228/228.hea" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/228/annotations.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/228/samples.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/230/230.atr" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/230/230.dat" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/230/230.hea" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/230/annotations.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/230/samples.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/231/231.atr" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/231/231.dat" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/231/231.hea" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/231/annotations.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/231/samples.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/232/232.atr" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/232/232.dat" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/232/232.hea" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/232/annotations.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/232/samples.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/233/233.atr" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/233/233.dat" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/233/233.hea" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/233/annotations.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/233/samples.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/234/234.atr" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/234/234.dat" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/234/234.hea" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/234/annotations.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/234/samples.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/downloadFile.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/downloadFileAnnot.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/downloadFileConverted.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../JS/Data/ecgcodes.h" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../real_time_QRS_detection" afterPath="$PROJECT_DIR$/../real_time_QRS_detection" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ESP8266/main (copy)/main/connection.ino" afterPath="$PROJECT_DIR$/../ESP8266/main (copy)/main/connection.ino" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ESP8266/main (copy)/main/main.ino" afterPath="$PROJECT_DIR$/../ESP8266/main (copy)/main/main.ino" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ESP8266/main (copy)/main/reading.ino" afterPath="$PROJECT_DIR$/../ESP8266/main (copy)/main/reading.ino" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../JS/Detection.js" afterPath="$PROJECT_DIR$/../JS/Detection.js" />
+    </list>
+    <ignored path="Python.iws" />
+    <ignored path=".idea/workspace.xml" />
+    <ignored path=".idea/dataSources.local.xml" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CoverageDataManager">
+    <SUITE FILE_PATH="coverage/Python$main.coverage" NAME="main Coverage Results" MODIFIED="1471215044232" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Python$tester.coverage" NAME="tester Coverage Results" MODIFIED="1471217008373" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+  </component>
+  <component name="CreatePatchCommitExecutor">
+    <option name="PATCH_PATH" value="" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
+  <component name="FavoritesManager">
+    <favorites_list name="Python" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="tester.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tester.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="144">
+              <caret line="84" column="28" selection-start-line="82" selection-start-column="4" selection-end-line="84" selection-end-column="28" />
+              <folding>
+                <element signature="e#2162#2193#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="main.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/main.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="331">
+              <caret line="29" column="30" selection-start-line="27" selection-start-column="56" selection-end-line="29" selection-end-column="30" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PanTom.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/PanTom.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="51">
+              <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+              <folding>
+                <element signature="e#0#31#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PanTom_depricated.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/PanTom_depricated.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="25">
+              <caret line="42" column="37" selection-start-line="42" selection-start-column="37" selection-end-line="42" selection-end-column="37" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CsvLoader.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/CsvLoader.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="204">
+              <caret line="12" column="79" selection-start-line="12" selection-start-column="79" selection-end-line="12" selection-end-column="79" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PanTomkins_single.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/PanTomkins_single.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="153">
+              <caret line="9" column="3" selection-start-line="9" selection-start-column="3" selection-end-line="9" selection-end-column="3" />
+              <folding>
+                <element signature="e#0#16#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/Pan_Tom.py" />
+        <option value="$PROJECT_DIR$/__init__.py" />
+        <option value="$PROJECT_DIR$/CsvLoader.py" />
+        <option value="$PROJECT_DIR$/PanTom.py" />
+        <option value="$PROJECT_DIR$/tester.py" />
+        <option value="$PROJECT_DIR$/main.py" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="1370" />
+    <option name="height" value="744" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <OptionsSetting value="true" id="Add" />
+    <OptionsSetting value="true" id="Remove" />
+    <OptionsSetting value="true" id="Checkout" />
+    <OptionsSetting value="true" id="Update" />
+    <OptionsSetting value="true" id="Status" />
+    <OptionsSetting value="true" id="Edit" />
+    <ConfirmationsSetting value="0" id="Add" />
+    <ConfirmationsSetting value="0" id="Remove" />
+  </component>
+  <component name="ProjectView">
+    <navigator currentView="ProjectPane" proportions="" version="1">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource />
+      <sortByType />
+      <manualOrder />
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="Scratches" />
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Python" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Python" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Python" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="last_opened_file_path" value="F:/Data/TUGAS/git.processing" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="js-jscs-nodeInterpreter" value="C:\Program Files\nodejs\node.exe" />
+  </component>
+  <component name="RunManager" selected="Python.tester">
+    <configuration default="false" name="tester" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="Python" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/tester.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="main" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="Python" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="C:\Users\maakbar\Documents\TA\Project Sensor\Python\PanTomkins_single.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
+    <configuration default="true" type="DjangoTestsConfigurationType" factoryName="Django tests">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="Python" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="TARGET" value="" />
+      <option name="SETTINGS_FILE" value="" />
+      <option name="CUSTOM_SETTINGS" value="false" />
+      <option name="USE_OPTIONS" value="false" />
+      <option name="OPTIONS" value="" />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
+      <method />
+    </configuration>
+    <configuration default="true" type="PyBehaveRunConfigurationType" factoryName="Behave">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="Python" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="ADDITIONAL_ARGS" value="" />
+      <method />
+    </configuration>
+    <configuration default="true" type="PyLettuceRunConfigurationType" factoryName="Lettuce">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="Python" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="ADDITIONAL_ARGS" value="" />
+      <method />
+    </configuration>
+    <configuration default="true" type="PythonConfigurationType" factoryName="Python">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="Python" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
+    <configuration default="true" type="Tox" factoryName="Tox">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <module name="Python" />
+      <method />
+    </configuration>
+    <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
+      <node-interpreter>project</node-interpreter>
+      <node-options />
+      <gulpfile />
+      <tasks />
+      <arguments />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="js.build_tools.npm" factoryName="npm">
+      <command value="run-script" />
+      <scripts />
+      <node-interpreter value="project" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="tests" factoryName="Attests">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="Python" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="FOLDER_NAME" value="" />
+      <option name="TEST_TYPE" value="TEST_SCRIPT" />
+      <option name="PATTERN" value="" />
+      <option name="USE_PATTERN" value="false" />
+      <method />
+    </configuration>
+    <configuration default="true" type="tests" factoryName="Doctests">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="Python" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="FOLDER_NAME" value="" />
+      <option name="TEST_TYPE" value="TEST_SCRIPT" />
+      <option name="PATTERN" value="" />
+      <option name="USE_PATTERN" value="false" />
+      <method />
+    </configuration>
+    <configuration default="true" type="tests" factoryName="Nosetests">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="Python" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="FOLDER_NAME" value="" />
+      <option name="TEST_TYPE" value="TEST_SCRIPT" />
+      <option name="PATTERN" value="" />
+      <option name="USE_PATTERN" value="false" />
+      <option name="PARAMS" value="" />
+      <option name="USE_PARAM" value="false" />
+      <method />
+    </configuration>
+    <configuration default="true" type="tests" factoryName="Unittests">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="Python" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="FOLDER_NAME" value="" />
+      <option name="TEST_TYPE" value="TEST_SCRIPT" />
+      <option name="PATTERN" value="" />
+      <option name="USE_PATTERN" value="false" />
+      <option name="PUREUNITTEST" value="true" />
+      <option name="PARAMS" value="" />
+      <option name="USE_PARAM" value="false" />
+      <method />
+    </configuration>
+    <configuration default="true" type="tests" factoryName="py.test">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="Python" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="FOLDER_NAME" value="" />
+      <option name="TEST_TYPE" value="TEST_SCRIPT" />
+      <option name="PATTERN" value="" />
+      <option name="USE_PATTERN" value="false" />
+      <option name="testToRun" value="" />
+      <option name="keywords" value="" />
+      <option name="params" value="" />
+      <option name="USE_PARAM" value="false" />
+      <option name="USE_KEYWORD" value="false" />
+      <method />
+    </configuration>
+    <list size="2">
+      <item index="0" class="java.lang.String" itemvalue="Python.tester" />
+      <item index="1" class="java.lang.String" itemvalue="Python.main" />
+    </list>
+    <recent_temporary>
+      <list size="2">
+        <item index="0" class="java.lang.String" itemvalue="Python.tester" />
+        <item index="1" class="java.lang.String" itemvalue="Python.main" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false">
+    <option name="remove_strategy" value="false" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="9decabf2-5f6d-48f6-8af2-cda29a987672" name="Default" comment="" />
+      <created>1471015472448</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1471015472448</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1370" height="744" extended-state="0" />
+    <editor active="true" />
+    <layout>
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17557251" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3289689" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.42553192" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3289689" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3289689" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+    </layout>
+  </component>
+  <component name="Vcs.Log.UiProperties">
+    <option name="RECENTLY_FILTERED_USER_GROUPS">
+      <collection />
+    </option>
+    <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+      <collection />
+    </option>
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager />
+    <watches-manager />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/tester.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1683">
+          <caret line="99" column="20" selection-start-line="99" selection-start-column="20" selection-end-line="99" selection-end-column="20" />
+          <folding>
+            <element signature="e#2162#2193#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/PanTom_depricated.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tester.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#2162#2193#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tester.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#2162#2193#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tester.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1479">
+          <caret line="87" column="0" selection-start-line="87" selection-start-column="0" selection-end-line="87" selection-end-column="0" />
+          <folding>
+            <element signature="e#2162#2193#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/PanTom_depricated.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tester.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1479">
+          <caret line="87" column="0" selection-start-line="87" selection-start-column="0" selection-end-line="87" selection-end-column="0" />
+          <folding>
+            <element signature="e#2162#2193#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/PanTom_depricated.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tester.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1479">
+          <caret line="87" column="0" selection-start-line="87" selection-start-column="0" selection-end-line="87" selection-end-column="0" />
+          <folding>
+            <element signature="e#2162#2193#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/PanTom_depricated.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/Python27/Lib/site-packages/numpy/core/numeric.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-9">
+          <caret line="465" column="8" selection-start-line="465" selection-start-column="8" selection-end-line="465" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CsvLoader.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" column="79" selection-start-line="12" selection-start-column="79" selection-end-line="12" selection-end-column="79" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/PanTom_depricated.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="25">
+          <caret line="42" column="37" selection-start-line="42" selection-start-column="37" selection-end-line="42" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/PanTomkins_single.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="3" selection-start-line="9" selection-start-column="3" selection-end-line="9" selection-end-column="3" />
+          <folding>
+            <element signature="e#0#16#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/PanTom.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tester.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="84" column="28" selection-start-line="82" selection-start-column="4" selection-end-line="84" selection-end-column="28" />
+          <folding>
+            <element signature="e#2162#2193#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="331">
+          <caret line="29" column="30" selection-start-line="27" selection-start-column="56" selection-end-line="29" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>
