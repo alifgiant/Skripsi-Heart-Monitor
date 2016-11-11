@@ -1,0 +1,61 @@
+<resources>
+    <string name="app_name">Jantung</string>
+    <string name="welcome_name">Welcome to Jantung</string>
+
+    <!--APP CONFIG-->
+    <string name="base_url">http://localhost/api</string>
+    <string name="login_url">/login</string>
+    <string name="register_url">/register</string>
+
+    <!--LOGIN PAGE-->
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="logout">Logout</string>
+    <string name="register">Register</string>
+    <string name="create_account">Create Account</string>
+
+    <!--HOME PAGE-->
+    <string name="image_condition">Image Condition</string>
+    <string name="add_device">Add a family/friend</string>
+    <string name="device_id">Device Id</string>
+    <string name="device_pass">Device Password</string>
+    <string name="about">About</string>
+    <string name="notification">Notifications</string>
+
+    <!--REGISTER PAGE-->
+    <string name="tutor1">1. Follow first boot instruction of Jantung Device, You should found it in the box</string>
+    <string name="tutor2">2. Fill registration form on Jantung App, Device Id and Password is printed on boot instruction</string>
+    <string name="tutor3">3. A device is locked to one account only</string>
+    <string name="tutor4">4. To add family/friend device simply use add on home page then insert device id and password</string>
+
+    <string name="image_tutorial">Image Tutorial</string>
+    <string name="fullname">Full Name</string>
+    <string name="address">Address</string>
+    <string name="emergency_number">Emergency Phone (Family/Friend)</string>
+    <string name="user_number">Phone Number</string>
+    <string name="age">Age</string>
+    <string-array name="gender">
+        <item>Male</item>
+        <item>Female</item>
+    </string-array>
+    <string name="terms_check">*By registering, you are agree to Jantung Terms and Conditions
+        <![CDATA[
+            <a href="http://google.com">Read More</a>
+        ]]>
+    </string>
+
+    <!--NOTIFICATION PAGE-->
+    <string name="outgoing_message">You send monitor request</string>
+    <string name="outgoing_message_confirm">Waiting for confirmation</string>
+    <string name="incoming_message">You got a monitor request</string>
+    <string name="incoming_message_confirm">you need to confirm</string>
+
+    <!--DETAIL PAGE-->
+    <string name="card_transition">Card Transition</string>
+    <string name="key_name">keyName</string>
+    <string name="key_id">keyId</string>
+    <string name="key_gender">keyGender</string>
+    <string name="key_rate">keyRate</string>
+    <string name="key_condition">keyCondition</string>
+</resources>

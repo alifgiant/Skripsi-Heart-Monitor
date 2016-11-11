@@ -1,0 +1,51 @@
+extends layout
+block content
+    link(rel='stylesheet', href='/stylesheets/style_login.css')
+    script.
+        function autoHideField (obj, type) {
+            if (type == "user") {
+                if (obj.value == 'Username') {
+                    obj.value = '';
+                }else if (obj.value == '') obj.value = 'Username';
+            }else{
+                if (obj.value == 'password') {
+                    obj.value = '';
+                } else if (obj.value == '') obj.value = 'password';
+            }
+        }
+    script.
+        function autoBlur(obj, type) {
+            if (type == "user" && obj.value == '') {
+                    obj.value = 'Username';
+            } else  if (obj.value == '') {
+                    obj.value = 'password';
+            }
+        }
+
+    div#clouds
+        div.cloud.x1
+        // Time for multiple clouds to dance around
+        div.cloud.x2
+        div.cloud.x3
+        div.cloud.x4
+        div.cloud.x5
+
+    div.container
+        h1.center.blue Welcome to #{title}
+        div#login
+            form(method="post")
+                fieldset.clearfix
+                    p
+                        span.fontawesome-user
+                        input(type="text", value="Username", onfocus='autoHideField(this, "user")', onblur='autoBlur(this, "user")')
+                    p
+                        span.fontawesome-lock
+                        input(type="password", value="password", onfocus='autoHideField(this, "pass")', onblur='autoBlur(this, "pass")')
+
+                    p
+                        input(type="submit", value="Sign In")
+
+
+            p You are a new doctor?
+                a(href="/register") Sign up now
+                span.fontawesome-arrow-right
