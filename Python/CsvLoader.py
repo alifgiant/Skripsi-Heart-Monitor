@@ -1,4 +1,4 @@
-def load(address='../Data/116/samples.csv'):
+def load(address='data.csv'):
     source = open(address)
     data_source = []
     i = 0
@@ -10,5 +10,5 @@ def load(address='../Data/116/samples.csv'):
             y = data.split(',')[2]
             data_source.append(float(y))
 
-    print 'banyak sample', dataCount, 'Lama rekam', dataCount/200./60., 'menit'
+    #print 'banyak sample', dataCount, 'Lama rekam', dataCount/200./60., 'menit'
     return data_source
