@@ -1,4 +1,4 @@
-import matplotlib.pyplot as plt
+# import matplotlib.pyplot as plt
 import numpy as np
 from scipy.signal import lfilter, convolve
 
@@ -109,25 +109,25 @@ class Detector(object):
                 pass  # look for next peak
                 # break
 
-        '''
-        SHOWING DATA
-        '''
-        if visible_plot:
-            fig, (ax_orig, ax_lowed, ax_highed, ax_derr, ax_square, ax_6, resss) = plt.subplots(7, 1, sharex=True)
-            ax_orig.plot(data_source)
-            ax_lowed.plot(lowed)
-            ax_highed.plot(highed)
-            ax_derr.plot(derr)
-            ax_square.plot(squared)
-            ax_6.plot(x6)
-            resss.plot(derr)
-            # print R_loc
-            resss.plot([i for i in R_loc if i < len(derr)], [derr[i] for i in R_loc if i < len(derr)], 'r')
-            # dataata = [data_source[i] for i in R_loc if i<len(data_source)]
-            # print dataata
-            # plt.plot([i for i in R_loc if i < len(data_source)], [data_source[i] for i in R_loc if i < len(data_source)], 'r')
-            plt.tight_layout()
-            plt.show()
+        # '''
+        # SHOWING DATA
+        # '''
+        # if visible_plot:
+        #     fig, (ax_orig, ax_lowed, ax_highed, ax_derr, ax_square, ax_6, resss) = plt.subplots(7, 1, sharex=True)
+        #     ax_orig.plot(data_source)
+        #     ax_lowed.plot(lowed)
+        #     ax_highed.plot(highed)
+        #     ax_derr.plot(derr)
+        #     ax_square.plot(squared)
+        #     ax_6.plot(x6)
+        #     resss.plot(derr)
+        #     # print R_loc
+        #     resss.plot([i for i in R_loc if i < len(derr)], [derr[i] for i in R_loc if i < len(derr)], 'r')
+        #     # dataata = [data_source[i] for i in R_loc if i<len(data_source)]
+        #     # print dataata
+        #     # plt.plot([i for i in R_loc if i < len(data_source)], [data_source[i] for i in R_loc if i < len(data_source)], 'r')
+        #     plt.tight_layout()
+        #     plt.show()
 
         '''
         DECISION
@@ -143,9 +143,9 @@ class Detector(object):
         """Beat Classification"""
         Last4_Window = zip(range(0, len(RR_interval)-4), range(4, len(RR_interval)))
         PVC = [RR_interval[y-1] <= 0.8 * np.mean(RR_interval[x:y]) and QRS_width[y-1]*5 >= 120 for x, y in Last4_Window]
-        print PVC
+        # print PVC
         PAC = [RR_interval[y-1] <= 0.8 * np.mean(RR_interval[x:y]) and QRS_width[y-1]*5 < 120 for x, y in Last4_Window]
-        print PAC
+        # print PAC
         BUNDLE_BRANCH = [0.8*np.mean(RR_interval[x:y]) <= RR_interval[y-1] <= 1.2 * np.mean(RR_interval[x:y])
                          and QRS_width[y-1]*5 >= 120 for x, y in Last4_Window]
         # print BUNDLE_BRANCH
@@ -161,4 +161,4 @@ class Detector(object):
                              and BUNDLE_BRANCH[x-2] for x in range(len(BUNDLE_BRANCH))[2:]]
         # print BundleBranchBlock
 
-        return derr,  PVC, PAC, BUNDLE_BRANCH, AtrialTachycardia, VentricularTachycardia, BundleBranchBlock
+        return derr,  PVC, PAC, BUNDLE_BRANCH, AtrialTachycardia, VentricularTachycardia, BundleBranchBlock, bpm

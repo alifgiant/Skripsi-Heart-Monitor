@@ -25,7 +25,8 @@ for raw in data_csv:
 
 	for filtered_data in data[0]:
 		print "forwarding data to dashboard", filtered_data
-		client.publish("visual/"+device_id, filtered_data, qos=2)
+		# client.publish("visual/"+device_id, filtered_data, qos=2)
+		client.publish("visual/"+device_id, filtered_data)
 
 		time.sleep(0.010)
 
