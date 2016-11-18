@@ -1,20 +1,21 @@
 var mongoose = require('mongoose');
-var uniqueValidator = require('mongoose-unique-validator');
 var Schema = mongoose.Schema;
+
+var uniqueValidator = require('mongoose-unique-validator');
 var passportLocalMongoose = require('passport-local-mongoose');
 
 var Patient = new Schema({
     username: { type: 'string', unique: true },
-    name: String,
-    _doctor : { type: Schema.Types.ObjectId, ref: 'Doctor' }, //single reference to a doctor
-    alerts : [{ type: Schema.Types.ObjectId, ref: 'Alert' }],
-// password: String handled by passport
+    full_name: String,
+    // password: String handled by passport
+    // _doctor : { type: Schema.Types.ObjectId, ref: 'Doctor' }, //single reference to a doctor
+    friends : [{ type: Schema.Types.ObjectId, ref: 'Patient' }],
     address: String,
-    device_id: String,
-    phone_number: String,
-    alert_phone: String,
-    alert_email: String,
-    age : Number
+    my_phone: String,
+    emergency_phone: String,
+    age : Number,
+    gender : Boolean,
+    device_id: String
 });
 
 Patient.plugin(uniqueValidator);
@@ -26,7 +27,8 @@ module.exports = mongoose.model('Patient', Patient);
 // - username
 // - full_name
 // - address
+// - my_phone
+// - emergency_phone
+// - age
+// - gender
 // - device_id
-// - phone_number
-// - alert_phone
-// - alert_email

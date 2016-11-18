@@ -4,8 +4,6 @@
 var EventEmitter = require('events').EventEmitter;
 var emitter = new EventEmitter();
 
-var Doctor = require('./models/doctor');
-
 var app_mqtt = function(packet, client) {
     /* packet sended */
     console.log('MQTT: Published topic', packet.topic);
