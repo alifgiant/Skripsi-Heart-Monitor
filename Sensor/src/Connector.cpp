@@ -7,17 +7,11 @@
 
 using namespace std;
 
-// const char * Connector::DEFAULT_SSID = "MyPulseSensor";
-// const char * Connector::DEFAULT_PASS = "12345678";
-const char * Connector::DEFAULT_SSID = "TP-LINK_CD26EA";
-const char * Connector::DEFAULT_PASS = "elgebete";
-
 const char * Connector::SENSOR_ID = "H00001";
+const char * Connector::MQTT_BROKER = "192.168.0.111";
 const int Connector::MQTT_PORT = 1883;
 const char * Connector::OUT_TOPIC = "report";
 const char * Connector::IN_TOPIC = "setting";
-
-
 
 void Connector::connectWifi(){
   WiFiManager wifiManager;
@@ -25,17 +19,18 @@ void Connector::connectWifi(){
   Serial.println("connected...yeey :)");
 }
 
-void callback(char* topic, byte* payload, unsigned int length) {
+void messageArriveCallback(char* topic, byte* payload, unsigned int length){
   // handle message arrived
   Serial.print("Message arrived [");
   Serial.print(topic);
   Serial.print("] ");
   for (int i = 0; i < length; i++) {
-    Serial.println((char)payload[i]);
+    Serial.print((char)payload[i]);
   }
 }
+
 WiFiClient espClient;
-PubSubClient client ("192.168.0.111", 1883, callback, espClient);
+PubSubClient client (Connector::MQTT_BROKER, Connector::MQTT_PORT, messageArriveCallback, espClient);
 
 void Connector::connectMqtt(){
   client.connect(SENSOR_ID);
@@ -52,10 +47,13 @@ void Connector::subscribeMQTT(){
   Serial.println("Subs setting");
   client.subscribe(IN_TOPIC);
 }
-
-void Connector::publish(char message[]){
+void Connector::publish(char* message){
   Serial.println("published");
-  client.publish("outTopic", message);
+  string a = "";
+  a += OUT_TOPIC;
+  a += "/";
+  a += SENSOR_ID;
+  client.publish(a.c_str(), message);
 }
 void Connector::setupConnection(){
   connectWifi();
@@ -67,7 +65,6 @@ void Connector::loop(){
   //   setupConnection();
   //   delay(10/*second*/*1000/*ms*/);  // re-try connection
   // }else{
-  publish("ini pesan");
-    client.loop();
+  client.loop();
   // }
 }

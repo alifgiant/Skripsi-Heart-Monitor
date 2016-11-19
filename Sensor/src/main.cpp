@@ -1,11 +1,14 @@
 #include <Arduino.h>
 #include "Connector.h"
+#include "Reader.h"
+
 // #include "Ticker.h"
 
 // REPEATER
 // Ticker repeater;
 
 Connector connector;
+Reader reader;
 
 void setup(/* arguments */) {
   /* code */
@@ -15,9 +18,12 @@ void setup(/* arguments */) {
 }
 
 void loop(/* arguments */) {
-  connector.loop();
-  // Serial.println(" do something ");
-  delay(1000);
-  // int signal = analogRead(0);
-  // publish(signal);
+  // read data
+  int readResult = reader.read();
+  char str_temp[6];
+	dtostrf(readResult, 4, 2, str_temp);
+  connector.publish(str_temp);
+
+  // connector.loop();
+  delay(3); // loop every 3 ms
 }
