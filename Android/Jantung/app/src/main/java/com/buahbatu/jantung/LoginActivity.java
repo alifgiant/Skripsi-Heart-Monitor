@@ -41,7 +41,8 @@ public class LoginActivity extends AppCompatActivity {
             textUserName.setError(null);
             textUserPass.setError(null);
 
-            final ProgressDialog dialog = new ProgressDialog(LoginActivity.this, AlertDialog.THEME_DEVICE_DEFAULT_DARK);
+            final ProgressDialog dialog = new ProgressDialog(LoginActivity.this,
+                    AlertDialog.THEME_DEVICE_DEFAULT_DARK);
             dialog.setMessage("Logging in");
             dialog.show();
 

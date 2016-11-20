@@ -1,5 +1,6 @@
 package com.buahbatu.jantung;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.design.widget.TextInputEditText;
@@ -22,8 +23,16 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.androidnetworking.AndroidNetworking;
+import com.androidnetworking.common.Priority;
+import com.androidnetworking.error.ANError;
+import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.buahbatu.jantung.model.ItemDevice;
 import com.buahbatu.jantung.model.Item;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,16 +55,12 @@ public class HomeActivity extends AppCompatActivity{
 
         // Set up the input
         final TextInputEditText deviceId = new TextInputEditText(this);
-        TextInputEditText devicePassword = new TextInputEditText(this);
         deviceId.setInputType(InputType.TYPE_CLASS_TEXT);
-        deviceId.setHint(R.string.device_id);
-        devicePassword.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
-        devicePassword.setHint(R.string.device_pass);
+        deviceId.setHint(R.string.username);
 
         LinearLayout linearLayout = new LinearLayout(this);
         linearLayout.setOrientation(LinearLayout.VERTICAL);
         linearLayout.addView(deviceId);
-        linearLayout.addView(devicePassword);
 
         builder.setView(linearLayout);
 
@@ -94,6 +99,66 @@ public class HomeActivity extends AppCompatActivity{
 
     ViewAdapter viewAdapter;
 
+    void setupDummy(){
+//        items.add(new Item("My Device", HEADER));
+//        items.add(new ItemDevice("Alif Akbar", DEVICE, "H001", true));
+//        items.add(new Item("Friend Device", HEADER));
+        items.add(new ItemDevice("Masyithah", DEVICE, "H002", false));
+        items.add(new ItemDevice("Sarah", DEVICE, "H003", false));
+        items.add(new ItemDevice("Fahmi", DEVICE, "H004", true));
+        items.add(new ItemDevice("Rere", DEVICE, "H005", false));
+        items.add(new ItemDevice("Nana", DEVICE, "H006", false));
+        items.add(new ItemDevice("Dani", DEVICE, "H007", true));
+    }
+
+    void getDevicesData(){
+        final ProgressDialog dialog = new ProgressDialog(HomeActivity.this,
+                android.app.AlertDialog.THEME_DEVICE_DEFAULT_DARK);
+        dialog.setMessage("Retrieving data");
+        dialog.show();
+
+        items.add(new Item("My Device", HEADER));
+        AppSetting.AccountInfo info = AppSetting.getSavedAccount(HomeActivity.this);
+        AndroidNetworking.get(getString(R.string.base_url)+"/data/{user}/{username}")
+                .addPathParameter("user", "patient")
+                .addPathParameter("username", info.username)
+                .setPriority(Priority.MEDIUM).build()
+                .getAsJSONObject(new JSONObjectRequestListener(){
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.i("HOME", "onResponse: "+response.toString());
+                        dialog.dismiss();
+                        try {
+                            String deviceId = response.getString("device_id");
+                            String full_name = response.getString("full_name");
+                            boolean is_male = response.getBoolean("is_male");
+                            // add my device
+                            items.add(new ItemDevice(full_name, DEVICE, deviceId, is_male));
+
+                            // add friend list header
+                            items.add(new Item("Friend Device", HEADER));
+
+                            // add friend devices
+                            JSONArray friendArray = response.getJSONArray("friends");
+                            for (int i = 0; i < friendArray.length(); i++) {
+                                JSONObject object = friendArray.getJSONObject(i);
+                                items.add(new ItemDevice(object.getString("name"), DEVICE, object.getString("device_id"), object.getBoolean("is_male")));
+                            }
+
+                            // notify all view
+                            viewAdapter.notifyDataSetChanged();
+                        }catch (JSONException ex){
+                            ex.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onError(ANError anError) {
+                        dialog.dismiss();
+                    }
+                });
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -104,16 +169,7 @@ public class HomeActivity extends AppCompatActivity{
         viewAdapter = new ViewAdapter();
         items = new ArrayList<>();
 
-        // dummy data
-        items.add(new Item("My Device", HEADER));
-        items.add(new ItemDevice("Alif Akbar", DEVICE, "H001", true));
-        items.add(new Item("Friend Device", HEADER));
-        items.add(new ItemDevice("Masyithah", DEVICE, "H002", false));
-        items.add(new ItemDevice("Sarah", DEVICE, "H003", false));
-        items.add(new ItemDevice("Fahmi", DEVICE, "H004", true));
-        items.add(new ItemDevice("Rere", DEVICE, "H005", false));
-        items.add(new ItemDevice("Nana", DEVICE, "H006", false));
-        items.add(new ItemDevice("Dani", DEVICE, "H007", true));
+        getDevicesData();
 
         recyclerView.setLayoutManager(new LinearLayoutManager(HomeActivity.this));
         recyclerView.setAdapter(viewAdapter);

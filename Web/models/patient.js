@@ -9,7 +9,12 @@ var Patient = new Schema({
     full_name: String,
     // password: String handled by passport
     // _doctor : { type: Schema.Types.ObjectId, ref: 'Doctor' }, //single reference to a doctor
-    friends : [{ type: Schema.Types.ObjectId, ref: 'Patient' }],
+    friends : [{
+        _id: false,
+        id: {type: Schema.Types.ObjectId, ref: 'Patient'},
+        name: String,
+        is_male: Boolean,
+        device_id: String}], //single reference to a patient
     address: String,
     my_phone: String,
     emergency_phone: String,

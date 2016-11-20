@@ -127,11 +127,77 @@ router.post('/device/add', function (req, res, next) {
 router.get('/data/:user/:username', function (req, res, next) {
     if (req.params.user == 'doctor'){
         Doctor.findOne({username: req.params.username}, function (err, doctor) {
-            res.json(doctor);
+            if (doctor) res.json(doctor);
+            else res.status(401).send({status:'failed', info:'user not found'});
         });
     }else if (req.params.user == 'patient'){
         Patient.findOne({username: req.params.username}, function (err, patient) {
-            res.json(patient);
+            if (patient) res.json(patient);
+            else res.status(401).send({status:'failed', info:'user not found'});
+        });
+    }else {
+        res.status(400);
+        return res.send({status:'failed', info:'wrong user type'});
+    }
+});  // tested
+
+router.get('/data-simple/:user/:id', function (req, res, next) {
+    if (req.params.user == 'doctor'){
+        Doctor.findOne({username: req.params.username}, function (err, doctor) {
+            if (doctor) res.json(doctor);
+            else res.status(401).send({status:'failed', info:'user not found'});
+        });
+    }else if (req.params.user == 'patient'){
+        Patient.findOne({_id: req.params.id}, function (err, patient) {
+            if (patient) res.json({username:patient.username, device_id:patient.device_id});
+            else res.status(401).send({status:'failed', info:'user not found'});
+        });
+    }else {
+        res.status(400);
+        return res.send({status:'failed', info:'wrong user type'});
+    }
+});  // tested
+
+router.post('/data/:user/:username/add', function (req, res, next) {
+    if (req.params.user == 'doctor'){
+        Doctor.findOne({username: req.params.username}, function (err, doctor) {
+            if (doctor) res.json(doctor);
+            else res.status(401).send({status:'failed', info:'user not found'});
+        });
+    }else if (req.params.user == 'patient'){
+        Patient.findOne({username: req.params.username}, function (err, patient) {
+            if (patient) {
+                // res.json(patient);
+                console.log(req.body.username);
+                Patient.findOne({username:req.body.username}, function (err, friend) {
+                    if (friend){
+                        var duplicate = false;
+                        for (var i = 0; i<patient.friends.length; i++){
+                            if (patient.friends[i].id == friend.id){
+                                patient.friends[i].name = friend.username;
+                                patient.friends[i].device_id= friend.device_id;
+                                duplicate = true;
+                                break;
+                            }
+                        }
+                        if (!duplicate) {
+                            patient.friends.push({
+                                id: friend.id,
+                                name: friend.username,
+                                is_male: friend.is_male,
+                                device_id: friend.device_id
+                            });
+                        }
+                        patient.save(function (err) {
+                            console.log(err);
+                            if (!err && !duplicate) res.send({status:'success', info:'friend added'});
+                            else if (duplicate) res.send({status:'success', info:'friend updated'});
+                            else res.send(err);
+                        });
+                    }else res.status(401).send({status:'failed', info:'user not found'});
+                });
+            }
+            else res.status(401).send({status:'failed', info:'user not found'});
         });
     }else {
         res.status(400);
