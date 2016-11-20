@@ -1,18 +1,33 @@
 package com.buahbatu.jantung;
 
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Html;
+import android.text.TextUtils;
 import android.text.method.LinkMovementMethod;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.androidnetworking.AndroidNetworking;
+import com.androidnetworking.common.Priority;
+import com.androidnetworking.error.ANError;
+import com.androidnetworking.interfaces.JSONObjectRequestListener;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,12 +43,74 @@ public class RegisterActivity extends AppCompatActivity {
     @BindView(R.id.pager_indicator) CircleIndicator pagerIndicator;
     @BindView(R.id.button_next) ImageView nextButton;
 
+    DataFragment dataFragment;
+
     @OnClick(R.id.button_next) void onNextClick(){
         int position = viewPager.getCurrentItem();
         if (position < fragmentList.size()-1){
             viewPager.setCurrentItem(position+1, true);
         }else {
-            finish();
+            TextInputLayout[] inputLayouts = {
+                    dataFragment.textUserName,
+                    dataFragment.textUserPassword,
+                    dataFragment.textUserFullName,
+                    dataFragment.textUserAddress,
+                    dataFragment.textUserPhone,
+                    dataFragment.textUserEmergencyPhone,
+                    dataFragment.textUserAge,
+                    dataFragment.textUserDeviceId
+            };
+            boolean anyEmpty = false;
+            for (TextInputLayout inputLayout: inputLayouts) {
+                inputLayout.getEditText().setError(null);
+                if (TextUtils.isEmpty(inputLayout.getEditText().getText())){
+                    inputLayout.setError(getString(R.string.error_form));
+                    anyEmpty = true;
+                }
+            }
+            if (!anyEmpty) {
+                JSONObject patient = new JSONObject();
+                try {
+                    patient.put("username", dataFragment.textUserName.getEditText().getText().toString())
+                            .put("password", dataFragment.textUserPassword.getEditText().getText().toString())
+                            .put("fullname", dataFragment.textUserFullName.getEditText().getText().toString())
+                            .put("address", dataFragment.textUserAddress.getEditText().getText().toString())
+                            .put("my_phone", dataFragment.textUserPhone.getEditText().getText().toString())
+                            .put("emergency_phone", dataFragment.textUserEmergencyPhone.getEditText().getText().toString())
+                            .put("age", dataFragment.textUserAge.getEditText().getText().toString())
+                            .put("is_male", dataFragment.spinnerUserGender.getSelectedItem().toString().equals("Male"))
+                            .put("device_id", dataFragment.textUserDeviceId.getEditText().getText().toString());
+
+                    final ProgressDialog dialog = new ProgressDialog(RegisterActivity.this, AlertDialog.THEME_DEVICE_DEFAULT_DARK);
+                    dialog.setMessage("Registering");
+                    dialog.show();
+
+                    AndroidNetworking.post(getString(R.string.base_url)+"/{user}"+getString(R.string.register_url))
+                            .addPathParameter("user", "patient")
+                            .addJSONObjectBody(patient)
+                            .setPriority(Priority.MEDIUM)
+                            .build()
+                            .getAsJSONObject(new JSONObjectRequestListener() {
+                                @Override
+                                public void onResponse(JSONObject response) {
+                                    dialog.dismiss();
+                                    // do anything with response
+                                    Log.i("REGISTER", "onResponse: "+response.toString());
+                                    Toast.makeText(RegisterActivity.this, "Register Success", Toast.LENGTH_SHORT).show();
+                                    finish();
+                                }
+                                @Override
+                                public void onError(ANError error) {
+                                    dialog.dismiss();
+                                    // handle error
+                                    Log.i("REGISTER", "onError: "+ error.getErrorBody());
+                                    dataFragment.textUserName.setError("Username already exist");
+                                }
+                            });
+                }catch (JSONException ex){
+                    ex.printStackTrace();
+                }
+            }
         }
     }
 
@@ -44,13 +121,14 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         ButterKnife.bind(this);
+        dataFragment = new DataFragment();
 
         fragmentList = new ArrayList<>();
         fragmentList.add(TutorialFragment.newInstance(R.drawable.boy0, R.string.tutor1));
         fragmentList.add(TutorialFragment.newInstance(R.drawable.boy1, R.string.tutor2));
         fragmentList.add(TutorialFragment.newInstance(R.drawable.boy2, R.string.tutor3));
         fragmentList.add(TutorialFragment.newInstance(R.drawable.girl0, R.string.tutor4));
-        fragmentList.add(new DataFragment());
+        fragmentList.add(dataFragment);
 
         viewPager.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
             @Override
@@ -89,6 +167,15 @@ public class RegisterActivity extends AppCompatActivity {
     };
 
     public static class DataFragment extends Fragment{
+        @BindView(R.id.text_user_name) TextInputLayout textUserName;
+        @BindView(R.id.text_user_password) TextInputLayout textUserPassword;
+        @BindView(R.id.text_full_name) TextInputLayout textUserFullName;
+        @BindView(R.id.text_address) TextInputLayout textUserAddress;
+        @BindView(R.id.text_user_phone) TextInputLayout textUserPhone;
+        @BindView(R.id.text_emergency_phone) TextInputLayout textUserEmergencyPhone;
+        @BindView(R.id.text_user_age) TextInputLayout textUserAge;
+        @BindView(R.id.spinner_gender) Spinner spinnerUserGender;
+        @BindView(R.id.text_device_id) TextInputLayout textUserDeviceId;
         @Nullable
         @Override
         public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -96,6 +183,7 @@ public class RegisterActivity extends AppCompatActivity {
             TextView textView = (TextView) view.findViewById(R.id.terms_check);
             textView.setMovementMethod(LinkMovementMethod.getInstance());
             textView.setText(Html.fromHtml(getString(R.string.terms_check)));
+            ButterKnife.bind(this, view);
             return view;
         }
     }

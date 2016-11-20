@@ -5,7 +5,7 @@ var EventEmitter = require('events').EventEmitter;
 var emitter = new EventEmitter();
 
 var app_mqtt = function(packet, client) {
-    /* packet sended */
+    /* packet received */
     console.log('MQTT: Published topic', packet.topic);
     console.log('MQTT: Published payload', packet.payload.toString('ascii'));
 
@@ -14,7 +14,7 @@ var app_mqtt = function(packet, client) {
 };
 
 emitter.on('sensor', function (sensorId, data) {
-    console.log('get sensor data '+sensorId, data);
+    console.log('get sensor read:'+sensorId, data);
 });
 
 emitter.on('phone', function (userId, data) {

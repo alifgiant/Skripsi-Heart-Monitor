@@ -230,6 +230,9 @@ public class HomeActivity extends AppCompatActivity{
                 startActivity(new Intent(HomeActivity.this, AboutActivity.class));
                 break;
             case R.id.action_logout:
+                AppSetting.setLogin(HomeActivity.this, AppSetting.LOGGED_OUT);
+
+                startActivity(new Intent(HomeActivity.this, LoginActivity.class));
                 finish();
                 break;
         }

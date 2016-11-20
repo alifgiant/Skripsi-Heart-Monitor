@@ -7,11 +7,6 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var passport = require('passport');
 
-/*ROUTES HANDLE*/
-var routes = require('./routes/index');
-var users = require('./routes/users');
-var apis = require('./routes/api');
-
 var app = express();
 
 // view engine setup
@@ -32,9 +27,19 @@ app.use(require('node-sass-middleware')({
 }));
 app.use(express.static(path.join(__dirname, 'public')));
 
+/*USER HANDLE*/
+var configPassport = require('./config/passport');
+// passport middleware config
+app.use(passport.initialize());
+app.use(passport.session());
+configPassport(passport);
+
+/*ROUTES HANDLE*/
+var routes = require('./routes/routes');
+var api = require('./routes/api');
+
 app.use('/', routes);
-app.use('/users', users);
-app.use('/api', apis);
+app.use('/api', api);
 
 // mongoose
 var configDatabase = require('./config/database');
@@ -70,6 +75,5 @@ app.use(function(err, req, res, next) {
     error: {}
   });
 });
-
 
 module.exports = app;

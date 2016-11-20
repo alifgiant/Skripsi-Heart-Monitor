@@ -17,6 +17,7 @@
             android:layout_height="wrap_content">
             <android.support.design.widget.TextInputEditText
                 android:hint="@string/username"
+                android:text="alif"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </android.support.design.widget.TextInputLayout>
@@ -26,6 +27,8 @@
             android:layout_height="wrap_content">
             <android.support.design.widget.TextInputEditText
                 android:hint="@string/password"
+                android:text="kaskus"
+                android:inputType="textPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </android.support.design.widget.TextInputLayout>
@@ -35,6 +38,7 @@
             android:layout_height="wrap_content">
             <android.support.design.widget.TextInputEditText
                 android:hint="@string/fullname"
+                android:text="Alif Akbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </android.support.design.widget.TextInputLayout>
@@ -44,6 +48,7 @@
             android:layout_height="wrap_content">
             <android.support.design.widget.TextInputEditText
                 android:hint="@string/address"
+                android:text="JL. Telekomunikasi"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </android.support.design.widget.TextInputLayout>
@@ -53,6 +58,8 @@
             android:layout_height="wrap_content">
             <android.support.design.widget.TextInputEditText
                 android:hint="@string/user_number"
+                android:text="62 813 1223"
+                android:inputType="phone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </android.support.design.widget.TextInputLayout>
@@ -62,6 +69,8 @@
             android:layout_height="wrap_content">
             <android.support.design.widget.TextInputEditText
                 android:hint="@string/emergency_number"
+                android:inputType="phone"
+                android:text="62 813 2232"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </android.support.design.widget.TextInputLayout>
@@ -76,11 +85,13 @@
                 android:layout_height="wrap_content">
                 <android.support.design.widget.TextInputEditText
                     android:hint="@string/age"
+                    android:text="21"
                     android:inputType="number"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
             </android.support.design.widget.TextInputLayout>
             <android.support.v7.widget.AppCompatSpinner
+                android:id="@+id/spinner_gender"
                 android:entries="@array/gender"
                 android:layout_width="0dp"
                 android:layout_weight="1"
@@ -92,15 +103,8 @@
             android:layout_height="wrap_content">
             <android.support.design.widget.TextInputEditText
                 android:hint="@string/device_id"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-        </android.support.design.widget.TextInputLayout>
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/text_device_pass"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <android.support.design.widget.TextInputEditText
-                android:hint="@string/device_pass"
+                android:text="OW133X"
+                android:inputType="textPhonetic"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </android.support.design.widget.TextInputLayout>
