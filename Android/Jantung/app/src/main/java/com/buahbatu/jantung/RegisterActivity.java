@@ -1,7 +1,5 @@
 package com.buahbatu.jantung;
 
-import android.app.AlertDialog;
-import android.app.ProgressDialog;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
@@ -31,6 +29,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -81,11 +80,10 @@ public class RegisterActivity extends AppCompatActivity {
                             .put("is_male", dataFragment.spinnerUserGender.getSelectedItem().toString().equals("Male"))
                             .put("device_id", dataFragment.textUserDeviceId.getEditText().getText().toString());
 
-                    final ProgressDialog dialog = new ProgressDialog(RegisterActivity.this, AlertDialog.THEME_DEVICE_DEFAULT_DARK);
-                    dialog.setMessage("Registering");
-                    dialog.show();
+                    AppSetting.showProgressDialog(RegisterActivity.this, "Registering");
 
-                    AndroidNetworking.post(getString(R.string.base_url)+"/{user}"+getString(R.string.register_url))
+                    AndroidNetworking.post(String.format(Locale.US, getString(R.string.http_url), getString(R.string.server_ip_address))
+                            +"/{user}"+getString(R.string.register_url))
                             .addPathParameter("user", "patient")
                             .addJSONObjectBody(patient)
                             .setPriority(Priority.MEDIUM)
@@ -93,7 +91,7 @@ public class RegisterActivity extends AppCompatActivity {
                             .getAsJSONObject(new JSONObjectRequestListener() {
                                 @Override
                                 public void onResponse(JSONObject response) {
-                                    dialog.dismiss();
+                                    AppSetting.dismissProgressDialog();
                                     // do anything with response
                                     Log.i("REGISTER", "onResponse: "+response.toString());
                                     Toast.makeText(RegisterActivity.this, "Register Success", Toast.LENGTH_SHORT).show();
@@ -101,7 +99,7 @@ public class RegisterActivity extends AppCompatActivity {
                                 }
                                 @Override
                                 public void onError(ANError error) {
-                                    dialog.dismiss();
+                                    AppSetting.dismissProgressDialog();
                                     // handle error
                                     Log.i("REGISTER", "onError: "+ error.getErrorBody());
                                     dataFragment.textUserName.setError("Username already exist");

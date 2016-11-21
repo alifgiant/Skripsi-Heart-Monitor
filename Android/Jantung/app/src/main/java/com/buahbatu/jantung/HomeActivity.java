@@ -1,6 +1,5 @@
 package com.buahbatu.jantung;
 
-import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.design.widget.TextInputEditText;
@@ -27,9 +26,17 @@ import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
+import com.buahbatu.jantung.misc.ViewHolder;
 import com.buahbatu.jantung.model.ItemDevice;
 import com.buahbatu.jantung.model.Item;
 
+import org.eclipse.paho.android.service.MqttAndroidClient;
+import org.eclipse.paho.client.mqttv3.IMqttActionListener;
+import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
+import org.eclipse.paho.client.mqttv3.IMqttToken;
+import org.eclipse.paho.client.mqttv3.MqttCallback;
+import org.eclipse.paho.client.mqttv3.MqttException;
+import org.eclipse.paho.client.mqttv3.MqttMessage;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -47,6 +54,11 @@ public class HomeActivity extends AppCompatActivity{
     private static final int HEADER = 85;
     private static final int DEVICE = 629;
     private List<Item> items;
+    private AppSetting.AccountInfo accountInfo;
+    private ViewAdapter viewAdapter;
+    private MqttAndroidClient mqttClient;
+
+    private List<String> subscribedTopic = new ArrayList<>();
 
     @BindView(R.id.recycler_view) RecyclerView recyclerView;
     @OnClick(R.id.fab) void onFabClick(){
@@ -54,13 +66,13 @@ public class HomeActivity extends AppCompatActivity{
         builder.setTitle(getString(R.string.add_device));
 
         // Set up the input
-        final TextInputEditText deviceId = new TextInputEditText(this);
-        deviceId.setInputType(InputType.TYPE_CLASS_TEXT);
-        deviceId.setHint(R.string.username);
+        final TextInputEditText friendUsername = new TextInputEditText(this);
+        friendUsername.setInputType(InputType.TYPE_CLASS_TEXT);
+        friendUsername.setHint(R.string.username);
 
         LinearLayout linearLayout = new LinearLayout(this);
         linearLayout.setOrientation(LinearLayout.VERTICAL);
-        linearLayout.addView(deviceId);
+        linearLayout.addView(friendUsername);
 
         builder.setView(linearLayout);
 
@@ -68,10 +80,41 @@ public class HomeActivity extends AppCompatActivity{
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                // nama asli, dan gender minta dari server
-                items.add(new ItemDevice("Newly Added", DEVICE, deviceId.getText().toString(), true));
-                recyclerView.scrollToPosition(items.size()-1);
-                Toast.makeText(HomeActivity.this, "A family/friend added", Toast.LENGTH_SHORT).show();
+                // ganti nanti dengan cuma add ke notif
+                AppSetting.showProgressDialog(HomeActivity.this, "Adding Friend");
+                AndroidNetworking.post(String.format(Locale.US, getString(R.string.http_url), getString(R.string.server_ip_address))
+                        +"/data/{user}/{username}/add")
+                        .addPathParameter("user", "patient")
+                        .addPathParameter("username", accountInfo.username)
+                        .addBodyParameter("username", friendUsername.getText().toString())
+                        .setPriority(Priority.MEDIUM)
+                        .build().getAsJSONObject(new JSONObjectRequestListener() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        AppSetting.dismissProgressDialog();
+                        try {
+                            Toast.makeText(HomeActivity.this, response.getString("info"), Toast.LENGTH_SHORT).show();
+                            // nama asli, dan gender minta dari response server
+                            items.add(new ItemDevice(response.getString("name"), DEVICE, response.getString("device_id"), response.getBoolean("is_male")));
+                        }catch (JSONException ex){
+                            ex.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onError(ANError anError) {
+                        AppSetting.dismissProgressDialog();
+                        try {
+                            JSONObject response = new JSONObject(anError.getErrorBody());
+                            Toast.makeText(HomeActivity.this, response.getString("info"), Toast.LENGTH_SHORT).show();
+                        }catch (JSONException ex){
+                            ex.printStackTrace();
+                        }
+                    }
+                });
+//                items.add(new ItemDevice("Newly Added", DEVICE, friendUsername.getText().toString(), true));
+//                recyclerView.scrollToPosition(items.size()-1);
+//                Toast.makeText(HomeActivity.this, "A family/friend added", Toast.LENGTH_SHORT).show();
             }
         });
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -84,54 +127,29 @@ public class HomeActivity extends AppCompatActivity{
         builder.show();
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        for (int i = 0; i < items.size(); i++) {
-            if (items.get(i).getItemType() == DEVICE){
-                Log.i("HOME ACT", "onResume: "+i);
-                ItemDevice device = (ItemDevice) items.get(i);
-                device.setRateRandom();
-                viewAdapter.notifyDataSetChanged();
-            }
-        }
-    }
-
-    ViewAdapter viewAdapter;
-
-    void setupDummy(){
-//        items.add(new Item("My Device", HEADER));
-//        items.add(new ItemDevice("Alif Akbar", DEVICE, "H001", true));
-//        items.add(new Item("Friend Device", HEADER));
-        items.add(new ItemDevice("Masyithah", DEVICE, "H002", false));
-        items.add(new ItemDevice("Sarah", DEVICE, "H003", false));
-        items.add(new ItemDevice("Fahmi", DEVICE, "H004", true));
-        items.add(new ItemDevice("Rere", DEVICE, "H005", false));
-        items.add(new ItemDevice("Nana", DEVICE, "H006", false));
-        items.add(new ItemDevice("Dani", DEVICE, "H007", true));
-    }
-
     void getDevicesData(){
-        final ProgressDialog dialog = new ProgressDialog(HomeActivity.this,
-                android.app.AlertDialog.THEME_DEVICE_DEFAULT_DARK);
-        dialog.setMessage("Retrieving data");
-        dialog.show();
+        AppSetting.showProgressDialog(HomeActivity.this, "Retrieving data");
 
         items.add(new Item("My Device", HEADER));
-        AppSetting.AccountInfo info = AppSetting.getSavedAccount(HomeActivity.this);
-        AndroidNetworking.get(getString(R.string.base_url)+"/data/{user}/{username}")
+        Log.i("HOME", "url: "+String.format(Locale.US, getString(R.string.http_url), getString(R.string.server_ip_address))
+                +"/data/{user}/{username}");
+        AndroidNetworking.get(String.format(Locale.US, getString(R.string.http_url), getString(R.string.server_ip_address))
+                +"/data/{user}/{username}")
                 .addPathParameter("user", "patient")
-                .addPathParameter("username", info.username)
+                .addPathParameter("username", accountInfo.username)
                 .setPriority(Priority.MEDIUM).build()
                 .getAsJSONObject(new JSONObjectRequestListener(){
                     @Override
                     public void onResponse(JSONObject response) {
                         Log.i("HOME", "onResponse: "+response.toString());
-                        dialog.dismiss();
+                        AppSetting.dismissProgressDialog();
                         try {
                             String deviceId = response.getString("device_id");
                             String full_name = response.getString("full_name");
                             boolean is_male = response.getBoolean("is_male");
+
+                            subscribedTopic.add("bpm/" + deviceId);
+
                             // add my device
                             items.add(new ItemDevice(full_name, DEVICE, deviceId, is_male));
 
@@ -142,21 +160,97 @@ public class HomeActivity extends AppCompatActivity{
                             JSONArray friendArray = response.getJSONArray("friends");
                             for (int i = 0; i < friendArray.length(); i++) {
                                 JSONObject object = friendArray.getJSONObject(i);
-                                items.add(new ItemDevice(object.getString("name"), DEVICE, object.getString("device_id"), object.getBoolean("is_male")));
+                                items.add(new ItemDevice(object.getString("name"),
+                                        DEVICE, object.getString("device_id"), object.getBoolean("is_male")));
+                                subscribedTopic.add("bpm/" + object.getString("device_id"));
                             }
 
+                            onResume();
                             // notify all view
                             viewAdapter.notifyDataSetChanged();
                         }catch (JSONException ex){
                             ex.printStackTrace();
                         }
                     }
-
                     @Override
                     public void onError(ANError anError) {
-                        dialog.dismiss();
+                        AppSetting.dismissProgressDialog();
                     }
                 });
+    }
+
+    void setupMqtt(){
+        try {
+            // mqtt client
+            mqttClient = new MqttAndroidClient(this.getApplicationContext(),
+                    /*MQTT SERVER ADDRESS*/
+                    String.format(Locale.US, getString(R.string.mqtt_url), getString(R.string.server_ip_address)),
+                    /*MQTT CLIENT ID*/
+                    accountInfo.username);
+            mqttClient.connect();
+            mqttClient.setCallback(new MqttCallback() {
+                @Override
+                public void connectionLost(Throwable cause) {
+                    System.out.println("Connection was lost!");
+                }
+
+                @Override
+                public void messageArrived(String topic, MqttMessage message) throws Exception {
+                    System.out.println("Message Arrived!: " + topic + ": " + new String(message.getPayload()));
+                    String[] splitedTopic = topic.split("/");
+                    switch (splitedTopic[0]){
+                        case "bpm":
+                            for (Item item: items) {
+                                if (item.getItemType() == DEVICE){
+                                    ItemDevice device = (ItemDevice)item;
+                                    if (device.getDeviceId().equals(splitedTopic[1])){
+                                        device.setRate(Integer.parseInt(new String(message.getPayload())));
+                                        viewAdapter.notifyDataSetChanged();
+//                                        break;
+                                    }
+                                }
+                            }
+                            break;
+                    }
+                }
+
+                @Override
+                public void deliveryComplete(IMqttDeliveryToken token) {
+                    System.out.println("Delivery Complete!");
+                }
+            });
+        } catch (MqttException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        System.out.println("resume subs "+subscribedTopic.size());
+        for (String topic:subscribedTopic){
+            try {
+                mqttClient.subscribe(topic, 0);
+            }catch (MqttException ex){
+                ex.printStackTrace();
+            }
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        System.out.println("pause subs "+subscribedTopic.size());
+        for (String topic:subscribedTopic){
+            try{
+                mqttClient.unsubscribe(topic);
+            }catch (MqttException ex){
+                // do nothing
+                // un-subscribe failed
+            }
+
+        }
     }
 
     @Override
@@ -165,20 +259,18 @@ public class HomeActivity extends AppCompatActivity{
         setContentView(R.layout.activity_home);
         ButterKnife.bind(this);
 
+        accountInfo = AppSetting.getSavedAccount(HomeActivity.this);
+
+
         // init adapter and data holder
         viewAdapter = new ViewAdapter();
         items = new ArrayList<>();
 
+        setupMqtt();
         getDevicesData();
 
         recyclerView.setLayoutManager(new LinearLayoutManager(HomeActivity.this));
         recyclerView.setAdapter(viewAdapter);
-    }
-
-    class ViewHolder extends RecyclerView.ViewHolder{
-        ViewHolder(View itemView) {
-            super(itemView);
-        }
     }
 
     class ViewAdapter extends RecyclerView.Adapter<ViewHolder>{
@@ -199,12 +291,11 @@ public class HomeActivity extends AppCompatActivity{
 
         @Override
         public void onBindViewHolder(ViewHolder holder, int position) {
-            Item item = items.get(position);
+            final Item item = items.get(position);
             TextView textName = (TextView) holder.itemView.findViewById(R.id.item_name);
             textName.setText(item.getName());
             if (item.getItemType() == DEVICE){
-                ItemDevice device = (ItemDevice)item;
-
+                final ItemDevice device = (ItemDevice)item;
                 ImageView image = (ImageView) holder.itemView.findViewById(R.id.item_image);
                 if (device.isMale()){
                     switch (device.getCondition()){

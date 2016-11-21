@@ -3,10 +3,10 @@
     <string name="welcome_name">Welcome to Jantung</string>
 
     <!--APP CONFIG-->
-    <!--<string name="base_url">http://localhost/api</string>-->
-    <string name="base_url">http://192.168.43.13:3000/api</string>
-    <!--<string name="base_url">http://192.168.0.108:3000/api</string>-->
-    <!--<string name="base_url">http://192.168.1.32:3000/api</string>-->
+    <string name="http_url">http://%s:3000/api</string>
+    <string name="mqtt_url">tcp://%s:1883</string>
+    <!--<string name="server_ip_address">192.168.0.108</string>-->
+    <string name="server_ip_address">192.168.43.13</string>
     <string name="login_url">/login</string>
     <string name="register_url">/register</string>
 

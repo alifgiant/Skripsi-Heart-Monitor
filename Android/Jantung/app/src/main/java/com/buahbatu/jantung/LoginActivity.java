@@ -1,25 +1,21 @@
 package com.buahbatu.jantung;
 
-import android.app.AlertDialog;
-import android.app.ProgressDialog;
 import android.content.Intent;
-import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
-import android.widget.EditText;
-import android.widget.Toast;
 
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
-import com.androidnetworking.interfaces.StringRequestListener;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -41,12 +37,10 @@ public class LoginActivity extends AppCompatActivity {
             textUserName.setError(null);
             textUserPass.setError(null);
 
-            final ProgressDialog dialog = new ProgressDialog(LoginActivity.this,
-                    AlertDialog.THEME_DEVICE_DEFAULT_DARK);
-            dialog.setMessage("Logging in");
-            dialog.show();
+            AppSetting.showProgressDialog(LoginActivity.this, "Logging in");
 
-            AndroidNetworking.post(getString(R.string.base_url)+"/{user}" + getString(R.string.login_url))
+            AndroidNetworking.post(String.format(Locale.US, getString(R.string.http_url), getString(R.string.server_ip_address))
+                    +"/{user}" + getString(R.string.login_url))
                     .addPathParameter("user", "patient")
                     .addBodyParameter("username", textUserName.getEditText().getText().toString())
                     .addBodyParameter("password", textUserPass.getEditText().getText().toString())
@@ -55,7 +49,7 @@ public class LoginActivity extends AppCompatActivity {
                         @Override
                         public void onResponse(JSONObject response) {
                             // do anything with response
-                            dialog.dismiss();
+                            AppSetting.dismissProgressDialog();
                             Log.i("LOGIN", "onResponse: "+response.toString());
                             AppSetting.setLogin(LoginActivity.this, AppSetting.LOGGED_IN);
                             AppSetting.saveAccount(LoginActivity.this, textUserName.getEditText().getText().toString(),
@@ -65,7 +59,7 @@ public class LoginActivity extends AppCompatActivity {
                         @Override
                         public void onError(ANError error) {
                             // handle error
-                            dialog.dismiss();
+                            AppSetting.dismissProgressDialog();
                             Log.i("LOGIN", "onError: "+ error.getErrorBody());
                             try {
                                 JSONObject response = new JSONObject(error.getErrorBody());

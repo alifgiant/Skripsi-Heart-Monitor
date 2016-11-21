@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.buahbatu.jantung.misc.ViewHolder;
 import com.buahbatu.jantung.model.Notification;
 import com.buahbatu.jantung.model.Request;
 
@@ -60,12 +61,6 @@ public class NotificationActivity extends AppCompatActivity {
         });
 
         tabLayout.setupWithViewPager(viewPager);
-    }
-
-    public static class ViewHolder extends RecyclerView.ViewHolder{
-        ViewHolder(View itemView) {
-            super(itemView);
-        }
     }
 
     public static class RequestFragment extends Fragment{
