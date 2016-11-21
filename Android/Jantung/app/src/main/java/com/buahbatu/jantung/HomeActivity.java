@@ -83,7 +83,7 @@ public class HomeActivity extends AppCompatActivity{
                 // ganti nanti dengan cuma add ke notif
                 AppSetting.showProgressDialog(HomeActivity.this, "Adding Friend");
                 AndroidNetworking.post(String.format(Locale.US, getString(R.string.http_url), getString(R.string.server_ip_address))
-                        +"/data/{user}/{username}/add")
+                        +"/{user}/{username}/data/add")
                         .addPathParameter("user", "patient")
                         .addPathParameter("username", accountInfo.username)
                         .addBodyParameter("username", friendUsername.getText().toString())
@@ -129,12 +129,10 @@ public class HomeActivity extends AppCompatActivity{
 
     void getDevicesData(){
         AppSetting.showProgressDialog(HomeActivity.this, "Retrieving data");
-
         items.add(new Item("My Device", HEADER));
-        Log.i("HOME", "url: "+String.format(Locale.US, getString(R.string.http_url), getString(R.string.server_ip_address))
-                +"/data/{user}/{username}");
+
         AndroidNetworking.get(String.format(Locale.US, getString(R.string.http_url), getString(R.string.server_ip_address))
-                +"/data/{user}/{username}")
+                +"/{user}/{username}/data")
                 .addPathParameter("user", "patient")
                 .addPathParameter("username", accountInfo.username)
                 .setPriority(Priority.MEDIUM).build()
@@ -148,7 +146,7 @@ public class HomeActivity extends AppCompatActivity{
                             String full_name = response.getString("full_name");
                             boolean is_male = response.getBoolean("is_male");
 
-                            subscribedTopic.add("bpm/" + deviceId);
+                            subscribedTopic.add(deviceId+"/bpm");
 
                             // add my device
                             items.add(new ItemDevice(full_name, DEVICE, deviceId, is_male));
@@ -162,9 +160,8 @@ public class HomeActivity extends AppCompatActivity{
                                 JSONObject object = friendArray.getJSONObject(i);
                                 items.add(new ItemDevice(object.getString("name"),
                                         DEVICE, object.getString("device_id"), object.getBoolean("is_male")));
-                                subscribedTopic.add("bpm/" + object.getString("device_id"));
+                                subscribedTopic.add(object.getString("device_id")+"/bpm");
                             }
-
                             onResume();
                             // notify all view
                             viewAdapter.notifyDataSetChanged();
@@ -175,19 +172,15 @@ public class HomeActivity extends AppCompatActivity{
                     @Override
                     public void onError(ANError anError) {
                         AppSetting.dismissProgressDialog();
+                        Log.i("HOME", "onError: "+anError.getErrorBody());
                     }
                 });
     }
 
     void setupMqtt(){
-        try {
-            // mqtt client
-            mqttClient = new MqttAndroidClient(this.getApplicationContext(),
-                    /*MQTT SERVER ADDRESS*/
-                    String.format(Locale.US, getString(R.string.mqtt_url), getString(R.string.server_ip_address)),
-                    /*MQTT CLIENT ID*/
-                    accountInfo.username);
-            mqttClient.connect();
+        // mqtt client
+        mqttClient = ((MyApp) getApplication()).getClient();
+        if (mqttClient!=null) {
             mqttClient.setCallback(new MqttCallback() {
                 @Override
                 public void connectionLost(Throwable cause) {
@@ -198,12 +191,12 @@ public class HomeActivity extends AppCompatActivity{
                 public void messageArrived(String topic, MqttMessage message) throws Exception {
                     System.out.println("Message Arrived!: " + topic + ": " + new String(message.getPayload()));
                     String[] splitedTopic = topic.split("/");
-                    switch (splitedTopic[0]){
+                    switch (splitedTopic[1]) {
                         case "bpm":
-                            for (Item item: items) {
-                                if (item.getItemType() == DEVICE){
-                                    ItemDevice device = (ItemDevice)item;
-                                    if (device.getDeviceId().equals(splitedTopic[1])){
+                            for (Item item : items) {
+                                if (item.getItemType() == DEVICE) {
+                                    ItemDevice device = (ItemDevice) item;
+                                    if (device.getDeviceId().equals(splitedTopic[0])) {
                                         device.setRate(Integer.parseInt(new String(message.getPayload())));
                                         viewAdapter.notifyDataSetChanged();
 //                                        break;
@@ -219,15 +212,15 @@ public class HomeActivity extends AppCompatActivity{
                     System.out.println("Delivery Complete!");
                 }
             });
-        } catch (MqttException e) {
-            e.printStackTrace();
+        }else {
+            Log.e("SetupMqtt", "MQTT CLIENT IS NULL");
         }
     }
-
 
     @Override
     protected void onResume() {
         super.onResume();
+        setupMqtt();
         System.out.println("resume subs "+subscribedTopic.size());
         for (String topic:subscribedTopic){
             try {
@@ -266,7 +259,6 @@ public class HomeActivity extends AppCompatActivity{
         viewAdapter = new ViewAdapter();
         items = new ArrayList<>();
 
-        setupMqtt();
         getDevicesData();
 
         recyclerView.setLayoutManager(new LinearLayoutManager(HomeActivity.this));

@@ -1,8 +1,23 @@
 package com.buahbatu.jantung;
 
+import android.Manifest;
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.support.annotation.RequiresPermission;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
+import android.util.Log;
+
+import org.eclipse.paho.android.service.MqttAndroidClient;
+import org.eclipse.paho.client.mqttv3.MqttClient;
+import org.eclipse.paho.client.mqttv3.MqttException;
+
+import java.util.Locale;
 
 /**
  * Created by maakbar on 11/8/16.
@@ -19,6 +34,21 @@ class AppSetting {
         dialog = new ProgressDialog(context, android.app.AlertDialog.THEME_DEVICE_DEFAULT_DARK);
         dialog.setMessage(message);
         dialog.show();
+    }
+
+    static void makeACall(Activity context, String number){
+        Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + number));
+//        intent.setData(Uri.parse("tel:" + number));
+        int res = ContextCompat.checkSelfPermission(context, Manifest.permission.CALL_PHONE);
+        if (res == PackageManager.PERMISSION_GRANTED)
+            context.startActivity(intent);
+        else ActivityCompat.requestPermissions(context,
+                new String[]{Manifest.permission.READ_CONTACTS}, 0 /*REQUEST CODE*/);
+    }
+
+    static void makeASms(Context context, String number){
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("sms:" + number));
+        context.startActivity(intent);
     }
 
     static void dismissProgressDialog(){

@@ -2,12 +2,15 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.buahbatu.jantung">
 
-
     <!--PAHO MQTT SERVICE PERMISSION-->
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.INTERNET" />  <!--FAST NETWORK PERMISSION-->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
+    <!--CALL PERMISSION-->
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.SEND_SMS" />
 
     <application
         android:allowBackup="true"
@@ -35,7 +38,9 @@
         <activity
             android:name=".NotificationActivity"
             android:label="@string/notification" />
-        <activity android:name=".DetailActivity"/>
+        <activity
+            android:name=".DetailActivity"
+            android:label="@string/detail" />
     </application>
 
 </manifest>

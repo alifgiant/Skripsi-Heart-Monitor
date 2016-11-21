@@ -72,7 +72,7 @@ public class RegisterActivity extends AppCompatActivity {
                 try {
                     patient.put("username", dataFragment.textUserName.getEditText().getText().toString())
                             .put("password", dataFragment.textUserPassword.getEditText().getText().toString())
-                            .put("fullname", dataFragment.textUserFullName.getEditText().getText().toString())
+                            .put("full_name", dataFragment.textUserFullName.getEditText().getText().toString())
                             .put("address", dataFragment.textUserAddress.getEditText().getText().toString())
                             .put("my_phone", dataFragment.textUserPhone.getEditText().getText().toString())
                             .put("emergency_phone", dataFragment.textUserEmergencyPhone.getEditText().getText().toString())

@@ -137,22 +137,22 @@ public class NotificationActivity extends AppCompatActivity {
             recyclerView = (RecyclerView) inflater.inflate(R.layout.fragment_recycler, container, false);
 
             notificationList = new ArrayList<>();
-            notificationList.add(new Notification("Akbar is fine, nothing to worry",
-                    "Last 30 minutes nothing wrong happened", Notification.HEALTH));
-            notificationList.add(new Notification("Masyithah is doing great, nothing to worry",
-                    "Last 30 minutes nothing wrong happened", Notification.HEALTH));
+            notificationList.add(new Notification("Akbar is fine",
+                    "Nothing to worry in last 30 minutes", Notification.HEALTH));
+            notificationList.add(new Notification("Masyithah is doing great",
+                    "Nothing to worry in last 30 minutes", Notification.HEALTH));
             notificationList.add(new Notification("Dani got a PAC",
                     "Not serious, you should not worry", Notification.SICK));
-            notificationList.add(new Notification("Fahmi got a Tycardhia in last minute",
+            notificationList.add(new Notification("Fahmi got a Tycardhia",
                     "A bit dangerous, you should call him", Notification.DANGER));
             notificationList.add(new Notification("Dani got a PAC",
                     "Not serious, you should not worry", Notification.SICK));
-            notificationList.add(new Notification("Nana is doing great, nothing to worry",
-                    "Last 30 minutes nothing wrong happened", Notification.HEALTH));
+            notificationList.add(new Notification("Nana is doing great",
+                    "Nothing to worry in last 30 minutes", Notification.HEALTH));
             notificationList.add(new Notification("Fahmi just got a SVT",
                     "Very dangerous, you need to call him ASAP", Notification.DANGER));
-            notificationList.add(new Notification("Rere is fine, nothing to worry",
-                    "Last 30 minutes nothing wrong happened", Notification.HEALTH));
+            notificationList.add(new Notification("Rere is fine",
+                    "Nothingto worry in last 30 minutes", Notification.HEALTH));
 
             recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
             recyclerView.setAdapter(new RecyclerView.Adapter() {

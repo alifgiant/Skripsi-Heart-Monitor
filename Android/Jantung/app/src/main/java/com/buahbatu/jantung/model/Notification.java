@@ -5,9 +5,9 @@ package com.buahbatu.jantung.model;
  */
 
 public class Notification {
-    public static final int HEALTH = 675;
-    public static final int SICK = 547;
-    public static final int DANGER = 339;
+    public static final int HEALTH = 0;
+    public static final int SICK = 1;
+    public static final int DANGER = 2;
 
     private String title;
     private String detail;

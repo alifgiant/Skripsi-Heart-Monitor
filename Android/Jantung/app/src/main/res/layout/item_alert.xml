@@ -41,6 +41,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
+                android:contentDescription="@string/action_call"
                 android:id="@+id/button_action"
                 android:layout_marginRight="8dp"
                 android:layout_marginEnd="8dp"

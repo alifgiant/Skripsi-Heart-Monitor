@@ -5,8 +5,8 @@
     <!--APP CONFIG-->
     <string name="http_url">http://%s:3000/api</string>
     <string name="mqtt_url">tcp://%s:1883</string>
-    <!--<string name="server_ip_address">192.168.0.108</string>-->
-    <string name="server_ip_address">192.168.43.13</string>
+    <string name="server_ip_address">192.168.0.110</string>
+    <!--<string name="server_ip_address">192.168.43.13</string>-->
     <string name="login_url">/login</string>
     <string name="register_url">/register</string>
 
@@ -25,6 +25,7 @@
     <string name="device_pass">Device Password</string>
     <string name="about">About</string>
     <string name="notification">Notifications</string>
+    <string name="detail">Detail</string>
 
     <!--REGISTER PAGE-->
     <string name="tutor1">1. Follow first boot instruction of Jantung Device, You should found it in the box</string>
@@ -39,6 +40,7 @@
     <string name="emergency_number">Emergency Phone (Family/Friend)</string>
     <string name="user_number">Phone Number</string>
     <string name="age">Age</string>
+    <string name="gender">Gender</string>
     <string-array name="gender">
         <item>Male</item>
         <item>Female</item>
@@ -62,4 +64,8 @@
     <string name="key_gender">keyGender</string>
     <string name="key_rate">keyRate</string>
     <string name="key_condition">keyCondition</string>
+    <string name="remove_friend">remove friend</string>
+    <string name="action_call">action call</string>
+    <string name="action_sms">action sms</string>
+    <string name="no_phone_num">No phone number available</string>
 </resources>

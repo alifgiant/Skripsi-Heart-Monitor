@@ -124,15 +124,17 @@ router.post('/device/add', function (req, res, next) {
     });
 });  // Tested
 
-router.get('/data-simple/:user/:id', function (req, res, next) {
-    if (req.params.user == 'doctor'){
-        Doctor.findOne({username: req.params.username}, function (err, doctor) {
-            if (doctor) res.json(doctor);
-            else res.status(401).send({status:'failed', info:'user not found'});
-        });
-    }else if (req.params.user == 'patient'){
-        Patient.findOne({_id: req.params.id}, function (err, patient) {
-            if (patient) res.json({username:patient.username, device_id:patient.device_id});
+router.get('/:user/:username/data/simple', function (req, res, next) {
+    if (req.params.user == 'patient'){
+        Patient.findOne({username: req.params.username}, function (err, patient) {
+            if (patient) res.json({
+                full_name:patient.full_name,
+                address:patient.address,
+                phone:patient.my_phone,
+                is_male:patient.is_male,
+                age:patient.age,
+                device_id:patient.device_id
+            });
             else res.status(401).send({status:'failed', info:'user not found'});
         });
     }else {
@@ -141,7 +143,7 @@ router.get('/data-simple/:user/:id', function (req, res, next) {
     }
 });  // tested patient
 
-router.get('/data/:user/:username', function (req, res, next) {
+router.get('/:user/:username/data', function (req, res, next) {
     if (req.params.user == 'doctor'){
         Doctor.findOne({username: req.params.username}, function (err, doctor) {
             if (doctor) res.json(doctor);
@@ -158,7 +160,7 @@ router.get('/data/:user/:username', function (req, res, next) {
     }
 });  // tested patient
 
-router.post('/data/:user/:username/add', function (req, res, next) {
+router.post('/:user/:username/data/add', function (req, res, next) {
     if (req.params.user == 'doctor'){
         Doctor.findOne({username: req.params.username}, function (err, doctor) {
             if (doctor) res.json(doctor);
