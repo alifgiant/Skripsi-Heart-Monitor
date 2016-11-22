@@ -12,8 +12,6 @@ import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
-import com.buahbatu.jantung.model.Item;
-import com.buahbatu.jantung.model.ItemDevice;
 import com.buahbatu.jantung.model.Notification;
 import com.robinhood.spark.SparkAdapter;
 import com.robinhood.spark.SparkView;
@@ -64,6 +62,28 @@ public class DetailActivity extends AppCompatActivity {
     @OnClick(R.id.button_call) void onCallClick(){
         if (phoneNumber != null) AppSetting.makeACall(DetailActivity.this, phoneNumber);
         else Toast.makeText(this, getString(R.string.no_phone_num), Toast.LENGTH_SHORT).show();
+    }
+    @OnClick(R.id.button_remove) void onRemoveClick(){
+        AppSetting.showProgressDialog(DetailActivity.this, "Removing friend");
+        AndroidNetworking.get(String.format(Locale.US, getString(R.string.http_url), getString(R.string.server_ip_address))
+                +"/{user}/{username}/data/remove")
+                .addPathParameter("user", "patient")
+                .addPathParameter("username", username)
+                .setPriority(Priority.MEDIUM).build()
+                .getAsJSONObject(new JSONObjectRequestListener() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        AppSetting.dismissProgressDialog();
+                        Toast.makeText(DetailActivity.this, getString(R.string.friend_delete_success), Toast.LENGTH_SHORT).show();
+                        finish();
+                    }
+
+                    @Override
+                    public void onError(ANError anError) {
+                        AppSetting.dismissProgressDialog();
+                        Log.i("Detail", "onError: "+anError.getErrorBody());
+                    }
+                });
     }
 
     private MqttAndroidClient mqttClient;

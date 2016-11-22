@@ -67,5 +67,7 @@
     <string name="remove_friend">remove friend</string>
     <string name="action_call">action call</string>
     <string name="action_sms">action sms</string>
+    <string name="friend_delete_success">Friend Deleted</string>
     <string name="no_phone_num">No phone number available</string>
+
 </resources>

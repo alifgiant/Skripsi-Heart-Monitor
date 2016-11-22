@@ -14,50 +14,16 @@ router.get('/', function(req, res, next) {
     res.send('respond with a resource');
 });
 
-router.post('/:user/register', function (req, res, next) {
-    if (req.params.user == 'doctor'){
-        Doctor.register(new Doctor({
-            username : req.body.username,
-            full_name : req.body.full_name,
-            address : req.body.address
-        }), req.body.password, function(err, account) {
-            if (err) {
-                res.status(err.status || 422);
-                return res.json(err);
-            }else{
-                return res.json({"status":"success", username: req.body.username});
-            }
-        });
-    }else if (req.params.user == 'patient'){
-        Device.findOne({device_id: req.body.device_id}, function (err, device) {
-            if (device){
-                Patient.register(new Patient({
-                    username : req.body.username,
-                    full_name : req.body.full_name,
-                    address : req.body.address,
-                    my_phone: req.body.my_phone,
-                    emergency_phone: req.body.emergency_phone,
-                    age : req.body.age,
-                    is_male : req.body.is_male,
-                    // device_id: device.id
-                    device_id: req.body.device_id
-                }), req.body.password, function(err, account) {
-                    if (err) {
-                        res.status(err.status || 422);
-                        return res.json(err);
-                    }else{
-                        return res.json({"status":"success", username: req.body.username});
-                    }
-                });
-            }else {
-                res.status(422);
-                return res.json({"status":"failed", info: 'no device'});
-            }
-        });
-    }else {
-        res.status(400);
-        return res.send({status:'failed', info:'wrong user type'});
-    }
+router.post('/device/add', function (req, res, next) {
+    var newDevice = new Device({
+        device_id : req.body.device_id
+    });
+    newDevice.save(function (err, newDevice) {
+        if (err) {
+            return res.status(422).send({status:'failed', message: err.errors.device_id.message});
+        }
+        return res.send({status:'success', device_id: newDevice.device_id});
+    });
 });  // Tested
 
 router.post('/:user/login', function(req, res, next) {
@@ -99,12 +65,12 @@ router.post('/:user/login', function(req, res, next) {
                 }else if (strategy == 'sign-in-doctor'){
                     // return user info
                     Doctor.findOne({username: req.body.username}, function (err, data) {
-                        return res.json({type: 'doctor', user: data});
+                        return res.json({status:"success", type: 'doctor', username: data.username});
                     })
                 }else if (strategy == 'sign-in-patient'){
                     // return user info
                     Patient.findOne({username: req.body.username}, function (err, data) {
-                        return res.json({type: 'patient', data: data});
+                        return res.json({status:"success", type: 'patient', username: data.username});
                     })
                 }
             });
@@ -112,20 +78,58 @@ router.post('/:user/login', function(req, res, next) {
     })(req, res, next);
 }); // Tested
 
-router.post('/device/add', function (req, res, next) {
-    var newDevice = new Device({
-        device_id : req.body.device_id
-    });
-    newDevice.save(function (err, newDevice) {
-        if (err) {
-            return res.status(422).send({status:'failed', message: err.errors.device_id.message});
-        }
-        return res.send({status:'success', device_id: newDevice.device_id});
-    });
+router.post('/:user_type/register', function (req, res, next) {
+    if (req.params.user_type== 'doctor'){
+        Doctor.register(new Doctor({
+            username : req.body.username,
+            full_name : req.body.full_name,
+            address : req.body.address
+        }), req.body.password, function(err, account) {
+            if (err) {
+                res.status(err.status || 422);
+                return res.json(err);
+            }else{
+                return res.json({status:"success", username: req.body.username});
+            }
+        });
+    }else if (req.params.user_type == 'patient'){
+        Device.findOne({device_id: req.body.device_id}, function (err, device) {
+            if (device){
+                Patient.register(new Patient({
+                    username : req.body.username,
+                    full_name : req.body.full_name,
+                    address : req.body.address,
+                    my_phone: req.body.my_phone,
+                    emergency_phone: req.body.emergency_phone,
+                    age : req.body.age,
+                    is_male : req.body.is_male,
+                    device_id: req.body.device_id
+                }), req.body.password, function(err, account) {
+                    if (err) {
+                        res.status(err.status || 422);
+                        return res.json(err);
+                    }else{
+                        return res.json({status:"success", username: req.body.username});
+                    }
+                });
+            }else {
+                res.status(422);
+                return res.json({status:"failed", info: 'no device'});
+            }
+        });
+    }else {
+        res.status(400);
+        return res.send({status:'failed', info:'wrong user type'});
+    }
 });  // Tested
 
-router.get('/:user/:username/data/simple', function (req, res, next) {
-    if (req.params.user == 'patient'){
+router.get('/:user_type/:username/data/simple', function (req, res, next) {
+    if (req.params.user_type == 'doctor'){
+        Doctor.findOne({username: req.params.username}, function (err, doctor) {
+            if (doctor) res.json(doctor);
+            else res.status(401).send({status:'failed', info:'user not found'});
+        });
+    }else if (req.params.user_type == 'patient'){
         Patient.findOne({username: req.params.username}, function (err, patient) {
             if (patient) res.json({
                 full_name:patient.full_name,
@@ -143,13 +147,13 @@ router.get('/:user/:username/data/simple', function (req, res, next) {
     }
 });  // tested patient
 
-router.get('/:user/:username/data', function (req, res, next) {
-    if (req.params.user == 'doctor'){
+router.get('/:user_type/:username/data', function (req, res, next) {
+    if (req.params.user_type == 'doctor'){
         Doctor.findOne({username: req.params.username}, function (err, doctor) {
             if (doctor) res.json(doctor);
             else res.status(401).send({status:'failed', info:'user not found'});
         });
-    }else if (req.params.user == 'patient'){
+    }else if (req.params.user_type == 'patient'){
         Patient.findOne({username: req.params.username}, function (err, patient) {
             if (patient) res.json(patient);
             else res.status(401).send({status:'failed', info:'user not found'});
@@ -160,13 +164,13 @@ router.get('/:user/:username/data', function (req, res, next) {
     }
 });  // tested patient
 
-router.post('/:user/:username/data/add', function (req, res, next) {
-    if (req.params.user == 'doctor'){
+router.post('/:user_type/:username/data/add', function (req, res, next) {
+    if (req.params.user_type == 'doctor'){
         Doctor.findOne({username: req.params.username}, function (err, doctor) {
             if (doctor) res.json(doctor);
             else res.status(401).send({status:'failed', info:'user not found'});
         });
-    }else if (req.params.user == 'patient'){
+    }else if (req.params.user_type == 'patient'){
         Patient.findOne({username: req.params.username}, function (err, patient) {
             if (patient) {
                 // res.json(patient);
@@ -210,5 +214,37 @@ router.post('/:user/:username/data/add', function (req, res, next) {
         return res.send({status:'failed', info:'wrong user type'});
     }
 });  // tested patient
+
+router.post('/:user_type/:username/data/remove', function (req, res, next) {
+    if (req.params.user_type == 'doctor'){
+        Doctor.findOne({username: req.params.username}, function (err, doctor) {
+            if (doctor) res.json(doctor);
+            else res.status(401).send({status:'failed', info:'user not found'});
+        });
+    }else if (req.params.user_type == 'patient'){
+        Patient.findOne({username: req.params.username}, function (err, patient) {
+            if (patient){
+                var found = false;
+                for (var i = 0; i<patient.friends.length; i++){
+                    if (patient.friends[i].name == req.body.username){
+                        patient.friends.splice(i, 1);
+                        found = true;
+                        break;
+                    }
+                }
+                if (found){
+                    patient.save(function (err) {
+                        if (!err) res.send({status:'success', info:'friend removed'});
+                        else res.send(err);
+                    });
+                }else res.status(401).send({status:'failed', info:'friend not found'});
+            }
+            else res.status(401).send({status:'failed', info:'user not found'});
+        });
+    }else {
+        res.status(400);
+        return res.send({status:'failed', info:'wrong user type'});
+    }
+});
 
 module.exports = router;

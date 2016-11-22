@@ -242,3 +242,33 @@ depend on (info)
 'wrong user_type' : 400
 'user not found' : 401
 ```
+
+Remove Friend of Patient
+---------------------
+### url
+```
+POST
+http://{base_address}/api/:user_type/:username/data/remove
+```
+user_type:
+* patient
+* doctor
+
+param key, encoding: x-www-urlencoded  
+* username
+
+### response
+```javascript
+{ status: "success", info: "friend removed"}
+or
+{status: "failed", info: "friend not found"}
+or
+{status:'failed', info:'wrong user type'}
+```
+
+### error status
+```	
+depend on (info)
+'wrong user_type' : 400
+'friend not found' : 401
+```

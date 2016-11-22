@@ -128,6 +128,9 @@ public class HomeActivity extends AppCompatActivity{
     }
 
     void getDevicesData(){
+        // remove all element
+        items.clear();
+
         AppSetting.showProgressDialog(HomeActivity.this, "Retrieving data");
         items.add(new Item("My Device", HEADER));
 
@@ -220,6 +223,7 @@ public class HomeActivity extends AppCompatActivity{
     @Override
     protected void onResume() {
         super.onResume();
+        getDevicesData();
         setupMqtt();
         System.out.println("resume subs "+subscribedTopic.size());
         for (String topic:subscribedTopic){
@@ -258,8 +262,6 @@ public class HomeActivity extends AppCompatActivity{
         // init adapter and data holder
         viewAdapter = new ViewAdapter();
         items = new ArrayList<>();
-
-        getDevicesData();
 
         recyclerView.setLayoutManager(new LinearLayoutManager(HomeActivity.this));
         recyclerView.setAdapter(viewAdapter);

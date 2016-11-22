@@ -252,6 +252,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <Button
+                android:id="@+id/button_remove"
                 android:textColor="#fff"
                 android:background="@color/colorRed"
                 android:text="@string/remove_friend"
