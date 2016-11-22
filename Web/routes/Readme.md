@@ -1,7 +1,11 @@
 SERVER API
 ==========
 
-## base_address example: http://localhost:3000  
+-------  
+**base_address example: http://localhost:3000**  
+
+-------
+
 
 Login
 -----
