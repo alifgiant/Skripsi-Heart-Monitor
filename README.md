@@ -6,7 +6,7 @@ Reading heart signal- Transmit to Server - Analyze on Server - Forward analized 
 
 Reading Heart Signal
 --------------------
-Heart signal readed using [photoplethysmogram](https://en.wikipedia.org/wiki/Photoplethysmogram) (PPG) sensor placed on wrist front. PPG used in the project is a product by Joel and Yury ([Pulse Sensor](http://pulsesensor.com/))
+Heart signal readed using [photoplethysmogram](https://en.wikipedia.org/wiki/Photoplethysmogram) (PPG) sensor placed on wrist front. PPG used in the project is a product by Joel and Yury ([Pulse Sensor](http://pulsesensor.com/))  
 ![Pulse Sensor](http://cdn.shopify.com/s/files/1/0100/6632/products/PulseSensorAmpedFinger-web_2.jpg?v=1348514131)
 
 Transmit to Server 
@@ -15,12 +15,12 @@ The sensor is controlled by an ESP8266-12E, an S.o.C which already has WiFi modu
 
 ## Analyzed on Server
 ### Purpose
-The heart rate analyzed to obtain:
+The heart rate analyzed to obtain:  
 * Heart Rate
 * Arrhytmhia Classification
 
 ### Method
-The analizing process followed these steps:
+The analizing process followed these steps:  
 1. Receive heart signal sampled at 3ms (~300 Hz)
 2. Start filtering and feature extraction algorithm,  
  Filtering and Feature extraction algorithm described on [Pan and Tompkins](http://www.robots.ox.ac.uk/~gari/teaching/cdt/A3/readings/ECG/Pan+Tompkins.pdf) algorithm. Which band pass (combined of high pass and low pass) filter and Sliding Window thresholding.
