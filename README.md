@@ -24,6 +24,7 @@ The heart rate analyzed to obtain:
 The analizing process followed these steps:  
 1. Receive heart signal sampled at 3ms (~300 Hz)  
 2. Start filtering and feature extraction algorithm  
+Filtering and Feature extraction algorithm described on [Pan and Tompkins](http://www.robots.ox.ac.uk/~gari/teaching/cdt/A3/readings/ECG/Pan+Tompkins.pdf) algorithm. Which band pass (combined of high pass and low pass) filter and Sliding Window thresholding.
 3. Start Classification algorithm  
 4. Forward Heart Rate and Arrhythmia Classification to subscriber  
 
