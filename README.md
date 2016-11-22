@@ -24,17 +24,15 @@ The heart rate analyzed to obtain:
 The analizing process followed these steps:
 
 1. Receive heart signal sampled at 3ms (~300 Hz)
-2. Start filtering and feature extraction algorithm
-3. Start Classification algorithm
-4. Forward Heart Rate and Arrhythmia Classification to subscriber
-
-#### Algorithm
-* Filtering and Feature extraction algorithm described on [Pan and Tompkins](http://www.robots.ox.ac.uk/~gari/teaching/cdt/A3/readings/ECG/Pan+Tompkins.pdf) algorithm. Which band pass (combined of high pass and low pass) filter and Sliding Window thresholding.
-* The project use Naive Bayes classifier, trained with [UCI-Lab dataset](https://archive.ics.uci.edu/ml/datasets/Arrhythmia), using features:
+2. Start filtering and feature extraction algorithm  
+Filtering and Feature extraction algorithm described on [Pan and Tompkins](http://www.robots.ox.ac.uk/~gari/teaching/cdt/A3/readings/ECG/Pan+Tompkins.pdf) algorithm. Which band pass (combined of high pass and low pass) filter and Sliding Window thresholding.
+3. Start Classification algorithm  
+The project use Naive Bayes classifier, trained with [UCI-Lab dataset](https://archive.ics.uci.edu/ml/datasets/Arrhythmia), using features:
 	* QRS duration
- 	* RR Interval
+	* RR Interval
 	* Age
- 	* Sex
+	* Sex
+4. Forward Heart Rate and Arrhythmia Classification to subscriber
 
 ### Architecture
 Server run on [Node.JS(v6.9.1)](https://nodejs.org/en/download/) using [Mongodb(v.3.2.10)](https://www.mongodb.com/) as database. The project depedency can be found on project [folder](https://github.com/alifgiant/HeartRate-Monitor/tree/NewTA/Web).  
