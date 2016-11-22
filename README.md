@@ -38,7 +38,7 @@ The analizing process followed these steps:
 ### Architecture
 Server run on [Node.JS(v6.9.1)](https://nodejs.org/en/download/) using [Mongodb(v.3.2.10)](https://www.mongodb.com/) as database. The project depedency can be found on project [folder](https://github.com/alifgiant/HeartRate-Monitor/tree/NewTA/Web).  
 ![architecture](https://raw.githubusercontent.com/alifgiant/HeartRate-Monitor/NewTA/public/images/architecture.png)
-![server](https://raw.githubusercontent.com/alifgiant/HeartRate-Monitor/NewTA/public/images/server.png)
+![server](https://raw.githubusercontent.com/alifgiant/HeartRate-Monitor/NewTA/public/images/server_r.png)
 
 Forwarded analyzed data
 -----------------------
