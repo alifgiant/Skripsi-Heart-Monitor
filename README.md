@@ -38,8 +38,8 @@ Server run on [Node.JS(v6.9.1)](https://nodejs.org/en/download/) using [Mongodb(
 
 ## Forwarded analyzed data
 The result will be forwarded to [web](https://github.com/alifgiant/HeartRate-Monitor/tree/NewTA/Web) and [android phone](https://github.com/alifgiant/HeartRate-Monitor/tree/NewTA/Android/Jantung) using WebSocket and MQTT respectively.  
-![web screen shoot](https://raw.githubusercontent.com/alifgiant/HeartRate-Monitor/NewTA/public/images/web.jpg)
-![phone screen shoot](https://raw.githubusercontent.com/alifgiant/HeartRate-Monitor/NewTA/public/images/phone.jpg)
+![web screen shoot](https://raw.githubusercontent.com/alifgiant/HeartRate-Monitor/NewTA/public/images/web_r.jpg)
+![phone screen shoot](https://raw.githubusercontent.com/alifgiant/HeartRate-Monitor/NewTA/public/images/phone_r.jpg)
 
 License
 -------
