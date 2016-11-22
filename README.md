@@ -13,7 +13,8 @@ Transmit to Server
 ----------------------
 The sensor is controlled by an ESP8266-12E, an S.o.C which already has WiFi module embedded on it. The [sketch](https://github.com/alifgiant/HeartRate-Monitor/tree/NewTA/Sensor) writed using [Platform.io ATOM IDE](http://docs.platformio.org/en/stable/ide/atom.html).
 
-## Analyzed on Server
+Analyzed on Server
+------------------
 ### Purpose
 The heart rate analyzed to obtain:  
 * Heart Rate
@@ -36,14 +37,14 @@ The analizing process followed these steps:
 Server run on [Node.JS(v6.9.1)](https://nodejs.org/en/download/) using [Mongodb(v.3.2.10)](https://www.mongodb.com/) as database. The project depedency can be found on project [folder](https://github.com/alifgiant/HeartRate-Monitor/tree/NewTA/Web).
 (GAMBAR)
 
-## Forwarded analyzed data
+Forwarded analyzed data
+-----------------------
 The result will be forwarded to [web](https://github.com/alifgiant/HeartRate-Monitor/tree/NewTA/Web) and [android phone](https://github.com/alifgiant/HeartRate-Monitor/tree/NewTA/Android/Jantung) using WebSocket and MQTT respectively.  
 ![web screen shoot](https://raw.githubusercontent.com/alifgiant/HeartRate-Monitor/NewTA/public/images/web_r.jpg)
 ![phone screen shoot](https://raw.githubusercontent.com/alifgiant/HeartRate-Monitor/NewTA/public/images/phone_r.jpg)
 
 License
 -------
-
 	Copyright 2016 Muhammad Alif Akbar
 	Telkom University, Informatics Department
 
