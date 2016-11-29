@@ -1,5 +1,5 @@
 import CsvLoader
-source = CsvLoader.load()
+source = CsvLoader.load()[0:5000]
 
 """
 Delay data: 12 second (2400 sample)

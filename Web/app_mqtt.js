@@ -9,16 +9,16 @@ var emitter = new EventEmitter();
 var app = function (broker) {
     this.receivedDataCallBack = function(packet, client) {
         /* packet received */
-        console.log('MQTT: Published topic', packet.topic);
-        console.log('MQTT: Published payload', packet.payload.toString('ascii'));
+        // console.log('MQTT: Published topic', packet.topic);
+        // console.log('MQTT: Published payload', packet.payload.toString('ascii'));
 
         var rootTopic = packet.topic.split('/');
-        emitter.emit(rootTopic[0], rootTopic[1], packet.payload.toString('ascii'), broker);  // rootTopic[0] = tipe publish, [1] = id
+        emitter.emit(rootTopic[1], rootTopic[0], packet.payload.toString('ascii'), broker);  // rootTopic[0] = tipe publish, [1] = id
     };
 };
 
 emitter.on('sensor', function (sensorId, data, broker) {
-    console.log('get sensor read:'+sensorId, data);
+    // console.log('get sensor read:'+sensorId, data);
     detector(sensorId, data, function (result) {
         var message = {
             topic: 'processed/'+sensorId,

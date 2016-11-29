@@ -171,13 +171,19 @@ public class HomeActivity extends AppCompatActivity{
                         }catch (JSONException ex){
                             ex.printStackTrace();
                         }
+                        items.add(new ItemDevice("husna", DEVICE, "A001", false));
+                        subscribedTopic.add("A001"+"/bpm");
                     }
                     @Override
                     public void onError(ANError anError) {
                         AppSetting.dismissProgressDialog();
                         Log.i("HOME", "onError: "+anError.getErrorBody());
+//                        items.add(new ItemDevice("husna", DEVICE, "A001", false));
+//                        subscribedTopic.add("A001"+"/bpm");
                     }
                 });
+        items.add(new ItemDevice("husna", DEVICE, "A001", false));
+        subscribedTopic.add("A001"+"/bpm");
     }
 
     void setupMqtt(){
@@ -223,7 +229,6 @@ public class HomeActivity extends AppCompatActivity{
     @Override
     protected void onResume() {
         super.onResume();
-        getDevicesData();
         setupMqtt();
         System.out.println("resume subs "+subscribedTopic.size());
         for (String topic:subscribedTopic){
@@ -258,10 +263,11 @@ public class HomeActivity extends AppCompatActivity{
 
         accountInfo = AppSetting.getSavedAccount(HomeActivity.this);
 
-
         // init adapter and data holder
         viewAdapter = new ViewAdapter();
         items = new ArrayList<>();
+
+        getDevicesData();
 
         recyclerView.setLayoutManager(new LinearLayoutManager(HomeActivity.this));
         recyclerView.setAdapter(viewAdapter);

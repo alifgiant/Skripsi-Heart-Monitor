@@ -1,6 +1,8 @@
 /**
- * Created by maakbar on 11/20/16.
+ * loader of algorithms
  */
+
+var classifier = require('./classifier');
 
 var holder = [];
 
@@ -12,4 +14,15 @@ function runAlgorithm(deviceId, data, callback) {
     });
 }
 
+function handleRrSegment(rrSegment, callback) {
+    process.nextTick(function () {
+        var beatClassification = classifier.classifyBeat(rrSegment);
+        var episodeClassification = classifier.classifyEpisode(beatClassification);
+        callback(beatClassification, episodeClassification);
+    });
+}
+
+console.log(classifier.beatCategory);
+
 module.exports = runAlgorithm;
+

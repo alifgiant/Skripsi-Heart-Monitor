@@ -112,7 +112,7 @@ public class DetailActivity extends AppCompatActivity {
                     String[] splitedTopic = topic.split("/");
                     switch (splitedTopic[1]) {
                         case "bpm":
-                            if (deviceId.equals(splitedTopic[0]))
+//                            if (deviceId.equals(splitedTopic[0]))
                                 itemRate.setText(String.format(Locale.US, "%s", new String(message.getPayload())));
                             break;
                         case "visual":
@@ -222,6 +222,7 @@ public class DetailActivity extends AppCompatActivity {
         setupMqtt();
         System.out.println("detail resume subs "+subscribedTopic.size());
         for (String topic:subscribedTopic){
+            System.out.println("detail resume subs "+topic);
             try {
                 mqttClient.subscribe(topic, 0);
             }catch (MqttException ex){

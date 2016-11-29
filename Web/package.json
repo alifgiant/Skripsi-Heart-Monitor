@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon ./bin/www"
+    "start": "nodemon ./init_server/www"
   },
   "dependencies": {
     "body-parser": "~1.15.1",
@@ -11,6 +11,7 @@
     "cookie-parser": "~1.4.3",
     "debug": "~2.2.0",
     "express": "~4.13.4",
+    "freqr": "^1.0.0",
     "jade": "~1.11.0",
     "mongoose": "^4.6.5",
     "mongoose-unique-validator": "^1.0.2",
