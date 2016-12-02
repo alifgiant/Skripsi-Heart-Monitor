@@ -12,7 +12,7 @@ public class ItemDevice extends Item{
     private boolean isMale;
 
     private int condition;
-    private int rate;
+    private float rate;
 
     public ItemDevice(String name, int itemType, String deviceId, boolean isMale) {
         super(name, itemType);
@@ -41,11 +41,11 @@ public class ItemDevice extends Item{
         this.condition = condition;
     }
 
-    public int getRate() {
+    public float getRate() {
         return rate;
     }
 
-    public void setRate(int rate) {
+    public void setRate(float rate) {
         this.rate = rate;
     }
 

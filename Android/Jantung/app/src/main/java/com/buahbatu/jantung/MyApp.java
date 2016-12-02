@@ -26,31 +26,10 @@ public class MyApp extends Application {
         // initialize http client
         AndroidNetworking.initialize(getApplicationContext());
         // initialize mqtt client
-        mClient = setupMqtt(getApplicationContext());
+//        mClient = setupMqttCallBack(getApplicationContext());
     }
 
-    public final MqttAndroidClient getClient() {
-        return mClient;
-    }
-
-    private MqttAndroidClient setupMqtt(Context context){
-        try {
-//            String clientId = MqttClient.generateClientId();
-            AppSetting.AccountInfo accountInfo = AppSetting.getSavedAccount(context);
-            // mqtt client
-            MqttAndroidClient mqttClient = new MqttAndroidClient(context,
-                    /*MQTT SERVER ADDRESS*/
-                    String.format(Locale.US,
-                            context.getString(R.string.mqtt_url),
-                            context.getString(R.string.server_ip_address)),
-                    /*MQTT CLIENT ID*/
-                    accountInfo.username/*+"/"+clientId*/);
-            mqttClient.connect();
-            return mqttClient;
-        }catch (MqttException ex){
-            Log.e("MqttSetup", "can't connect");
-            ex.printStackTrace();
-        }
-        return null;
-    }
+//    public final MqttAndroidClient getClient() {
+//        return mClient;
+//    }
 }

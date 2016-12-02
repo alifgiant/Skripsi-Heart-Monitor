@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.design.widget.TextInputEditText;
 import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.util.Pair;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -31,9 +32,7 @@ import com.buahbatu.jantung.model.ItemDevice;
 import com.buahbatu.jantung.model.Item;
 
 import org.eclipse.paho.android.service.MqttAndroidClient;
-import org.eclipse.paho.client.mqttv3.IMqttActionListener;
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
-import org.eclipse.paho.client.mqttv3.IMqttToken;
 import org.eclipse.paho.client.mqttv3.MqttCallback;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
@@ -82,7 +81,7 @@ public class HomeActivity extends AppCompatActivity{
             public void onClick(DialogInterface dialog, int which) {
                 // ganti nanti dengan cuma add ke notif
                 AppSetting.showProgressDialog(HomeActivity.this, "Adding Friend");
-                AndroidNetworking.post(String.format(Locale.US, getString(R.string.http_url), getString(R.string.server_ip_address))
+                AndroidNetworking.post(AppSetting.getHttpAddress(HomeActivity.this)
                         +"/{user}/{username}/data/add")
                         .addPathParameter("user", "patient")
                         .addPathParameter("username", accountInfo.username)
@@ -134,7 +133,7 @@ public class HomeActivity extends AppCompatActivity{
         AppSetting.showProgressDialog(HomeActivity.this, "Retrieving data");
         items.add(new Item("My Device", HEADER));
 
-        AndroidNetworking.get(String.format(Locale.US, getString(R.string.http_url), getString(R.string.server_ip_address))
+        AndroidNetworking.get(AppSetting.getHttpAddress(HomeActivity.this)
                 +"/{user}/{username}/data")
                 .addPathParameter("user", "patient")
                 .addPathParameter("username", accountInfo.username)
@@ -165,7 +164,6 @@ public class HomeActivity extends AppCompatActivity{
                                         DEVICE, object.getString("device_id"), object.getBoolean("is_male")));
                                 subscribedTopic.add(object.getString("device_id")+"/bpm");
                             }
-                            onResume();
                             // notify all view
                             viewAdapter.notifyDataSetChanged();
                         }catch (JSONException ex){
@@ -173,87 +171,85 @@ public class HomeActivity extends AppCompatActivity{
                         }
                         items.add(new ItemDevice("husna", DEVICE, "A001", false));
                         subscribedTopic.add("A001"+"/bpm");
+                        onResume();
                     }
                     @Override
                     public void onError(ANError anError) {
                         AppSetting.dismissProgressDialog();
                         Log.i("HOME", "onError: "+anError.getErrorBody());
-//                        items.add(new ItemDevice("husna", DEVICE, "A001", false));
-//                        subscribedTopic.add("A001"+"/bpm");
+                        items.add(new ItemDevice("husna", DEVICE, "A001", false));
+                        subscribedTopic.add("A001"+"/bpm");
+                        onResume();
                     }
                 });
-        items.add(new ItemDevice("husna", DEVICE, "A001", false));
-        subscribedTopic.add("A001"+"/bpm");
     }
 
-    void setupMqtt(){
+    void setupMqttCallBack(){
         // mqtt client
-        mqttClient = ((MyApp) getApplication()).getClient();
-        if (mqttClient!=null) {
-            mqttClient.setCallback(new MqttCallback() {
-                @Override
-                public void connectionLost(Throwable cause) {
-                    System.out.println("Connection was lost!");
-                }
+        mqttClient.setCallback(new MqttCallback() {
+            @Override
+            public void connectionLost(Throwable cause) {
+                System.out.println("Connection was lost!");
+            }
 
-                @Override
-                public void messageArrived(String topic, MqttMessage message) throws Exception {
-                    System.out.println("Message Arrived!: " + topic + ": " + new String(message.getPayload()));
-                    String[] splitedTopic = topic.split("/");
-                    switch (splitedTopic[1]) {
-                        case "bpm":
-                            for (Item item : items) {
-                                if (item.getItemType() == DEVICE) {
-                                    ItemDevice device = (ItemDevice) item;
-                                    if (device.getDeviceId().equals(splitedTopic[0])) {
-                                        device.setRate(Integer.parseInt(new String(message.getPayload())));
-                                        viewAdapter.notifyDataSetChanged();
+            @Override
+            public void messageArrived(String topic, MqttMessage message) throws Exception {
+                System.out.println("Message Arrived!: " + topic + ": " + new String(message.getPayload()));
+                String[] splitedTopic = topic.split("/");
+                switch (splitedTopic[1]) {
+                    case "bpm":
+                        for (Item item : items) {
+                            if (item.getItemType() == DEVICE) {
+                                ItemDevice device = (ItemDevice) item;
+                                if (device.getDeviceId().equals(splitedTopic[0])) {
+                                    device.setRate(Float.parseFloat(new String(message.getPayload())));
+                                    viewAdapter.notifyDataSetChanged();
 //                                        break;
-                                    }
                                 }
                             }
-                            break;
-                    }
+                        }
+                        break;
                 }
+            }
 
-                @Override
-                public void deliveryComplete(IMqttDeliveryToken token) {
-                    System.out.println("Delivery Complete!");
-                }
-            });
-        }else {
-            Log.e("SetupMqtt", "MQTT CLIENT IS NULL");
-        }
+            @Override
+            public void deliveryComplete(IMqttDeliveryToken token) {
+                System.out.println("Delivery Complete!");
+            }
+        });
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        setupMqtt();
+        setupMqttCallBack();
         System.out.println("resume subs "+subscribedTopic.size());
         for (String topic:subscribedTopic){
             try {
-                mqttClient.subscribe(topic, 0);
+                mqttClient.subscribe(topic, 0);//
             }catch (MqttException ex){
                 ex.printStackTrace();
             }
         }
     }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        System.out.println("pause subs "+subscribedTopic.size());
-        for (String topic:subscribedTopic){
-            try{
-                mqttClient.unsubscribe(topic);
-            }catch (MqttException ex){
-                // do nothing
-                // un-subscribe failed
-            }
-
+//
+@Override
+protected void onDestroy() {
+    Log.i("Detail", "onDestroy: ");
+    for (String topic:subscribedTopic){
+        Log.i("Detail", "onDestroy: "+topic);
+        try{
+            mqttClient.unsubscribe(topic);
+        }catch (MqttException ex){
+            // do nothing
+            // un-subscribe failed
         }
     }
+
+    mqttClient.unregisterResources();
+    mqttClient.close();
+    super.onDestroy();
+}
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -267,6 +263,16 @@ public class HomeActivity extends AppCompatActivity{
         viewAdapter = new ViewAdapter();
         items = new ArrayList<>();
 
+        if (mqttClient == null) {
+            mqttClient = AppSetting.getMqttClient(HomeActivity.this);
+            try {
+                System.out.println("Setup Mqtt");
+                mqttClient.connect();
+            }catch (MqttException ex){
+                Log.e("MqttSetup", "can't connect");
+                ex.printStackTrace();
+            }
+        }
         getDevicesData();
 
         recyclerView.setLayoutManager(new LinearLayoutManager(HomeActivity.this));
@@ -299,21 +305,21 @@ public class HomeActivity extends AppCompatActivity{
                 ImageView image = (ImageView) holder.itemView.findViewById(R.id.item_image);
                 if (device.isMale()){
                     switch (device.getCondition()){
-                        case 0: image.setImageDrawable(getDrawable(R.drawable.boy0));
+                        case 0: image.setImageDrawable(ContextCompat.getDrawable(HomeActivity.this, R.drawable.boy0));
                             break;
-                        case 1: image.setImageDrawable(getDrawable(R.drawable.boy1));
+                        case 1: image.setImageDrawable(ContextCompat.getDrawable(HomeActivity.this, R.drawable.boy1));
                             break;
-                        case 2: image.setImageDrawable(getDrawable(R.drawable.boy2));
+                        case 2: image.setImageDrawable(ContextCompat.getDrawable(HomeActivity.this, R.drawable.boy2));
                             break;
                     }
 
                 }else {
                     switch (device.getCondition()){
-                        case 0: image.setImageDrawable(getDrawable(R.drawable.girl0));
+                        case 0: image.setImageDrawable(ContextCompat.getDrawable(HomeActivity.this,R.drawable.girl0));
                             break;
-                        case 1: image.setImageDrawable(getDrawable(R.drawable.girl1));
+                        case 1: image.setImageDrawable(ContextCompat.getDrawable(HomeActivity.this,R.drawable.girl1));
                             break;
-                        case 2: image.setImageDrawable(getDrawable(R.drawable.girl2));
+                        case 2: image.setImageDrawable(ContextCompat.getDrawable(HomeActivity.this,R.drawable.girl2));
                             break;
                     }
                 }
@@ -323,7 +329,7 @@ public class HomeActivity extends AppCompatActivity{
                         device.getDeviceId()));
 
                 TextView textRate = (TextView) holder.itemView.findViewById(R.id.item_rate);
-                textRate.setText(String.format(Locale.US, "%d", device.getRate()));
+                textRate.setText(String.format(Locale.US, "%.0f", device.getRate()));
                 holder.itemView.setOnClickListener(new OnDeviceClick(device));
             }
         }

@@ -19,7 +19,8 @@ class Detector(object):
             container.append(raw)
         else:
             self.data_sources.append([raw])
-            return self.__process(self.data_sources.pop(0), visible_plot)
+            return self.__process(self.data_sources.pop(0), visible_plot)        
+        # return ['filling', len(container)]
         return ['filling']
 
     @staticmethod

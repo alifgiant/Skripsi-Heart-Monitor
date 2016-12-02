@@ -19,16 +19,51 @@ import org.eclipse.paho.client.mqttv3.MqttException;
 
 import java.util.Locale;
 
-/**
- * Created by maakbar on 11/8/16.
- */
-
 class AppSetting {
     private static String PREFERENCE_NAME = "JANTUNG PREF";
 
     static boolean LOGGED_IN = true;
     static boolean LOGGED_OUT = false;
     private static ProgressDialog dialog;
+
+    static MqttAndroidClient getMqttClient(Context context){
+        //            String clientId = MqttClient.generateClientId();
+        System.out.println("mqtt address "+AppSetting.getMqttAddress(context));
+        AppSetting.AccountInfo accountInfo = AppSetting.getSavedAccount(context);
+        // mqtt client
+        MqttAndroidClient mqttClient = new MqttAndroidClient(context,
+                    /*MQTT SERVER ADDRESS*/
+                AppSetting.getMqttAddress(context),
+                    /*MQTT CLIENT ID*/
+                accountInfo.username/*+"/"+clientId*/);
+        return mqttClient;
+    }
+
+    static void saveIp(Context context, String ip, String port){
+        SharedPreferences.Editor edit = context.getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE).edit();
+        edit.putString("ip", ip);
+        edit.putString("port", port);
+        edit.apply();
+    }
+
+    static String getHttpAddress(Context context){
+        SharedPreferences pref = context.getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE);
+        String ip = pref.getString("ip", "");
+        String port = pref.getString("port", "");
+        if (ip.equals(""))
+            ip = context.getString(R.string.server_ip_address);
+        if (port.equals(""))
+            port = context.getString(R.string.server_http_port);
+        return String.format(Locale.US, context.getString(R.string.http_url), ip+":"+port);
+    }
+
+    static String getMqttAddress(Context context){
+        SharedPreferences pref = context.getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE);
+        String ip = pref.getString("ip", "");
+        if (ip.equals(""))
+            ip = context.getString(R.string.server_ip_address);
+        return String.format(Locale.US, context.getString(R.string.mqtt_url), ip);
+    }
 
     static void showProgressDialog(Context context, String message){
         dialog = new ProgressDialog(context, android.app.AlertDialog.THEME_DEVICE_DEFAULT_DARK);

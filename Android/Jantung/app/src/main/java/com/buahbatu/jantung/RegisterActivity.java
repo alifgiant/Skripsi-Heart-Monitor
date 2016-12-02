@@ -29,7 +29,6 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -61,7 +60,7 @@ public class RegisterActivity extends AppCompatActivity {
             };
             boolean anyEmpty = false;
             for (TextInputLayout inputLayout: inputLayouts) {
-                inputLayout.getEditText().setError(null);
+                inputLayout.setError(null);
                 if (TextUtils.isEmpty(inputLayout.getEditText().getText())){
                     inputLayout.setError(getString(R.string.error_form));
                     anyEmpty = true;
@@ -82,7 +81,7 @@ public class RegisterActivity extends AppCompatActivity {
 
                     AppSetting.showProgressDialog(RegisterActivity.this, "Registering");
 
-                    AndroidNetworking.post(String.format(Locale.US, getString(R.string.http_url), getString(R.string.server_ip_address))
+                    AndroidNetworking.post(AppSetting.getHttpAddress(RegisterActivity.this)
                             +"/{user}"+getString(R.string.register_url))
                             .addPathParameter("user", "patient")
                             .addJSONObjectBody(patient)

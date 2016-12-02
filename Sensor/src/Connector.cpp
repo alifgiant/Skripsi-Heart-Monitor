@@ -7,10 +7,10 @@
 
 using namespace std;
 
-const char * Connector::SENSOR_ID = "H00001";
-const char * Connector::MQTT_BROKER = "192.168.0.111";
+const char * Connector::SENSOR_ID = "ow0003";
+const char * Connector::MQTT_BROKER = "192.168.43.13";
 const int Connector::MQTT_PORT = 1883;
-const char * Connector::OUT_TOPIC = "report";
+const char * Connector::OUT_TOPIC = "sensor";
 const char * Connector::IN_TOPIC = "setting";
 
 void Connector::connectWifi(){
@@ -30,14 +30,18 @@ void messageArriveCallback(char* topic, byte* payload, unsigned int length){
 }
 
 WiFiClient espClient;
-PubSubClient client (Connector::MQTT_BROKER, Connector::MQTT_PORT, messageArriveCallback, espClient);
+// PubSubClient client (Connector::MQTT_BROKER, Connector::MQTT_PORT, messageArriveCallback, espClient);
+PubSubClient client (espClient);
 
 void Connector::connectMqtt(){
-  client.connect(SENSOR_ID);
+  client.setServer(Connector::MQTT_BROKER, Connector::MQTT_PORT);
+  client.setCallback(messageArriveCallback);
+
   Serial.print("Attempting MQTT connection...");
   while (!client.connected()) {
-   Serial.print(".");
-   delay(5000);
+    client.connect(SENSOR_ID);
+    Serial.print(".");
+    delay(5000);
   }
   Serial.println("Connected");
   subscribeMQTT();
@@ -48,11 +52,11 @@ void Connector::subscribeMQTT(){
   client.subscribe(IN_TOPIC);
 }
 void Connector::publish(char* message){
-  Serial.println("published");
   string a = "";
-  a += OUT_TOPIC;
-  a += "/";
   a += SENSOR_ID;
+  a += "/";
+  a += OUT_TOPIC;
+  Serial.println(a.c_str());
   client.publish(a.c_str(), message);
 }
 void Connector::setupConnection(){

@@ -1,5 +1,6 @@
 package com.buahbatu.jantung;
 
+import android.graphics.RectF;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -17,7 +18,9 @@ import com.robinhood.spark.SparkAdapter;
 import com.robinhood.spark.SparkView;
 
 import org.eclipse.paho.android.service.MqttAndroidClient;
+import org.eclipse.paho.client.mqttv3.IMqttActionListener;
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
+import org.eclipse.paho.client.mqttv3.IMqttToken;
 import org.eclipse.paho.client.mqttv3.MqttCallback;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
@@ -89,74 +92,67 @@ public class DetailActivity extends AppCompatActivity {
     private MqttAndroidClient mqttClient;
 
     private List<String> subscribedTopic = new ArrayList<>();
-    private List<Integer> ecgData = new ArrayList<>();
+    private List<Float> ecgData = new ArrayList<>();
     private MyAdapter ecgAdapter = new MyAdapter();
 
     private String phoneNumber = null;
     private String username;
     private String deviceId;
 
-    void setupMqtt(){
-        // mqtt client
-        mqttClient = ((MyApp) getApplication()).getClient();
-        if (mqttClient!=null) {
-            mqttClient.setCallback(new MqttCallback() {
-                @Override
-                public void connectionLost(Throwable cause) {
-                    System.out.println("Connection was lost!");
+    void setupMqttCallBack(){
+        mqttClient.setCallback(new MqttCallback() {
+            @Override
+            public void connectionLost(Throwable cause) {
+                System.out.println("Connection was lost!");
+            }
+
+            @Override
+            public void messageArrived(String topic, MqttMessage message) throws Exception {
+                System.out.println("Message Arrived!: " + topic + ": " + new String(message.getPayload()));
+                String[] splitedTopic = topic.split("/");
+                switch (splitedTopic[1]) {
+                    case "bpm":
+                        itemRate.setText(String.format(Locale.US, "%.0f", Float.parseFloat(new String(message.getPayload()))));
+                        break;
+                    case "visual":
+                        // show to graph
+                        ecgData.add(Float.parseFloat(new String(message.getPayload())));
+                        if (ecgData.size()>100){
+                            ecgData.remove(0);
+                        }
+                        ecgAdapter.notifyDataSetChanged();
+                        break;
+                    case "alert":
+                        String alertString = new String(message.getPayload());
+                        /*[TITLE, DETAIL, CONDITION]*/
+                        String[] splittedAlert = alertString.split("#");
+
+                        Notification notification = new Notification(
+                                String.format(Locale.US, splittedAlert[0], username),
+                                splittedAlert[1], Integer.parseInt(splittedAlert[2]));
+
+                        alertTitle.setText(notification.getTitle());
+                        alertDetail.setText(notification.getDetail());
+                        switch (notification.getCondition()){
+                            case Notification.HEALTH:
+                                alertImage.setImageResource(R.drawable.ic_error_green);
+                                break;
+                            case Notification.SICK:
+                                alertImage.setImageResource(R.drawable.ic_error_yellow);
+                                break;
+                            case Notification.DANGER:
+                                alertImage.setImageResource(R.drawable.ic_error_red);
+                                break;
+                        }
+                        break;
                 }
+            }
 
-                @Override
-                public void messageArrived(String topic, MqttMessage message) throws Exception {
-                    System.out.println("Message Arrived!: " + topic + ": " + new String(message.getPayload()));
-                    String[] splitedTopic = topic.split("/");
-                    switch (splitedTopic[1]) {
-                        case "bpm":
-//                            if (deviceId.equals(splitedTopic[0]))
-                                itemRate.setText(String.format(Locale.US, "%s", new String(message.getPayload())));
-                            break;
-                        case "visual":
-                            // show to graph
-                            ecgData.add(Integer.parseInt(new String(message.getPayload())));
-                            if (ecgData.size()>60){
-                                ecgData.remove(0);
-                            }
-                            ecgAdapter.notifyDataSetChanged();
-                            break;
-                        case "alert":
-                            String alertString = new String(message.getPayload());
-                            /*[TITLE, DETAIL, CONDITION]*/
-                            String[] splittedAlert = alertString.split("#");
-
-                            Notification notification = new Notification(
-                                    String.format(Locale.US, splittedAlert[0], username),
-                                    splittedAlert[1], Integer.parseInt(splittedAlert[2]));
-
-                            alertTitle.setText(notification.getTitle());
-                            alertDetail.setText(notification.getDetail());
-                            switch (notification.getCondition()){
-                                case Notification.HEALTH:
-                                    alertImage.setImageResource(R.drawable.ic_error_green);
-                                    break;
-                                case Notification.SICK:
-                                    alertImage.setImageResource(R.drawable.ic_error_yellow);
-                                    break;
-                                case Notification.DANGER:
-                                    alertImage.setImageResource(R.drawable.ic_error_red);
-                                    break;
-                            }
-                            break;
-                    }
-                }
-
-                @Override
-                public void deliveryComplete(IMqttDeliveryToken token) {
-                    System.out.println("Delivery Complete!");
-                }
-            });
-        }else {
-            Log.e("SetupMqtt", "MQTT CLIENT IS NULL");
-        }
+            @Override
+            public void deliveryComplete(IMqttDeliveryToken token) {
+                System.out.println("Delivery Complete!");
+            }
+        });
     }
 
     void setupDetail(){
@@ -164,7 +160,8 @@ public class DetailActivity extends AppCompatActivity {
 //        AppSetting.AccountInfo accountInfo = AppSetting.getSavedAccount(DetailActivity.this);
         AppSetting.showProgressDialog(DetailActivity.this, "Retrieving data");
 
-        AndroidNetworking.get(String.format(Locale.US, getString(R.string.http_url), getString(R.string.server_ip_address))
+        AndroidNetworking.get(AppSetting.getHttpAddress(DetailActivity.this)
+//        AndroidNetworking.get(String.format(Locale.US, getString(R.string.http_url), getString(R.string.server_ip_address))
                 +"/{user}/{username}/data/simple")
                 .addPathParameter("user", "patient")
                 .addPathParameter("username", username)
@@ -216,15 +213,16 @@ public class DetailActivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        setupMqtt();
+    private void resumeMqtt() {
+        setupMqttCallBack();
         System.out.println("detail resume subs "+subscribedTopic.size());
         for (String topic:subscribedTopic){
             System.out.println("detail resume subs "+topic);
             try {
-                mqttClient.subscribe(topic, 0);
+//                if (mqttClient != null)
+                    mqttClient.subscribe(topic, 0);
+//                else
+//                    System.out.println("MQTT is NULL");
             }catch (MqttException ex){
                 ex.printStackTrace();
             }
@@ -232,21 +230,47 @@ public class DetailActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onPause() {
-        super.onPause();
-        System.out.println("detail pause subs "+deviceId);
+    protected void onDestroy() {
+        Log.i("Detail", "onDestroy: ");
         for (String topic:subscribedTopic){
+            Log.i("Detail", "onDestroy: "+topic);
             try{
                 mqttClient.unsubscribe(topic);
             }catch (MqttException ex){
                 // do nothing
                 // un-subscribe failed
             }
-
         }
+
+        mqttClient.unregisterResources();
+        mqttClient.close();
+        super.onDestroy();
     }
 
     class MyAdapter extends SparkAdapter {
+
+        @Override
+        public RectF getDataBounds() {
+            final int count = getCount();
+
+            float minY = -0.1f;
+            float maxY = 0.1f;
+            float minX = Float.MAX_VALUE;
+            float maxX = -Float.MAX_VALUE;
+            for (int i = 0; i < count; i++) {
+                final float x = getX(i);
+                minX = Math.min(minX, x);
+                maxX = Math.max(maxX, x);
+
+                final float y = getY(i);
+                minY = Math.min(minY, y);
+                maxY = Math.max(maxY, y);
+            }
+
+            // set values on the return object
+            return new RectF(minX, minY, maxX, maxY);
+        }
+
         @Override
         public int getCount() {
             return ecgData.size();
@@ -272,7 +296,7 @@ public class DetailActivity extends AppCompatActivity {
         username = getIntent().getStringExtra(getString(R.string.key_name));
         deviceId = getIntent().getStringExtra(getString(R.string.key_id));
         boolean isMale = getIntent().getBooleanExtra(getString(R.string.key_gender), false);
-        int rate = getIntent().getIntExtra(getString(R.string.key_rate), 1000);
+        float rate = getIntent().getFloatExtra(getString(R.string.key_rate), 1000);
         int condition = getIntent().getIntExtra(getString(R.string.key_condition), 0);
 
         /*MQTT RELATED*/
@@ -280,6 +304,28 @@ public class DetailActivity extends AppCompatActivity {
         subscribedTopic.add(deviceId+"/visual");
         subscribedTopic.add(deviceId+"/alert");
         sparkView.setAdapter(ecgAdapter);
+
+        if (mqttClient == null) {
+            mqttClient = AppSetting.getMqttClient(DetailActivity.this);
+            try {
+                System.out.println("Setup Mqtt");
+                mqttClient.connect(DetailActivity.this, new IMqttActionListener() {
+                    @Override
+                    public void onSuccess(IMqttToken asyncActionToken) {
+                        System.out.print("connected");
+                        resumeMqtt();
+                    }
+
+                    @Override
+                    public void onFailure(IMqttToken asyncActionToken, Throwable exception) {
+
+                    }
+                });
+            }catch (MqttException ex){
+                Log.e("MqttSetup", "can't connect");
+                ex.printStackTrace();
+            }
+        }
 
         /*DETAIL INFORMATION*/
         setupDetail();
@@ -291,6 +337,7 @@ public class DetailActivity extends AppCompatActivity {
         itemId.setText(String.format(Locale.US, "%s: %s", getString(R.string.device_id),
                 deviceId));
 
-        itemRate.setText(String.format(Locale.US, "%d", rate));
+        itemRate.setText(String.format(Locale.US, "%.0f", rate));
+        itemRate.setText(String.format(Locale.US, "%.0f", rate));
     }
 }

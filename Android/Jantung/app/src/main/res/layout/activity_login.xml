@@ -12,6 +12,7 @@
     tools:context="com.buahbatu.jantung.LoginActivity">
 
     <ImageView
+        android:id="@+id/logo_jantung"
         android:layout_gravity="center"
         android:src="@drawable/ic_pulse"
         android:layout_width="wrap_content"

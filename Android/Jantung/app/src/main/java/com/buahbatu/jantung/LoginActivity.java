@@ -1,21 +1,22 @@
 package com.buahbatu.jantung;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.InputType;
 import android.text.TextUtils;
 import android.util.Log;
-
+import android.widget.LinearLayout;
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -39,7 +40,7 @@ public class LoginActivity extends AppCompatActivity {
 
             AppSetting.showProgressDialog(LoginActivity.this, "Logging in");
 
-            AndroidNetworking.post(String.format(Locale.US, getString(R.string.http_url), getString(R.string.server_ip_address))
+            AndroidNetworking.post(AppSetting.getHttpAddress(LoginActivity.this)
                     +"/{user}" + getString(R.string.login_url))
                     .addPathParameter("user", "patient")
                     .addBodyParameter("username", textUserName.getEditText().getText().toString())
@@ -58,7 +59,7 @@ public class LoginActivity extends AppCompatActivity {
                         }
                         @Override
                         public void onError(ANError error) {
-                            // handle error
+//                            // handle error
                             AppSetting.dismissProgressDialog();
                             Log.i("LOGIN", "onError: "+ error.getErrorBody());
                             try {
@@ -71,6 +72,12 @@ public class LoginActivity extends AppCompatActivity {
                             }catch (JSONException ex){
                                 ex.printStackTrace();
                             }
+//                            AppSetting.dismissProgressDialog();
+////                            Log.i("LOGIN", "onResponse: "+response.toString());
+//                            AppSetting.setLogin(LoginActivity.this, AppSetting.LOGGED_IN);
+//                            AppSetting.saveAccount(LoginActivity.this, textUserName.getEditText().getText().toString(),
+//                                    textUserPass.getEditText().getText().toString());
+//                            moveToHomeActivity();
                         }
                     });
         }
@@ -79,6 +86,44 @@ public class LoginActivity extends AppCompatActivity {
 
     @OnClick(R.id.button_register) void onRegisterClick(){
         startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
+    }
+
+    @OnClick(R.id.logo_jantung) void setupIp(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
+        builder.setTitle(getString(R.string.setup_ip));
+
+        // Set up the input
+        final TextInputEditText inputIp = new TextInputEditText(this);
+        inputIp.setInputType(InputType.TYPE_CLASS_PHONE);
+        inputIp.setHint(R.string.example_ip);
+        final TextInputEditText inputPort = new TextInputEditText(this);
+        inputPort.setInputType(InputType.TYPE_CLASS_PHONE);
+        inputPort.setHint(R.string.example_port);
+
+        LinearLayout linearLayout = new LinearLayout(this);
+        linearLayout.setOrientation(LinearLayout.VERTICAL);
+        linearLayout.addView(inputIp);
+        linearLayout.addView(inputPort);
+
+        builder.setView(linearLayout);
+
+        // Set up the buttons
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // save a new ip and port
+                if (!TextUtils.isEmpty(inputIp.getText().toString()) && !TextUtils.isEmpty(inputPort.getText().toString()) )
+                    AppSetting.saveIp(LoginActivity.this, inputIp.getText().toString(), inputPort.getText().toString());
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        builder.show();
     }
 
     void moveToHomeActivity(){

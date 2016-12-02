@@ -3,12 +3,10 @@
     <string name="welcome_name">Welcome to Jantung</string>
 
     <!--APP CONFIG-->
-    <string name="http_url">http://%s:3000/api</string>
-    <!--<string name="http_url">http://%s/api</string>-->
+    <string name="http_url">http://%s/api</string>
     <string name="mqtt_url">tcp://%s:1883</string>
-    <!--<string name="server_ip_address">192.168.0.110</string>-->
-    <!--<string name="server_ip_address">10.30.42.58</string>-->
-    <string name="server_ip_address">192.168.43.13</string>
+    <string name="server_ip_address">192.168.43.12</string>
+    <string name="server_http_port">3000</string>
     <!--<string name="server_ip_address">192.168.137.1</string>-->
     <string name="login_url">/login</string>
     <string name="register_url">/register</string>
@@ -20,6 +18,9 @@
     <string name="logout">Logout</string>
     <string name="register">Register</string>
     <string name="create_account">Create Account</string>
+    <string name="setup_ip">Setup IP</string>
+    <string name="example_ip">192.168.0.1</string>
+    <string name="example_port">3000</string>
 
     <!--HOME PAGE-->
     <string name="image_condition">Image Condition</string>

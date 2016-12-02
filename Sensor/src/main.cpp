@@ -26,4 +26,7 @@ void loop(/* arguments */) {
 
   // connector.loop();
   delay(3); // loop every 3 ms
+
+  // Serial.println("alif cuy");
+  // delay(1000);
 }
