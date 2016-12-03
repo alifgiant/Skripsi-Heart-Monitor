@@ -140,37 +140,37 @@ class Detector(object):
 
         # print 'RR interval', RR_interval
 
-        return bpm, derr, RR_interval
+        # return bpm, derr, RR_interval
 
-        # QRS_width = [S_loc[i]-Q_loc[i] for i in xrange(len(Q_loc))]
+        QRS_width = [S_loc[i]-Q_loc[i] for i in xrange(len(Q_loc))]
         
-        # # print 'len', len(RR_interval), len(QRS_width), len(R_loc), len(Q_loc), len(S_loc)
+        # print 'len', len(RR_interval), len(QRS_width), len(R_loc), len(Q_loc), len(S_loc)
         
         
-        # """Beat Classification"""
-        # # Last4_Window = zip(range(0, len(RR_interval)-4), range(4, len(RR_interval)))  # ini error
-        # Last4_Window = zip(range(0, len(QRS_width)-4), range(4, len(QRS_width)))
-        # # print 'last4window',Last4_Window
-        # # print 'RR_interval', RR_interval
-        # # print 'QRS_width', QRS_width
+        """Beat Classification"""
+        # Last4_Window = zip(range(0, len(RR_interval)-4), range(4, len(RR_interval)))  # ini error
+        Last4_Window = zip(range(0, len(QRS_width)-4), range(4, len(QRS_width)))
+        # print 'last4window',Last4_Window
+        # print 'RR_interval', RR_interval
+        # print 'QRS_width', QRS_width
         
-        # PVC = [RR_interval[y-1] <= 0.8 * np.mean(RR_interval[x:y]) and QRS_width[y-1]*5 >= 120 for x, y in Last4_Window]
-        # # print PVC
-        # PAC = [RR_interval[y-1] <= 0.8 * np.mean(RR_interval[x:y]) and QRS_width[y-1]*5 < 120 for x, y in Last4_Window]
-        # # print PAC
-        # BUNDLE_BRANCH = [0.8*np.mean(RR_interval[x:y]) <= RR_interval[y-1] <= 1.2 * np.mean(RR_interval[x:y])
-        #                  and QRS_width[y-1]*5 >= 120 for x, y in Last4_Window]
-        # # print BUNDLE_BRANCH
+        PVC = [RR_interval[y-1] <= 0.8 * np.mean(RR_interval[x:y]) and QRS_width[y-1]*5 >= 120 for x, y in Last4_Window]
+        # print PVC
+        PAC = [RR_interval[y-1] <= 0.8 * np.mean(RR_interval[x:y]) and QRS_width[y-1]*5 < 120 for x, y in Last4_Window]
+        # print PAC
+        BUNDLE_BRANCH = [0.8*np.mean(RR_interval[x:y]) <= RR_interval[y-1] <= 1.2 * np.mean(RR_interval[x:y])
+                         and QRS_width[y-1]*5 >= 120 for x, y in Last4_Window]
+        # print BUNDLE_BRANCH
         
-        # """Cardiac Rhythms"""
-        # AtrialTachycardia = [PAC[x] and PAC[x-1] and PAC[x-2] for x in range(len(PAC))[2:]]
-        # # print AtrialTachycardia
+        """Cardiac Rhythms"""
+        AtrialTachycardia = [PAC[x] and PAC[x-1] and PAC[x-2] for x in range(len(PAC))[2:]]
+        # print AtrialTachycardia
         
-        # VentricularTachycardia = [PVC[x] and PVC[x-1] and PVC[x-2] for x in range(len(PVC))[2:]]
-        # # print VentricularTachycardia
+        VentricularTachycardia = [PVC[x] and PVC[x-1] and PVC[x-2] for x in range(len(PVC))[2:]]
+        # print VentricularTachycardia
         
-        # BundleBranchBlock = [BUNDLE_BRANCH[x] and BUNDLE_BRANCH[x-1]
-        #                      and BUNDLE_BRANCH[x-2] for x in range(len(BUNDLE_BRANCH))[2:]]
-        # # print BundleBranchBlock
+        BundleBranchBlock = [BUNDLE_BRANCH[x] and BUNDLE_BRANCH[x-1]
+                             and BUNDLE_BRANCH[x-2] for x in range(len(BUNDLE_BRANCH))[2:]]
+        # print BundleBranchBlock
         
-        # return derr,  PVC, PAC, BUNDLE_BRANCH, AtrialTachycardia, VentricularTachycardia, BundleBranchBlock, bpm
+        return derr,  PVC, PAC, BUNDLE_BRANCH, AtrialTachycardia, VentricularTachycardia, BundleBranchBlock, bpm
