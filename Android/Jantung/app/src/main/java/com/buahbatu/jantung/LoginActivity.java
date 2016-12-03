@@ -38,48 +38,55 @@ public class LoginActivity extends AppCompatActivity {
             textUserName.setError(null);
             textUserPass.setError(null);
 
-            AppSetting.showProgressDialog(LoginActivity.this, "Logging in");
+            JSONObject patient = new JSONObject();
+            try {
+                patient.put("username", textUserName.getEditText().getText().toString())
+                        .put("password", textUserPass.getEditText().getText().toString());
 
-            AndroidNetworking.post(AppSetting.getHttpAddress(LoginActivity.this)
-                    +"/{user}" + getString(R.string.login_url))
-                    .addPathParameter("user", "patient")
-                    .addBodyParameter("username", textUserName.getEditText().getText().toString())
-                    .addBodyParameter("password", textUserPass.getEditText().getText().toString())
-                    .setPriority(Priority.MEDIUM).build()
-                    .getAsJSONObject(new JSONObjectRequestListener() {
-                        @Override
-                        public void onResponse(JSONObject response) {
-                            // do anything with response
-                            AppSetting.dismissProgressDialog();
-                            Log.i("LOGIN", "onResponse: "+response.toString());
-                            AppSetting.setLogin(LoginActivity.this, AppSetting.LOGGED_IN);
-                            AppSetting.saveAccount(LoginActivity.this, textUserName.getEditText().getText().toString(),
-                                    textUserPass.getEditText().getText().toString());
-                            moveToHomeActivity();
-                        }
-                        @Override
-                        public void onError(ANError error) {
-//                            // handle error
-                            AppSetting.dismissProgressDialog();
-                            Log.i("LOGIN", "onError: "+ error.getErrorBody());
-                            try {
-                                JSONObject response = new JSONObject(error.getErrorBody());
-                                if (response.getString("info").equals("username")){
-                                    textUserName.setError("Username doesn't exist");
-                                }else {
-                                    textUserPass.setError("Wrong password");
-                                }
-                            }catch (JSONException ex){
-                                ex.printStackTrace();
+                AppSetting.showProgressDialog(LoginActivity.this, "Logging in");
+
+                AndroidNetworking.post(AppSetting.getHttpAddress(LoginActivity.this)
+                        +"/{user}" + getString(R.string.login_url))
+                        .addPathParameter("user", "patient")
+                        .addJSONObjectBody(patient)
+//                        .addBodyParameter("username", textUserName.getEditText().getText().toString())
+//                        .addBodyParameter("password", textUserPass.getEditText().getText().toString())
+                        .setPriority(Priority.MEDIUM).build()
+                        .getAsJSONObject(new JSONObjectRequestListener() {
+                            @Override
+                            public void onResponse(JSONObject response) {
+                                // do anything with response
+                                AppSetting.dismissProgressDialog();
+                                Log.i("LOGIN", "onResponse: "+response.toString());
+                                AppSetting.setLogin(LoginActivity.this, AppSetting.LOGGED_IN);
+                                AppSetting.saveAccount(LoginActivity.this, textUserName.getEditText().getText().toString(),
+                                        textUserPass.getEditText().getText().toString());
+                                moveToHomeActivity();
                             }
-//                            AppSetting.dismissProgressDialog();
-////                            Log.i("LOGIN", "onResponse: "+response.toString());
-//                            AppSetting.setLogin(LoginActivity.this, AppSetting.LOGGED_IN);
-//                            AppSetting.saveAccount(LoginActivity.this, textUserName.getEditText().getText().toString(),
-//                                    textUserPass.getEditText().getText().toString());
-//                            moveToHomeActivity();
-                        }
-                    });
+                            @Override
+                            public void onError(ANError error) {
+//                            // handle error
+                                AppSetting.dismissProgressDialog();
+                                try {
+                                    JSONObject response = new JSONObject(error.getErrorBody());
+                                    if (response.getString("info").equals("username")){
+                                        textUserName.setError("Username doesn't exist");
+                                    }else {
+                                        textUserPass.setError("Wrong password");
+                                    }
+                                }catch (JSONException ex){
+                                    ex.printStackTrace();
+                                }
+                                // handle error
+                                Log.i("LOGIN", "onError: "+ error.getErrorCode());
+                                Log.i("LOGIN", "onError: "+ error.getErrorDetail());
+                                Log.i("LOGIN", "onError: "+ error.getErrorBody());
+                            }
+                        });
+            }catch (JSONException ex){
+                ex.printStackTrace();
+            }
+
         }
 
     }

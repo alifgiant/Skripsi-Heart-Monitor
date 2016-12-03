@@ -2,7 +2,6 @@ import paho.mqtt.client as mqtt
 import threading
 import time
 import numpy as np
-from collections import Counter
 import random
 
 from PanTom import Detector
@@ -13,14 +12,17 @@ client_process_holder = {}
 
 
 def sender_service(client, holder, topic, sensor):
-    # counter = Counter()
+    i = 0
     while True:
         source = holder['data'][topic]
         if len (source) > 0:
             delay = holder['delay'][topic]  
-            data = source.pop()            
-            client.publish(str(sensor+'/'+topic), str(data), retain=True)
-            print 'send', topic, data
+            i += 1
+            data = source.pop()          
+            if topic != 'visual' or i == 33:
+                i = 0
+                client.publish(str(sensor+'/'+topic), str(data), retain=True)
+                # print 'send', topic, data
             time.sleep(delay)  # in ms
 
 
@@ -70,7 +72,7 @@ def on_message(client, userdata, msg):
     if sensor_id not in client_process_holder:
         client_process_holder[sensor_id] = {'detector': Detector(), 'data': {
         'visual':[],
-        'alert':[]}, 'delay':{'visual':0.03, 'alert':1}}
+        'alert':[]}, 'delay':{'visual':0.003, 'alert':5}}
         threading.Thread(target=sender_service, args=(client, client_process_holder[sensor_id], 'visual', sensor_id)).start()
         threading.Thread(target=sender_service, args=(client, client_process_holder[sensor_id], 'alert', sensor_id)).start()
 

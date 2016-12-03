@@ -18,15 +18,15 @@ void setup(/* arguments */) {
 }
 
 void loop(/* arguments */) {
-  // read data
-  int readResult = reader.read();
-  char str_temp[6];
-	dtostrf(readResult, 4, 2, str_temp);
-  connector.publish(str_temp);
-
+  // // read data
+  // int readResult = reader.read();
+  // char str_temp[6];
+	// dtostrf(readResult, 4, 2, str_temp);
+  // connector.publish(str_temp);
+  //
   // connector.loop();
-  delay(3); // loop every 3 ms
+  // delay(3); // loop every 3 ms
 
-  // Serial.println("alif cuy");
-  // delay(1000);
+  Serial.println("alif cuy");
+  delay(1000);
 }

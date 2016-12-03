@@ -8,7 +8,8 @@
 using namespace std;
 
 const char * Connector::SENSOR_ID = "ow0003";
-const char * Connector::MQTT_BROKER = "192.168.43.13";
+// const char * Connector::MQTT_BROKER = "192.168.43.13";
+const char * Connector::MQTT_BROKER = "192.168.2.111";
 const int Connector::MQTT_PORT = 1883;
 const char * Connector::OUT_TOPIC = "sensor";
 const char * Connector::IN_TOPIC = "setting";

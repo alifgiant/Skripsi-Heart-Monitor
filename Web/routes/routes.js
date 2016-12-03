@@ -14,7 +14,7 @@ router.get('/dashboard', function(req, res, next) {
 });
 
 router.get('/login', function(req, res, next) {
-    res.render('login', {title: 'JANTUNG web apps'});
+    res.render('login2', {title: 'JANTUNG web apps'});
 });
 
 /* GET register page. */

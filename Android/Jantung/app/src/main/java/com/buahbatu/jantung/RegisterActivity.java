@@ -80,7 +80,6 @@ public class RegisterActivity extends AppCompatActivity {
                             .put("device_id", dataFragment.textUserDeviceId.getEditText().getText().toString());
 
                     AppSetting.showProgressDialog(RegisterActivity.this, "Registering");
-
                     AndroidNetworking.post(AppSetting.getHttpAddress(RegisterActivity.this)
                             +"/{user}"+getString(R.string.register_url))
                             .addPathParameter("user", "patient")
@@ -98,10 +97,20 @@ public class RegisterActivity extends AppCompatActivity {
                                 }
                                 @Override
                                 public void onError(ANError error) {
+                                    dataFragment.textUserName.setError(null);
+                                    dataFragment.textUserDeviceId.setError(null);
+
                                     AppSetting.dismissProgressDialog();
+                                    switch (error.getErrorCode()){
+                                        case 401: dataFragment.textUserName.setError("Username already exist");
+                                            break;
+                                        case 422: dataFragment.textUserDeviceId.setError("Device not registered");
+                                            break;
+                                    }
                                     // handle error
+                                    Log.i("REGISTER", "onError: "+ error.getErrorCode());
+                                    Log.i("REGISTER", "onError: "+ error.getErrorDetail());
                                     Log.i("REGISTER", "onError: "+ error.getErrorBody());
-                                    dataFragment.textUserName.setError("Username already exist");
                                 }
                             });
                 }catch (JSONException ex){
