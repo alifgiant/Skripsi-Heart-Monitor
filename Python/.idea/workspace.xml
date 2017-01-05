@@ -2,258 +2,104 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9decabf2-5f6d-48f6-8af2-cda29a987672" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Classifier.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/service_detector.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../Web/detection/PanTomkins.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../Web/detection/classifier.js" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/100/100.atr" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/100/100.dat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/100/100.hea" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/100/annotations.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/100/samples.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/101/101.atr" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/101/101.dat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/101/101.hea" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/101/annotations.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/101/samples.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/102/annotations.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/103/103.atr" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/103/103.dat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/103/103.hea" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/103/annotations.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/103/samples.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/104/104.atr" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/104/104.dat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/104/104.hea" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/104/annotations.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/104/samples.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/105/105.atr" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/105/105.dat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/105/105.hea" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/105/annotations.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/105/samples.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/106/106.atr" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/106/106.dat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/106/106.hea" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/106/annotations.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/106/data.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/107/107.atr" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/107/107.dat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/107/107.hea" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/107/annotations.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/107/samples.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/108/108.atr" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/108/108.dat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/108/108.hea" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/108/annotations.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/108/samples.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/109/109.atr" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/109/109.dat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/109/109.hea" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/109/annotations.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/109/samples.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/111/111.atr" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/111/111.dat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/111/111.hea" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/111/annotations.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/111/samples.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/112/112.atr" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/112/112.dat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/112/112.hea" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/112/annotations.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/112/samples.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/113/113.atr" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/113/113.dat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/113/113.hea" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/113/annotations.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/113/samples.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/114/114.atr" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/114/114.dat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/114/114.hea" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/114/annotations.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/114/samples.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/115/115.atr" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/115/115.dat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/115/115.hea" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/115/annotations.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/115/samples.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/116/116.atr" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/116/116.dat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/116/116.hea" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/116/annotations.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/116/samples.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/117/117.atr" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/117/117.dat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/117/117.hea" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/117/annotations.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/117/samples.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/118/118.atr" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/118/118.dat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/118/118.hea" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/118/annotations.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/118/samples.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/119/119.atr" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/119/119.dat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/119/119.hea" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/119/annotations.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/119/samples.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/121/121.atr" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/121/121.dat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/121/121.hea" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/121/annotations.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/121/samples.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/122/122.atr" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/122/122.dat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/122/122.hea" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/122/annotations.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/122/samples.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/123/123.atr" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/123/123.dat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/123/123.hea" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/123/annotations.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/123/samples.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/200/200.atr" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/200/200.dat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/200/200.hea" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/200/annotations.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/200/samples.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/201/201.atr" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/201/201.dat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/201/201.hea" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/201/annotations.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/201/samples.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/202/202.atr" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/202/202.dat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/202/202.hea" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/202/annotations.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/202/samples.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/203/203.atr" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/203/203.dat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/203/203.hea" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/203/annotations.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/203/samples.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/205/205.atr" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/205/205.dat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/205/205.hea" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/205/annotations.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/205/samples.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/207/207.atr" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/207/207.dat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/207/207.hea" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/207/annotations.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/207/samples.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/208/208.atr" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/208/208.dat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/208/208.hea" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/208/annotations.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/208/samples.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/209/209.atr" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/209/209.dat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/209/209.hea" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/209/annotations.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/209/samples.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/210/210.atr" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/210/210.dat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/210/210.hea" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/210/annotations.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/210/samples.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/212/212.atr" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/212/212.dat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/212/212.hea" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/212/annotations.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/212/samples.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/213/213.atr" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/213/213.dat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/213/213.hea" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/213/annotations.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/213/samples.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/214/214.atr" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/214/214.dat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/214/214.hea" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/214/annotations.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/214/samples.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/215/215.atr" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/215/215.dat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/215/215.hea" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/215/annotations.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/215/samples.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/217/217.atr" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/217/217.dat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/217/217.hea" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/217/annotations.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/217/samples.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/219/219.atr" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/219/219.dat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/219/219.hea" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/219/annotations.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/219/samples.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/220/220.atr" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/220/220.dat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/220/220.hea" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/220/annotations.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/220/samples.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/221/221.atr" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/221/221.dat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/221/221.hea" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/221/annotations.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/221/samples.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/222/222.atr" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/222/222.dat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/222/222.hea" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/222/annotations.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/222/samples.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/223/223.atr" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/223/223.dat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/223/223.hea" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/223/annotations.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/223/samples.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/228/228.atr" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/228/228.dat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/228/228.hea" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/228/annotations.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/228/samples.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/230/230.atr" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/230/230.dat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/230/230.hea" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/230/annotations.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/230/samples.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/231/231.atr" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/231/231.dat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/231/231.hea" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/231/annotations.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/231/samples.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/232/232.atr" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/232/232.dat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/232/232.hea" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/232/annotations.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/232/samples.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/233/233.atr" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/233/233.dat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/233/233.hea" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/233/annotations.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/233/samples.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/234/234.atr" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/234/234.dat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/234/234.hea" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/234/annotations.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/234/samples.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/downloadFile.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/downloadFileAnnot.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/downloadFileConverted.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Data/ecgcodes.h" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/service_mqtt.py" afterPath="$PROJECT_DIR$/service_mqtt_deprecated.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Android/Jantung/app/src/main/java/com/buahbatu/jantung/DetailActivity.java" afterPath="$PROJECT_DIR$/../Android/Jantung/app/src/main/java/com/buahbatu/jantung/DetailActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Android/Jantung/app/src/main/java/com/buahbatu/jantung/HomeActivity.java" afterPath="$PROJECT_DIR$/../Android/Jantung/app/src/main/java/com/buahbatu/jantung/HomeActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Android/Jantung/app/src/main/res/values/strings.xml" afterPath="$PROJECT_DIR$/../Android/Jantung/app/src/main/res/values/strings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../Web/views/content.pug" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../Web/views/footer.pug" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../Web/views/list_patient.pug" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../Web/views/side_bar.pug" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../Web/views/top_bar.pug" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Web/public/assets/css/AdminLTE.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Web/public/assets/css/admin/css/animate.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Web/public/assets/css/admin/css/bootstrap.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Web/public/assets/css/admin/css/demo.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Web/public/assets/css/admin/css/light-bootstrap-dashboard.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Web/public/assets/css/admin/css/pe-icon-7-stroke.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Web/public/assets/css/admin/fonts/Pe-icon-7-stroke.eot" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Web/public/assets/css/admin/fonts/Pe-icon-7-stroke.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Web/public/assets/css/admin/fonts/Pe-icon-7-stroke.ttf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Web/public/assets/css/admin/fonts/Pe-icon-7-stroke.woff" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Web/public/assets/css/admin/img/default-avatar.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Web/public/assets/css/admin/img/faces/face-0.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Web/public/assets/css/admin/img/faces/face-1.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Web/public/assets/css/admin/img/faces/face-2.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Web/public/assets/css/admin/img/faces/face-3.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Web/public/assets/css/admin/img/faces/face-4.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Web/public/assets/css/admin/img/faces/face-5.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Web/public/assets/css/admin/img/faces/face-6.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Web/public/assets/css/admin/img/faces/face-7.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Web/public/assets/css/admin/img/faces/tim_vector.jpe" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Web/public/assets/css/admin/img/favicon.ico" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Web/public/assets/css/admin/img/loading-bubbles.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Web/public/assets/css/admin/img/mask.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Web/public/assets/css/admin/img/new_logo.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Web/public/assets/css/admin/img/sidebar-1.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Web/public/assets/css/admin/img/sidebar-2.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Web/public/assets/css/admin/img/sidebar-3.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Web/public/assets/css/admin/img/sidebar-4.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Web/public/assets/css/admin/img/sidebar-5.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Web/public/assets/css/admin/img/tim_80x80.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Web/public/assets/css/admin/js/bootstrap-checkbox-radio-switch-tags.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Web/public/assets/css/admin/js/bootstrap-checkbox-radio-switch.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Web/public/assets/css/admin/js/bootstrap-notify.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Web/public/assets/css/admin/js/bootstrap-select.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Web/public/assets/css/admin/js/bootstrap-table.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Web/public/assets/css/admin/js/bootstrap.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Web/public/assets/css/admin/js/chartist.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Web/public/assets/css/admin/js/demo.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Web/public/assets/css/admin/js/jquery-1.10.2.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Web/public/assets/css/admin/js/jquery-ui.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Web/public/assets/css/admin/js/jquery.datatables.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Web/public/assets/css/admin/js/jquery.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Web/public/assets/css/admin/js/light-bootstrap-dashboard.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Web/public/assets/css/admin/sass/lbd/_alerts.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Web/public/assets/css/admin/sass/lbd/_buttons.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Web/public/assets/css/admin/sass/lbd/_cards.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Web/public/assets/css/admin/sass/lbd/_chartist.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Web/public/assets/css/admin/sass/lbd/_checkbox-radio-switch.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Web/public/assets/css/admin/sass/lbd/_dropdown.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Web/public/assets/css/admin/sass/lbd/_footers.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Web/public/assets/css/admin/sass/lbd/_inputs.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Web/public/assets/css/admin/sass/lbd/_misc.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Web/public/assets/css/admin/sass/lbd/_mixins.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Web/public/assets/css/admin/sass/lbd/_navbars.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Web/public/assets/css/admin/sass/lbd/_responsive.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Web/public/assets/css/admin/sass/lbd/_sidebar-and-main-panel.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Web/public/assets/css/admin/sass/lbd/_tables.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Web/public/assets/css/admin/sass/lbd/_typography.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Web/public/assets/css/admin/sass/lbd/_variables.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Web/public/assets/css/admin/sass/lbd/mixins/_buttons.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Web/public/assets/css/admin/sass/lbd/mixins/_cards.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Web/public/assets/css/admin/sass/lbd/mixins/_chartist.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Web/public/assets/css/admin/sass/lbd/mixins/_icons.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Web/public/assets/css/admin/sass/lbd/mixins/_inputs.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Web/public/assets/css/admin/sass/lbd/mixins/_labels.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Web/public/assets/css/admin/sass/lbd/mixins/_morphing-buttons.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Web/public/assets/css/admin/sass/lbd/mixins/_navbars.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Web/public/assets/css/admin/sass/lbd/mixins/_social-buttons.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Web/public/assets/css/admin/sass/lbd/mixins/_tabs.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Web/public/assets/css/admin/sass/lbd/mixins/_transparency.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Web/public/assets/css/admin/sass/lbd/mixins/_vendor-prefixes.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Web/public/assets/css/admin/sass/light-bootstrap-dashboard.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Web/public/assets/css/bbGrid.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Web/public/assets/css/bootstrap.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Web/public/assets/css/tabcontent.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Web/public/assets/css/w2ui-1.4.2.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Web/public/assets/js/bbGrid.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Web/public/assets/js/exporting.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Web/public/assets/js/highcharts.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Web/public/assets/js/jquery.dataTables.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Web/public/assets/js/nestedtable.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Web/public/assets/js/tabcontent.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Web/public/assets/js/w2ui-1.4.2.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Web/views/login2.pug" afterPath="" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/../Web/views/index.pug" afterPath="$PROJECT_DIR$/../Web/views/dashboard.pug" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PanTom.py" afterPath="$PROJECT_DIR$/PanTom.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/feeder.py" afterPath="$PROJECT_DIR$/feeder.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main.py" afterPath="$PROJECT_DIR$/main.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Web/app_mqtt.js" afterPath="$PROJECT_DIR$/../Web/app_mqtt.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Web/detection/algorithm.js" afterPath="$PROJECT_DIR$/../Web/detection/algorithm.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Web/package.json" afterPath="$PROJECT_DIR$/../Web/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Web/tester/DummySensor.py" afterPath="$PROJECT_DIR$/../Web/tester/DummySensor.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/service_old.py" afterPath="$PROJECT_DIR$/service_old.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Web/public/assets/css/style-responsive.css" afterPath="$PROJECT_DIR$/../Web/public/assets/css/style-responsive.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Web/public/assets/css/style.css" afterPath="$PROJECT_DIR$/../Web/public/assets/css/style.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Web/public/assets/js/morris-conf.js" afterPath="$PROJECT_DIR$/../Web/public/assets/js/morris-conf.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Web/routes/routes.js" afterPath="$PROJECT_DIR$/../Web/routes/routes.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Web/views/layout.pug" afterPath="$PROJECT_DIR$/../Web/views/layout.pug" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Web/views/login.pug" afterPath="$PROJECT_DIR$/../Web/views/login.pug" />
     </list>
     <ignored path="Python.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -266,8 +112,8 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/Python$tester.coverage" NAME="tester Coverage Results" MODIFIED="1471217008373" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Python$main.coverage" NAME="main Coverage Results" MODIFIED="1471215044232" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Python$tester.coverage" NAME="tester Coverage Results" MODIFIED="1471217008373" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
@@ -281,8 +127,8 @@
       <file leaf-file-name="service_mqtt_deprecated.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/service_mqtt_deprecated.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="125">
-              <caret line="41" column="16" selection-start-line="41" selection-start-column="16" selection-end-line="41" selection-end-column="33" />
+            <state relative-caret-position="666">
+              <caret line="41" column="16" lean-forward="false" selection-start-line="41" selection-start-column="16" selection-end-line="41" selection-end-column="33" />
               <folding>
                 <element signature="e#16#27#0" expanded="true" />
               </folding>
@@ -293,8 +139,8 @@
       <file leaf-file-name="main.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="395">
-              <caret line="25" column="26" selection-start-line="25" selection-start-column="12" selection-end-line="25" selection-end-column="26" />
+            <state relative-caret-position="450">
+              <caret line="25" column="26" lean-forward="false" selection-start-line="25" selection-start-column="12" selection-end-line="25" selection-end-column="26" />
               <folding />
             </state>
           </provider>
@@ -304,7 +150,7 @@
         <entry file="file://$PROJECT_DIR$/CsvLoader.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="162">
-              <caret line="9" column="33" selection-start-line="9" selection-start-column="33" selection-end-line="9" selection-end-column="33" />
+              <caret line="9" column="33" lean-forward="false" selection-start-line="9" selection-start-column="33" selection-end-line="9" selection-end-column="33" />
               <folding />
             </state>
           </provider>
@@ -314,10 +160,8 @@
         <entry file="file://$PROJECT_DIR$/service_detector.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="57">
-              <caret line="40" column="52" selection-start-line="40" selection-start-column="52" selection-end-line="40" selection-end-column="52" />
-              <folding>
-                <element signature="e#0#31#0" expanded="true" />
-              </folding>
+              <caret line="93" column="52" lean-forward="false" selection-start-line="93" selection-start-column="52" selection-end-line="93" selection-end-column="52" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -325,10 +169,11 @@
       <file leaf-file-name="feeder.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/feeder.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-159">
-              <caret line="12" column="69" selection-start-line="12" selection-start-column="69" selection-end-line="12" selection-end-column="69" />
+            <state relative-caret-position="162">
+              <caret line="13" column="0" lean-forward="false" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
               <folding>
                 <element signature="e#0#31#0" expanded="true" />
+                <marker date="1480798718058" expanded="true" signature="730:731" ph="..." />
               </folding>
             </state>
           </provider>
@@ -337,8 +182,8 @@
       <file leaf-file-name="PanTom.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/PanTom.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="137">
-              <caret line="140" column="0" selection-start-line="140" selection-start-column="0" selection-end-line="140" selection-end-column="0" />
+            <state relative-caret-position="2502">
+              <caret line="141" column="0" lean-forward="false" selection-start-line="141" selection-start-column="0" selection-end-line="141" selection-end-column="0" />
               <folding>
                 <element signature="e#0#31#0" expanded="true" />
               </folding>
@@ -349,8 +194,8 @@
       <file leaf-file-name="Classifier.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Classifier.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-201">
-              <caret line="220" column="22" selection-start-line="220" selection-start-column="22" selection-end-line="220" selection-end-column="22" />
+            <state relative-caret-position="3960">
+              <caret line="220" column="22" lean-forward="false" selection-start-line="220" selection-start-column="22" selection-end-line="220" selection-end-column="22" />
               <folding />
             </state>
           </provider>
@@ -398,16 +243,7 @@
     <option name="width" value="1368" />
     <option name="height" value="743" />
   </component>
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
-    <OptionsSetting value="true" id="Add" />
-    <OptionsSetting value="true" id="Remove" />
-    <OptionsSetting value="true" id="Checkout" />
-    <OptionsSetting value="true" id="Update" />
-    <OptionsSetting value="true" id="Status" />
-    <OptionsSetting value="true" id="Edit" />
-    <ConfirmationsSetting value="0" id="Add" />
-    <ConfirmationsSetting value="0" id="Remove" />
-  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
       <flattenPackages />
@@ -423,15 +259,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Python" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-          </PATH>
           <PATH>
             <PATH_ELEMENT>
               <option name="myItemId" value="Python" />
@@ -445,6 +274,7 @@
         </subPane>
       </pane>
       <pane id="Scratches" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -581,7 +411,7 @@
       <method />
     </configuration>
     <configuration default="true" type="js.build_tools.npm" factoryName="npm">
-      <command value="run-script" />
+      <command value="run" />
       <scripts />
       <node-interpreter value="project" />
       <envs />
@@ -728,25 +558,28 @@
     <frame x="-1" y="0" width="1368" height="743" extended-state="6" />
     <editor active="false" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.13333334" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19469696" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329582" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3289689" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.42553192" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3289689" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.63022506" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27813506" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3289689" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329582" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="processedProjectFiles" value="true" />
   </component>
   <component name="Vcs.Log.UiProperties">
     <option name="RECENTLY_FILTERED_USER_GROUPS">
@@ -767,42 +600,35 @@
     <entry file="file://$PROJECT_DIR$/PanTomkins_single.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="108">
-          <caret line="9" column="3" selection-start-line="9" selection-start-column="3" selection-end-line="9" selection-end-column="3" />
-          <folding>
-            <element signature="e#0#16#0" expanded="false" />
-          </folding>
+          <caret line="9" column="3" lean-forward="false" selection-start-line="9" selection-start-column="3" selection-end-line="9" selection-end-column="3" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/tester.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1494">
-          <caret line="83" column="25" selection-start-line="83" selection-start-column="25" selection-end-line="83" selection-end-column="25" />
-          <folding>
-            <element signature="e#2162#2193#0" expanded="false" />
-          </folding>
+          <caret line="83" column="25" lean-forward="false" selection-start-line="83" selection-start-column="25" selection-end-line="83" selection-end-column="25" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/BasedR.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/export.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="108">
-          <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+          <caret line="6" column="0" lean-forward="false" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="54">
-          <caret line="3" column="3" selection-start-line="3" selection-start-column="3" selection-end-line="3" selection-end-column="3" />
+          <caret line="3" column="3" lean-forward="false" selection-start-line="3" selection-start-column="3" selection-end-line="3" selection-end-column="3" />
           <folding />
         </state>
       </provider>
@@ -810,7 +636,7 @@
     <entry file="file://$PROJECT_DIR$/PanTom.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="216">
-          <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+          <caret line="12" column="0" lean-forward="false" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
           <folding>
             <element signature="e#0#31#0" expanded="true" />
           </folding>
@@ -820,60 +646,49 @@
     <entry file="file://$PROJECT_DIR$/PanTom_depricated.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="756">
-          <caret line="42" column="37" selection-start-line="42" selection-start-column="37" selection-end-line="42" selection-end-column="37" />
-          <folding />
+          <caret line="42" column="37" lean-forward="false" selection-start-line="42" selection-start-column="37" selection-end-line="42" selection-end-column="37" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/PanTomkins_single.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="108">
-          <caret line="9" column="3" selection-start-line="9" selection-start-column="3" selection-end-line="9" selection-end-column="3" />
-          <folding>
-            <element signature="e#0#16#0" expanded="false" />
-          </folding>
+          <caret line="9" column="3" lean-forward="false" selection-start-line="9" selection-start-column="3" selection-end-line="9" selection-end-column="3" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/tester.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#2162#2193#0" expanded="false" />
-          </folding>
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/tester.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1458">
-          <caret line="83" column="25" selection-start-line="83" selection-start-column="25" selection-end-line="83" selection-end-column="25" />
-          <folding>
-            <element signature="e#2162#2193#0" expanded="false" />
-          </folding>
+          <caret line="83" column="25" lean-forward="false" selection-start-line="83" selection-start-column="25" selection-end-line="83" selection-end-column="25" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/BasedR.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="126">
-          <caret line="7" column="20" selection-start-line="7" selection-start-column="20" selection-end-line="7" selection-end-column="20" />
-          <folding />
+          <caret line="7" column="20" lean-forward="false" selection-start-line="7" selection-start-column="20" selection-end-line="7" selection-end-column="20" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/export.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="108">
-          <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+          <caret line="6" column="0" lean-forward="false" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -881,14 +696,14 @@
     <entry file="file://$PROJECT_DIR$/CsvLoader.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="216">
-          <caret line="12" column="79" selection-start-line="12" selection-start-column="79" selection-end-line="12" selection-end-column="79" />
+          <caret line="12" column="79" lean-forward="false" selection-start-line="12" selection-start-column="79" selection-end-line="12" selection-end-column="79" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/PanTom.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2754">
-          <caret line="153" column="19" selection-start-line="153" selection-start-column="19" selection-end-line="153" selection-end-column="19" />
+          <caret line="153" column="19" lean-forward="false" selection-start-line="153" selection-start-column="19" selection-end-line="153" selection-end-column="19" />
           <folding>
             <element signature="e#0#31#0" expanded="true" />
           </folding>
@@ -898,45 +713,35 @@
     <entry file="file://$PROJECT_DIR$/PanTom_depricated.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="756">
-          <caret line="42" column="37" selection-start-line="42" selection-start-column="37" selection-end-line="42" selection-end-column="37" />
-          <folding />
+          <caret line="42" column="37" lean-forward="false" selection-start-line="42" selection-start-column="37" selection-end-line="42" selection-end-column="37" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/PanTomkins_single.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="108">
-          <caret line="9" column="3" selection-start-line="9" selection-start-column="3" selection-end-line="9" selection-end-column="3" />
-          <folding>
-            <element signature="e#0#16#0" expanded="false" />
-          </folding>
+          <caret line="9" column="3" lean-forward="false" selection-start-line="9" selection-start-column="3" selection-end-line="9" selection-end-column="3" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/tester.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#2162#2193#0" expanded="false" />
-          </folding>
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/tester.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1476">
-          <caret line="84" column="28" selection-start-line="82" selection-start-column="4" selection-end-line="84" selection-end-column="28" />
-          <folding>
-            <element signature="e#2162#2193#0" expanded="false" />
-          </folding>
+          <caret line="84" column="28" lean-forward="false" selection-start-line="82" selection-start-column="4" selection-end-line="84" selection-end-column="28" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="396">
-          <caret line="22" column="21" selection-start-line="22" selection-start-column="21" selection-end-line="22" selection-end-column="21" />
+          <caret line="22" column="21" lean-forward="false" selection-start-line="22" selection-start-column="21" selection-end-line="22" selection-end-column="21" />
           <folding />
         </state>
       </provider>
@@ -944,7 +749,7 @@
     <entry file="file://$PROJECT_DIR$/PanTom.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="54">
-          <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+          <caret line="3" column="0" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
           <folding>
             <element signature="e#0#31#0" expanded="true" />
           </folding>
@@ -954,124 +759,98 @@
     <entry file="file://$PROJECT_DIR$/PanTom_depricated.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="756">
-          <caret line="42" column="37" selection-start-line="42" selection-start-column="37" selection-end-line="42" selection-end-column="37" />
-          <folding />
+          <caret line="42" column="37" lean-forward="false" selection-start-line="42" selection-start-column="37" selection-end-line="42" selection-end-column="37" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/CsvLoader.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="216">
-          <caret line="12" column="79" selection-start-line="12" selection-start-column="79" selection-end-line="12" selection-end-column="79" />
+          <caret line="12" column="79" lean-forward="false" selection-start-line="12" selection-start-column="79" selection-end-line="12" selection-end-column="79" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/PanTomkins_single.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="108">
-          <caret line="9" column="3" selection-start-line="9" selection-start-column="3" selection-end-line="9" selection-end-column="3" />
-          <folding>
-            <element signature="e#0#16#0" expanded="false" />
-          </folding>
+          <caret line="9" column="3" lean-forward="false" selection-start-line="9" selection-start-column="3" selection-end-line="9" selection-end-column="3" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/tester.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1683">
-          <caret line="99" column="20" selection-start-line="99" selection-start-column="20" selection-end-line="99" selection-end-column="20" />
-          <folding>
-            <element signature="e#2162#2193#0" expanded="false" />
-          </folding>
+          <caret line="99" column="20" lean-forward="false" selection-start-line="99" selection-start-column="20" selection-end-line="99" selection-end-column="20" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/PanTom_depricated.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/tester.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#2162#2193#0" expanded="false" />
-          </folding>
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/tester.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#2162#2193#0" expanded="false" />
-          </folding>
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/tester.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1479">
-          <caret line="87" column="0" selection-start-line="87" selection-start-column="0" selection-end-line="87" selection-end-column="0" />
-          <folding>
-            <element signature="e#2162#2193#0" expanded="false" />
-          </folding>
+          <caret line="87" column="0" lean-forward="false" selection-start-line="87" selection-start-column="0" selection-end-line="87" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/PanTom_depricated.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/tester.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1479">
-          <caret line="87" column="0" selection-start-line="87" selection-start-column="0" selection-end-line="87" selection-end-column="0" />
-          <folding>
-            <element signature="e#2162#2193#0" expanded="false" />
-          </folding>
+          <caret line="87" column="0" lean-forward="false" selection-start-line="87" selection-start-column="0" selection-end-line="87" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/PanTom_depricated.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/tester.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1479">
-          <caret line="87" column="0" selection-start-line="87" selection-start-column="0" selection-end-line="87" selection-end-column="0" />
-          <folding>
-            <element signature="e#2162#2193#0" expanded="false" />
-          </folding>
+          <caret line="87" column="0" lean-forward="false" selection-start-line="87" selection-start-column="0" selection-end-line="87" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/PanTom_depricated.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -1079,54 +858,49 @@
     <entry file="file://$PROJECT_DIR$/PanTomkins_single.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="108">
-          <caret line="9" column="3" selection-start-line="9" selection-start-column="3" selection-end-line="9" selection-end-column="3" />
-          <folding>
-            <element signature="e#0#16#0" expanded="false" />
-          </folding>
+          <caret line="9" column="3" lean-forward="false" selection-start-line="9" selection-start-column="3" selection-end-line="9" selection-end-column="3" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/data3.csv">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/export.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="162">
-          <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+          <caret line="9" column="0" lean-forward="false" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/data2.csv">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/BasedR.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="18">
-          <caret line="1" column="18" selection-start-line="1" selection-start-column="18" selection-end-line="1" selection-end-column="18" />
-          <folding />
+          <caret line="1" column="18" lean-forward="false" selection-start-line="1" selection-start-column="18" selection-end-line="1" selection-end-column="18" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/PanTom_depricated.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="580">
-          <caret line="42" column="37" selection-start-line="42" selection-start-column="37" selection-end-line="42" selection-end-column="37" />
-          <folding />
+          <caret line="42" column="37" lean-forward="false" selection-start-line="42" selection-start-column="37" selection-end-line="42" selection-end-column="37" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/service_mqtt_deprecated.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="125">
-          <caret line="41" column="16" selection-start-line="41" selection-start-column="16" selection-end-line="41" selection-end-column="33" />
+        <state relative-caret-position="666">
+          <caret line="41" column="16" lean-forward="false" selection-start-line="41" selection-start-column="16" selection-end-line="41" selection-end-column="33" />
           <folding>
             <element signature="e#16#27#0" expanded="true" />
           </folding>
@@ -1136,15 +910,21 @@
     <entry file="file://$PROJECT_DIR$/tester.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
-          <caret line="83" column="25" selection-start-line="83" selection-start-column="25" selection-end-line="83" selection-end-column="25" />
-          <folding />
+          <caret line="83" column="25" lean-forward="false" selection-start-line="83" selection-start-column="25" selection-end-line="83" selection-end-column="25" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/data.csv">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="36">
-          <caret line="2" column="23" selection-start-line="2" selection-start-column="23" selection-end-line="2" selection-end-column="23" />
+          <caret line="2" column="23" lean-forward="false" selection-start-line="2" selection-start-column="23" selection-end-line="2" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="25" column="26" lean-forward="false" selection-start-line="25" selection-start-column="12" selection-end-line="25" selection-end-column="26" />
           <folding />
         </state>
       </provider>
@@ -1152,15 +932,34 @@
     <entry file="file://$PROJECT_DIR$/CsvLoader.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="162">
-          <caret line="9" column="33" selection-start-line="9" selection-start-column="33" selection-end-line="9" selection-end-column="33" />
+          <caret line="9" column="33" lean-forward="false" selection-start-line="9" selection-start-column="33" selection-end-line="9" selection-end-column="33" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/service_detector.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="57">
+          <caret line="93" column="52" lean-forward="false" selection-start-line="93" selection-start-column="52" selection-end-line="93" selection-end-column="52" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/feeder.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="13" column="0" lean-forward="false" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+            <marker date="1480798718058" expanded="true" signature="730:731" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/PanTom.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="137">
-          <caret line="140" column="0" selection-start-line="140" selection-start-column="0" selection-end-line="140" selection-end-column="0" />
+        <state relative-caret-position="2502">
+          <caret line="141" column="0" lean-forward="false" selection-start-line="141" selection-start-column="0" selection-end-line="141" selection-end-column="0" />
           <folding>
             <element signature="e#0#31#0" expanded="true" />
           </folding>
@@ -1169,37 +968,9 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Classifier.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-201">
-          <caret line="220" column="22" selection-start-line="220" selection-start-column="22" selection-end-line="220" selection-end-column="22" />
+        <state relative-caret-position="3960">
+          <caret line="220" column="22" lean-forward="false" selection-start-line="220" selection-start-column="22" selection-end-line="220" selection-end-column="22" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="395">
-          <caret line="25" column="26" selection-start-line="25" selection-start-column="12" selection-end-line="25" selection-end-column="26" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/feeder.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-159">
-          <caret line="12" column="69" selection-start-line="12" selection-start-column="69" selection-end-line="12" selection-end-column="69" />
-          <folding>
-            <element signature="e#0#31#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/service_detector.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="57">
-          <caret line="40" column="52" selection-start-line="40" selection-start-column="52" selection-end-line="40" selection-end-column="52" />
-          <folding>
-            <element signature="e#0#31#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>

@@ -214,7 +214,7 @@ hr {
 }
 
 ul.top-menu > li > .logout {
-	color: #f2f2f2;
+	color: #000;
 	font-size: 12px;
 	border-radius: 4px;
 	-webkit-border-radius: 4px;
@@ -414,7 +414,7 @@ ul.sidebar-menu li a.active i {
 
 .black-bg {
     background: #dd4949;
-    border-bottom: 1px solid #dd4949;
+    border-bottom: 1px solid #c9aa5f;
 }
 
 .wrapper {
@@ -468,11 +468,11 @@ a.logo span {
 }
 
 ul.top-menu > li > a {
-    color: #666666;
+    color: #fff;
     font-size: 16px;
     border-radius: 4px;
     -webkit-border-radius: 4px;
-    border:1px solid #666666 !important;
+    border:1px solid #dedede !important;
     padding: 2px 6px;
     margin-right: 15px;
 }
@@ -746,6 +746,7 @@ ul.top-menu > li > a:hover, ul.top-menu > li > a:focus {
     cursor: pointer;
     display: inline-block;
     font-size: 20px;
+    color: #fff;
 }
 
 
@@ -1743,7 +1744,8 @@ background: #fffbcc !important;
 }
 
 label {
-	font-weight: 400;
+	font-weight: bold;
+
 }
 
 .form-horizontal.style-form .form-group {

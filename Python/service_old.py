@@ -67,7 +67,7 @@ def on_message(client, userdata, msg):
         if AT_counter[True]>(0.35*len(AtrialTachycardia)):
         	new_alert.append('You should contact %s soon#Atrial Tachycardia is detected#1')
         if VT_counter[True]>(0.35*len(VentricularTachycardia)):
-        	new_alert.append('You should contact %s immediately#Ventricular Tachycardia#2')
+        	new_alert.append('You should contact %s immediately#Ventricular Tachycardia is detected#2')
         if BB_counter[True]>(0.35*len(BundleBranchBlock)):
         	new_alert.append('You should contact %s soon#Bundle Branch Block is detected#1')
         

@@ -1,14 +1,17 @@
 extends layout
-block content
+block head_bar
     link(rel='stylesheet', href='/stylesheets/signin.css')
+block content
     div.container
-        form.form-signin(method='POST' action='/api/doctor/login')
-            h2.form-signin-heading Welcome to #{title}
+        form.form-signin(method='POST')
+            // action='/api/doctor/login'
+            | Welcome to
+            h2.form-signin-heading  #{title}
             input(type="text", name='username' placeholder='Username', required=true, autofocus=true)#inputUsername.form-control
             input(type="password", name='password', placeholder='Password', required=true)#inputPassword.form-control
             div.checkbox
                 label
                     input(type="checkbox" value="remember-me")
                     | Remember me
-            button.btn.btn-lg.btn-primary.btn-block(type='submit') Sign In
-            button.btn.btn-lg.btn-primary.btn-block(type='submit') Register
+            button.btn.btn-sm.btn-primary.btn-block(type='submit') Sign In
+            button.btn.btn-sm.btn-block(type='submit') Register
