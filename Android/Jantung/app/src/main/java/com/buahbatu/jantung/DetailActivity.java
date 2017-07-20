@@ -5,6 +5,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -57,6 +58,7 @@ public class DetailActivity extends AppCompatActivity {
     @BindView(R.id.alert_image) ImageView alertImage;
     @BindView(R.id.alert_title) TextView alertTitle;
     @BindView(R.id.alert_detail) TextView alertDetail;
+    @BindView(R.id.button_remove) View button_remove;
 
     @OnClick(R.id.button_sms) void onSmsClick(){
         if (phoneNumber != null) AppSetting.makeASms(DetailActivity.this, phoneNumber);
@@ -68,10 +70,11 @@ public class DetailActivity extends AppCompatActivity {
     }
     @OnClick(R.id.button_remove) void onRemoveClick(){
         AppSetting.showProgressDialog(DetailActivity.this, "Removing friend");
-        AndroidNetworking.get(String.format(Locale.US, getString(R.string.http_url), getString(R.string.server_ip_address))
+        AndroidNetworking.post(AppSetting.getHttpAddress(DetailActivity.this)
                 +"/{user}/{username}/data/remove")
                 .addPathParameter("user", "patient")
-                .addPathParameter("username", username)
+                .addPathParameter("username", my_username)
+                .addBodyParameter("username", username)
                 .setPriority(Priority.MEDIUM).build()
                 .getAsJSONObject(new JSONObjectRequestListener() {
                     @Override
@@ -96,6 +99,7 @@ public class DetailActivity extends AppCompatActivity {
     private MyAdapter ecgAdapter = new MyAdapter();
 
     private String phoneNumber = null;
+    private String my_username;
     private String username;
     private String deviceId;
 
@@ -156,12 +160,9 @@ public class DetailActivity extends AppCompatActivity {
     }
 
     void setupDetail(){
-//        Log.i("DETAIL", "setupDetail: begin");
-//        AppSetting.AccountInfo accountInfo = AppSetting.getSavedAccount(DetailActivity.this);
         AppSetting.showProgressDialog(DetailActivity.this, "Retrieving data");
 
         AndroidNetworking.get(AppSetting.getHttpAddress(DetailActivity.this)
-//        AndroidNetworking.get(String.format(Locale.US, getString(R.string.http_url), getString(R.string.server_ip_address))
                 +"/{user}/{username}/data/simple")
                 .addPathParameter("user", "patient")
                 .addPathParameter("username", username)
@@ -247,7 +248,7 @@ public class DetailActivity extends AppCompatActivity {
         super.onDestroy();
     }
 
-    class MyAdapter extends SparkAdapter {
+    private class MyAdapter extends SparkAdapter {
 
         @Override
         public RectF getDataBounds() {
@@ -294,10 +295,15 @@ public class DetailActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         username = getIntent().getStringExtra(getString(R.string.key_name));
+        my_username = getIntent().getStringExtra(getString(R.string.key_user_name));
         deviceId = getIntent().getStringExtra(getString(R.string.key_id));
         boolean isMale = getIntent().getBooleanExtra(getString(R.string.key_gender), false);
         float rate = getIntent().getFloatExtra(getString(R.string.key_rate), 1000);
         int condition = getIntent().getIntExtra(getString(R.string.key_condition), 0);
+
+        if (username.equals(AppSetting.getSavedAccount(DetailActivity.this).username)){
+            button_remove.setVisibility(View.GONE);
+        }
 
         /*MQTT RELATED*/
         subscribedTopic.add(deviceId+"/bpm");

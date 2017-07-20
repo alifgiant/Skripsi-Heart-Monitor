@@ -1,4 +1,4 @@
-def load(address='106/106.csv', column=2):
+def load(address='106/106.csv', column=1):
     """
     Load csv that have multi column data
     :param address: csv location

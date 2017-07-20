@@ -1,5 +1,6 @@
 HeartRate-Monitor
 =================
+[This Project are not DONE yet. It still work on progress.]
 
 My Undergraduate Thesis Project  
 Reading heart signal- Transmit to Server - Analyze on Server - Forward analized data to Web and Android Phone.

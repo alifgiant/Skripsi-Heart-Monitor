@@ -1,10 +1,10 @@
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
+let mongoose = require('mongoose');
+let Schema = mongoose.Schema;
 
-var uniqueValidator = require('mongoose-unique-validator');
-var passportLocalMongoose = require('passport-local-mongoose');
+let uniqueValidator = require('mongoose-unique-validator');
+let passportLocalMongoose = require('passport-local-mongoose');
 
-var Patient = new Schema({
+let Patient = new Schema({
     username: { type: String, unique: true },
     full_name: String,
     // password: String handled by passport
@@ -14,6 +14,7 @@ var Patient = new Schema({
         id: {type: Schema.Types.ObjectId, ref: 'Patient'},
         name: String,
         is_male: Boolean,
+        phone_num: String,
         device_id: String}], //single reference to a patient
     address: String,
     my_phone: String,

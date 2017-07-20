@@ -1,0 +1,51 @@
+mixin insert_table(index, patient)
+    tr
+        td= index+1 + '.'
+        td= patient.full_name
+        td= patient.device_id
+        td= patient.phone_num
+        td            
+            a.btn.btn-sm.btn-primary(href='javascript:setupPatientList("'+ patient.id +'")')
+                i.fa.fa-heartbeat
+
+// Content Header (Page header)
+section.content-header
+    h1
+        | Warning Record
+        small Show warning log
+    ol.breadcrumb
+        li
+            i.fa.fa-dashboard  Warning        
+// Main content
+section.content
+    // Your Page Content Here
+    .box
+        .box-header.with-border
+            h3.box-title Logs
+        // /.box-header
+        .box-body
+            table.table.table-bordered#patient-list-table
+                tbody
+                    tr
+                        th(style='width: 10px') #
+                        th Name
+                        th Device
+                        th Phone
+                        th(style='width: 50px') Type
+                    // each val, index in patients
+                        +insert_table(index, val)
+        // /.box-body
+        .box-footer.clearfix
+            ul.pagination.pagination-sm.no-margin.pull-right
+                li
+                    a(href='#') «
+                li
+                    a(href='#') 1
+                li
+                    a(href='#') 2
+                li
+                    a(href='#') 3
+                li
+                    a(href='#') »
+
+// /.content

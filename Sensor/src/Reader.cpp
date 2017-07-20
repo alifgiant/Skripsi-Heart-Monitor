@@ -13,7 +13,7 @@ int Reader::process(int read){
   // do something here later
   return read;
 }
-// 
+//
 // double Reader::convertToVolt(int raw){
 //   double result = (raw * 3.3)/1024;
 // }

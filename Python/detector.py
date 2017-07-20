@@ -3,243 +3,284 @@ import itertools
 
 PEAK = 0.5
 
+BEAT_CLASS = {
+    'Normal': 1,
+    'PVC': 2,
+    'VF': 3,
+    'BII': 4
+}
 
-class Detector(object):
-    def __init__(self, sampling_freq, chunk_size_by_freq=0.2, init_duration=8):
+
+class BeatDetector(object):
+    def __init__(self, sampling_freq, window_duration=8, val_by_mean=1, idx_by_r=0.5):
         # experiment variable
-        self.init_duration = init_duration  # in second
-        self.freq = sampling_freq  # sample count in a second
-        self.chunk_size = int(sampling_freq * chunk_size_by_freq)  # detection chunks
+        self.window_duration = window_duration  # in second
+        self.freq = sampling_freq  # total sample in a second
+        self.val_by_mean = val_by_mean  # val threshold by mean coefficient
+        self.idx_by_r_avg = idx_by_r  # r-dis threshold by r-dis average coefficient
 
         # data holder
         self.sample = []
-        self.search_back_sample = []
-        self.search_back_peak = []
-        self.rr_holder = []
-        self.init_sample = []
-        self.init_rr = []
-
-        # THRESHOLD vars
-        self.SPKI = 0
-        self.NPKI = 0
-        self.THRESHOLD1 = 0
-        self.THRESHOLD2 = 0
-        self.RR_AVERAGE1 = 0
-        self.RR_AVERAGE2 = 0
-        self.RR_HIGH_LIMIT = 0
-        self.RR_LOW_LIMIT = 0
+        self.rr_holder = []                
 
         # flags
         self.r_distance = 0
-        self.is_initiation_period = True
 
-    def __initialization_threshold(self):
-        # Divide to 8 part (1s chunk), sized of sampling freq
-        chunks = [self.sample[i:i + self.freq] for i in range(0, len(self.sample), self.freq)]
-        # find temp peaks to use as base threshold
-        max_chunks = [max(enumerate(chunk), key=operator.itemgetter(1)) for chunk in chunks]
+    def execute_buffer(self):
+        # calculate threshold
+        mean = sum(self.sample) / len(self.sample)
+        threshold = self.val_by_mean * mean
 
-        for max_chunk, pos in zip(max_chunks, range(len(max_chunks))):
-            idx, val = max_chunk
-            self.SPKI = 0.125 * val + 0.875 * self.SPKI
-            self.THRESHOLD1 = self.NPKI + 0.25 * (self.SPKI - self.NPKI)
-            self.THRESHOLD2 = self.THRESHOLD1 * 0.5
+        # peak flags
+        is_peak_area = False
+        temp_peak_val = -1
 
-        last_max_idx, last_max_val = max_chunks[-1]
-        last_max_idx += 1  # +1 because idx start 0
+        # peak and threshold holder
+        threshold_feed = [threshold] * len(self.sample)
+        peak_feed = [0] * len(self.sample)
+        peaks = []
 
-        '''
-        if peak always found on last sample in a second. the average is must equal to sample count in second/
-        Whenever a peak found, as long the last peak is found on last sample of chunk, the total RR distance
-        is equal to all chunk length. So init RR average only is equal to
-        avr = (((chunk count - 1) * chunk length) + last peak idx) / chunk count 
-        '''
-        self.RR_AVERAGE1 = (((self.init_duration - 1) * self.freq) + last_max_idx) / self.init_duration
-        self.RR_AVERAGE2 = self.RR_AVERAGE1
-
-        self.RR_LOW_LIMIT = self.RR_AVERAGE2 * 0.92
-        self.RR_HIGH_LIMIT = self.RR_AVERAGE2 * 1.16
-
-        self.is_initiation_period = False
-
-    def __update_r_threshold(self, dist):
-        """"""
-        """
-        -----DISTANCE THRESHOLD-----
-        Updates dist thresholds based on last 8 RR intervals.
-        This method is normally used after initialization stage of algorithm.
-        """
-        self.rr_holder.append(dist)
-        if len(self.rr_holder) >= 8:
-            self.RR_AVERAGE1 = sum(self.rr_holder) / 8.
-            self.RR_AVERAGE2 = self.RR_AVERAGE1
-
-            self.RR_LOW_LIMIT = 0.92 * self.RR_AVERAGE2
-            self.RR_HIGH_LIMIT = 1.16 * self.RR_AVERAGE2
-
-            self.rr_holder.pop(-1)
-
-    def __update_val_threshold(self, peak_val, is_search_back=False, is_noise_peak=False):
-        # VAL THRESHOLD
-        if is_noise_peak:
-            self.NPKI = 0.125 * peak_val + 0.875 * self.NPKI
-        elif is_search_back:
-            self.SPKI = 0.25 * peak_val + 0.75 * self.SPKI
-        else:
-            self.SPKI = 0.125 * peak_val + 0.875 * self.SPKI
-
-        self.THRESHOLD1 = self.NPKI + 0.25 * (self.SPKI - self.NPKI)
-        self.THRESHOLD2 = 0.5 * self.THRESHOLD1
-
-    def __search_back(self):
-        idx, val = next(itertools.chain(iter((idx, val) for idx, val in enumerate(self.search_back_sample)
-                                             if val > self.THRESHOLD2), [(-1, -1)]))
-
-        t_search_back_peak = [0] * len(self.search_back_sample)
-        if idx > -1:
-            self.__update_val_threshold(val, is_search_back=True)
-            self.__update_r_threshold(idx)
-
-            # reset r distance and clear search back sample
-            self.r_distance = len(self.search_back_sample) - idx
-
-            t_search_back_peak[idx] = PEAK
-            self.search_back_peak += t_search_back_peak
-        else:
-            self.search_back_peak += t_search_back_peak
-        return t_search_back_peak  # search_back_result
-
-    def __execute_chunk(self, chunk):
-        peak = [0]*len(chunk)
-        # check if its distance is enough
-        if self.r_distance + len(chunk) < self.RR_LOW_LIMIT:
-            self.r_distance += len(chunk)
-            self.search_back_sample += chunk
-            return [], []
-
-            # impossible area to find peak
-            # self.search_back_peak += [0] * (len(self.search_back_sample) + len(chunk))
-            # self.search_back_sample.clear()
-            # return peak, [self.THRESHOLD1] * len(chunk)  # impossible peak, so 0
-        else:
-            remains = int(self.RR_LOW_LIMIT - self.r_distance)
-            qrs_margin_distance = int(self.RR_HIGH_LIMIT - self.RR_LOW_LIMIT + remains)
-            # qrs_margin_distance = 0
-            remains = remains if remains > 0 else 0
-            qrs_margin_distance = qrs_margin_distance if qrs_margin_distance > 0 else len(chunk)
-
-            idx, val = max(enumerate(chunk[remains:qrs_margin_distance]), key=operator.itemgetter(1))
-            idx += remains  # real idx in chunk
-
-            if val >= self.THRESHOLD1:
-                self.__update_val_threshold(val)
-                self.__update_r_threshold(self.r_distance + remains)
-                self.r_distance = 0
-
-                search_back_peak_t = [0] * len(self.search_back_sample)
-                self.search_back_peak += search_back_peak_t + ([0] * len(chunk))
-                self.search_back_sample.clear()
-
-                peak[idx] = PEAK  # temp number
-                return search_back_peak_t+peak, [self.THRESHOLD1] * (len(search_back_peak_t ) + len(chunk))
-
-            elif self.r_distance + remains > self.RR_HIGH_LIMIT:
-                self.r_distance += len(chunk)
-
-                self.search_back_sample += chunk
-                res = self.__search_back()
-                self.search_back_sample.clear()
-
-                return res, [self.THRESHOLD2] * len(res)
+        # find peaks in windows
+        for idx, val in enumerate(self.sample):
+            # for idx in range(len(self.sample)):
+            # val = self.sample[idx]
+            if val > threshold:
+                if not is_peak_area:  # peak area just begin
+                    is_peak_area = True
+                    temp_peak_val = val
+                    peaks.append(idx)
+                elif val > temp_peak_val:  # is in peak area, and current val higher than last
+                    # set peak to current val
+                    temp_peak_val = val
+                    # update last peak position
+                    peaks[-1] = idx
             else:
-                self.r_distance += len(chunk)
-                self.search_back_sample += chunk
+                is_peak_area = False
 
-                # update threshold by noise
-                self.__update_val_threshold(val, is_noise_peak=True)
+        if len(peaks) > 0:
+            # calc r-dis average,
+            # distance from last window r + idx of last peak
+            r_avg = (self.r_distance + peaks[-1]) / len(peaks)
+            r_threshold = r_avg * self.idx_by_r_avg
 
-                return [], []
-                # return peak, [self.THRESHOLD1] * len(chunk)
+            # add last peak position of last window
+            peaks.insert(0, -self.r_distance)
+
+            # remove false peak
+            last_picked = 0
+            peaks_removed = []
+            for i in range(len(peaks)-1):
+                current = peaks[i+1]
+                last = peaks[last_picked]
+                if current - last >= r_threshold:
+                    peaks_removed.append(current)
+                    last_picked = i+1  # set to current
+
+            # safe this window last r distance to end of window
+            self.r_distance = len(self.sample) - (peaks_removed[-1] + 1)  # idx+1, because idx start 0
+
+            # get set peak positions
+            for idx in peaks_removed:
+                peak_feed[idx] = PEAK
+
+
+        # clear buffer
+        self.sample.clear()
+        return peak_feed, threshold_feed
 
     def detect(self, data):
-        # load data to chunk
+        # load data to window
         self.sample.append(data)
 
-        # Initialization period is first 8 seconds of incoming signal.
-        # Samples are aggregated and for every 1s period the highest peak is assumed to be R peak.
-        # Initial thresholds are set after all 8s are acquired.
-        if self.is_initiation_period and len(self.sample) == self.init_duration * self.freq:
-            self.__initialization_threshold()
+        # buffer period is (n * freq) of incoming signal.
+        # find peaks every buffer period (seconds).
+        # if len(self.sample) == (self.buffer_duration * self.freq):
+        if len(self.sample) % (self.window_duration * self.freq) == 0:            
+            return self.execute_buffer()
 
-            # re-calculate the 8s signal using threshold, but cut back into chunk size
-            chunks = [self.sample[i:i + self.chunk_size] for i in range(0, len(self.sample), self.chunk_size)]
 
-            temp_p = []
-            temp_t = []
-            for chunk in chunks:
-                # execute pan tompkins
-                peak, thr = self.__execute_chunk(chunk)
-                temp_p += peak
-                temp_t += thr
+class ArrhythmiaDetector(object):
+    """
+    Based on An arrhythmia classification system based on the RR-interval signal
+    by M.G. Tsipouras, D.I. Fotiadis, D. Sideris
+    """
 
-            self.sample.clear()
-            return temp_p, temp_t
+    def __init__(self, sampling_freq):
+        # experiment variable
+        self.freq = sampling_freq  # total sample in a second
 
-        elif not self.is_initiation_period and len(self.sample) >= self.chunk_size:
-            # execute pan tompkins
-            peak, thr = self.__execute_chunk(self.sample)
+        # holder
+        self.rr_holder = []
+        self.beat_class = []        
 
-            self.sample.clear()
-            return peak, thr
+    def __get_r_window(self, i):
+        return self.rr_holder[i-1], self.rr_holder[i], self.rr_holder[i-+1]
 
-    def detect_test(self, data):
-        # load data to chunk
-        self.sample.append(data)
+    def __duration(self, x):
+        return x * self.freq
 
-        # Initialization period is first 8 seconds of incoming signal.
-        # Samples are aggregated and for every 1s period the highest peak is assumed to be R peak.
-        # Initial thresholds are set after all 8s are acquired.
-        if self.is_initiation_period and len(self.sample) == self.init_duration * self.freq:
-            # Divide to 8 part (1s chunk), sized of sampling freq
-            # chunks = [self.sample[i:i + self.freq] for i in range(0, len(self.sample), self.freq)]
-            chunks = [self.sample[i:i + self.freq] for i in range(0, len(self.sample), self.freq)]
-            # find temp peaks to use as base threshold
-            max_chunks = [max(enumerate(chunk), key=operator.itemgetter(1)) for chunk in chunks]
+    def __is_exceed_holder(self, i):
+        return i + 1 >= len(self.rr_holder)
 
-            idx_temp = []
-            for max_chunk, pos in zip(max_chunks, range(len(max_chunks))):
-                idx, val = max_chunk
-                idx_temp.append(idx + (pos * self.freq))
-                self.SPKI = 0.125 * val + 0.875 * self.SPKI
-                self.THRESHOLD1 = self.NPKI + 0.25 * (self.SPKI - self.NPKI)
-                self.THRESHOLD2 = self.THRESHOLD1 * 0.5
+    def __check1(self, window):
+        rr1, rr2, rr3 = window
+        return rr2 < self.__duration(0.6) and 1.8 * rr2 < rr1
 
-            last_max_idx, last_max_val = max_chunks[-1]
-            last_max_idx += 1  # +1 because idx start 0
+    def __check2(self, window):
+        rr1, rr2, rr3 = window
+        return (rr1 < self.__duration(0.7) and rr2 < self.__duration(0.7) and rr3 < self.__duration(0.7)) or \
+               (rr1 + rr2 + rr3 < self.__duration(1.7))
 
-            '''
-            if peak always found on last sample in a second. the average is must equal to sample count in second/
-            Whenever a peak found, as long the last peak is found on last sample of chunk, the total RR distance
-            is equal to all chunk length. So init RR average only is equal to
-            avr = (((chunk count - 1) * chunk length) + last peak idx) / chunk count 
-            '''
-            self.RR_AVERAGE1 = (((self.init_duration - 1) * self.freq) + last_max_idx) / self.init_duration
-            self.RR_AVERAGE2 = self.RR_AVERAGE1
+    @staticmethod
+    def __check3(window):
+        rr1, rr2, rr3 = window
+        return 1.15*rr2 < rr1 and 1.15 * rr2 < rr3
 
-            self.RR_LOW_LIMIT = self.RR_AVERAGE2 * 0.92
-            self.RR_HIGH_LIMIT = self.RR_AVERAGE2 * 1.16
+    @staticmethod
+    def __mean(x1, x2):
+        return (x1 + x2) / 2
 
-            # self.is_initiation_period = False
-            print(len(self.sample))
-            peak = [0] * len(self.sample)
-            for x in idx_temp:
-                # print(x)
-                peak[x] = 1
-            return peak, [self.THRESHOLD1] * len(self.sample)
+    def __check4(self, window):
+        rr1, rr2, rr3 = window
+        return (abs(rr1 - rr2) < self.__duration(0.3)) and \
+               (rr1 < self.__duration(0.8) or rr2 < self.__duration(0.8)) and \
+               (rr3 > 1.2 * self.__mean(rr1, rr2))
 
-        # elif not self.is_initiation_period and len(self.sample) >= self.chunk_size:
-        #     # execute pan tompkins
-        #     peak, thr = self.__execute_chunk(self.sample)
-        #
-        #     self.sample.clear()
-        #     return peak, thr
+    def __check5(self, window):
+        rr1, rr2, rr3 = window
+        return (abs(rr2 - rr3) < self.__duration(0.3)) and \
+               (rr2 < self.__duration(0.8) or rr3 < self.__duration(0.8)) and \
+               (rr1 > 1.2 * self.__mean(rr2, rr3))
+
+    def __check6(self, window):
+        rr1, rr2, rr3 = window
+        return (self.__duration(2.2) < rr2 < self.__duration(3)) and \
+               (abs(rr1 - rr2) < self.__duration(0.2) or abs(rr2 - rr3) < self.__duration(0.2))
+
+    def detect(self, rr_window):
+        # add new window to process holder
+        self.rr_holder += rr_window
+        # self.beat_class = [0] * len(self.rr_holder)  # category 0, no category
+        self.beat_class = [1] * len(self.rr_holder)  # category 1, assume all normal
+
+        should_stop = False
+        i = 1
+        pulse = 0
+        while not self.__is_exceed_holder(i) and not should_stop:  # window iterator
+            # VF area
+            if self.__check1(self.__get_r_window(i)):
+                self.beat_class[i] = 3
+                pulse += 1
+                i += 1
+                while not self.__is_exceed_holder(i) and self.__check2(self.__get_r_window(i)):
+                    self.beat_class[i] = 3
+                    pulse += 1
+                    i += 1
+                if self.__is_exceed_holder(i):
+                    # stop and return to i - pulse, re check after new window arrived
+                    should_stop = True
+                    i -= pulse                    
+                elif pulse < 4:
+                    while pulse > 0:
+                        i -= 1
+                        pulse -= 1
+                        self.beat_class[i] = 1  # set to category 1
+
+            # PVC area
+            window = self.__get_r_window(i)
+            if not should_stop and (self.__check3(window) or self.__check4(window) or self.__check5(window)):
+                self.beat_class[i] = 2  # set to category 2
+
+            # Heart Block area
+            if not should_stop and self.__check6(window):
+                self.beat_class[i] = 4  # set to category 4
+
+            i += 1
+
+        self.rr_holder = self.rr_holder[i-1:]  # slice from i - 1 to last
+
+        # remove first class, because un calculated or has calculated on last window
+        # remove from i to last, because un calculated, wait for next window
+        return self.beat_class[1:i]
+
+
+class ArrhythmiaEpisodeDetector(object):
+    def __init__(self):
+        self.position = 1
+
+    def detect(self, beat_class):
+        if self.position == 1:
+            if beat_class == BEAT_CLASS['Normal']:
+                self.position = 1
+            elif beat_class == BEAT_CLASS['PVC']:
+                self.position = 2
+            elif beat_class == BEAT_CLASS['VF']:
+                self.position = 7
+            elif beat_class == BEAT_CLASS['BII']:
+                self.position = 8
+        elif self.position == 2:
+            if beat_class == BEAT_CLASS['Normal']:
+                self.position = 3
+            elif beat_class == BEAT_CLASS['PVC']:
+                self.position = 5
+            elif beat_class == BEAT_CLASS['VF']:
+                self.position = 1
+            elif beat_class == BEAT_CLASS['BII']:
+                self.position = 1
+        elif self.position == 3:
+            if beat_class == BEAT_CLASS['Normal']:
+                self.position = 4
+            elif beat_class == BEAT_CLASS['PVC']:
+                self.position = 2
+            elif beat_class == BEAT_CLASS['VF']:
+                self.position = 1
+            elif beat_class == BEAT_CLASS['BII']:
+                self.position = 1
+        elif self.position == 4:
+            if beat_class == BEAT_CLASS['Normal']:
+                self.position = 1
+            elif beat_class == BEAT_CLASS['PVC']:
+                self.position = 2
+            elif beat_class == BEAT_CLASS['VF']:
+                self.position = 1
+            elif beat_class == BEAT_CLASS['BII']:
+                self.position = 1
+        elif self.position == 5:
+            if beat_class == BEAT_CLASS['Normal']:
+                self.position = 1
+            elif beat_class == BEAT_CLASS['PVC']:
+                self.position = 6
+            elif beat_class == BEAT_CLASS['VF']:
+                self.position = 1
+            elif beat_class == BEAT_CLASS['BII']:
+                self.position = 1
+        elif self.position == 6:
+            if beat_class == BEAT_CLASS['Normal']:
+                self.position = 1
+            elif beat_class == BEAT_CLASS['PVC']:
+                self.position = 6
+            elif beat_class == BEAT_CLASS['VF']:
+                self.position = 7
+            elif beat_class == BEAT_CLASS['BII']:
+                self.position = 8
+        elif self.position == 7:
+            if beat_class == BEAT_CLASS['Normal']:
+                self.position = 1
+            elif beat_class == BEAT_CLASS['PVC']:
+                self.position = 2
+            elif beat_class == BEAT_CLASS['VF']:
+                self.position = 7
+            elif beat_class == BEAT_CLASS['BII']:
+                self.position = 8
+        elif self.position == 8:
+            if beat_class == BEAT_CLASS['Normal']:
+                self.position = 1
+            elif beat_class == BEAT_CLASS['PVC']:
+                self.position = 2
+            elif beat_class == BEAT_CLASS['VF']:
+                self.position = 7
+            elif beat_class == BEAT_CLASS['BII']:
+                self.position = 8
+
+        return self.position
+

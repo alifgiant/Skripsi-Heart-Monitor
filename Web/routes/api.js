@@ -1,12 +1,12 @@
 /**
  * Created by MuhammadAlif on 10/22/2016.
  */
-var express = require('express');
-var router = express.Router();
-var Patient = require('../models/patient');
-var Doctor = require('../models/doctor');
-var Device = require('../models/device');
-var passport = require('passport');
+let express = require('express');
+let router = express.Router();
+let Patient = require('../models/patient');
+let Doctor = require('../models/doctor');
+let Device = require('../models/device');
+let passport = require('passport');
 
 /* POST user data. */
 router.get('/', function(req, res, next) {
@@ -15,7 +15,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/device/add', function (req, res, next) {
-    var newDevice = new Device({
+    let newDevice = new Device({
         device_id : req.body.device_id
     });
     newDevice.save(function (err, newDevice) {
@@ -27,9 +27,9 @@ router.post('/device/add', function (req, res, next) {
 });  // Tested
 
 router.post('/:user/login', function(req, res, next) {
-    if (req.params.user == 'doctor'){
-        var strategy = 'sign-in-doctor';
-    }else if (req.params.user == 'patient'){
+    if (req.params.user === 'doctor'){
+        let strategy = 'sign-in-doctor';
+    }else if (req.params.user === 'patient'){
         strategy = 'sign-in-patient';
     }else {
         res.status(400);
@@ -39,7 +39,7 @@ router.post('/:user/login', function(req, res, next) {
         if (err) { return next(err); }
         else if (!user) {
             res.status(401);
-            if (strategy == 'sign-in-doctor'){  // doctor
+            if (strategy === 'sign-in-doctor'){  // doctor
                 Doctor.findOne({username: req.body.username}, function (err, data) {
                     if(!data){
                         return res.send({status:'failed', info:'username'});
@@ -62,12 +62,12 @@ router.post('/:user/login', function(req, res, next) {
                 if (err) {
                     res.status(err.status || 503);
                     return next(err);
-                }else if (strategy == 'sign-in-doctor'){
+                }else if (strategy === 'sign-in-doctor'){
                     // return user info
                     Doctor.findOne({username: req.body.username}, function (err, data) {
                         return res.json({status:"success", type: 'doctor', username: data.username});
                     })
-                }else if (strategy == 'sign-in-patient'){
+                }else if (strategy === 'sign-in-patient'){
                     // return user info
                     Patient.findOne({username: req.body.username}, function (err, data) {
                         return res.json({status:"success", type: 'patient', username: data.username});
@@ -79,7 +79,7 @@ router.post('/:user/login', function(req, res, next) {
 }); // Tested
 
 router.post('/:user_type/register', function (req, res, next) {
-    if (req.params.user_type== 'doctor'){
+    if (req.params.user_type=== 'doctor'){
         Doctor.register(new Doctor({
             username : req.body.username,
             full_name : req.body.full_name,
@@ -92,7 +92,7 @@ router.post('/:user_type/register', function (req, res, next) {
                 return res.json({status:"success", username: req.body.username});
             }
         });
-    }else if (req.params.user_type == 'patient'){
+    }else if (req.params.user_type === 'patient'){
         Device.findOne({device_id: req.body.device_id}, function (err, device) {
             if (device){
                 Patient.register(new Patient({
@@ -124,12 +124,12 @@ router.post('/:user_type/register', function (req, res, next) {
 });  // Tested
 
 router.get('/:user_type/:username/data/simple', function (req, res, next) {
-    if (req.params.user_type == 'doctor'){
+    if (req.params.user_type === 'doctor'){
         Doctor.findOne({username: req.params.username}, function (err, doctor) {
             if (doctor) res.json(doctor);
             else res.status(401).send({status:'failed', info:'user not found'});
         });
-    }else if (req.params.user_type == 'patient'){
+    }else if (req.params.user_type === 'patient'){
         Patient.findOne({username: req.params.username}, function (err, patient) {
             if (patient) res.json({
                 full_name:patient.full_name,
@@ -148,12 +148,12 @@ router.get('/:user_type/:username/data/simple', function (req, res, next) {
 });  // tested patient
 
 router.get('/:user_type/:username/data', function (req, res, next) {
-    if (req.params.user_type == 'doctor'){
+    if (req.params.user_type === 'doctor'){
         Doctor.findOne({username: req.params.username}, function (err, doctor) {
             if (doctor) res.json(doctor);
             else res.status(401).send({status:'failed', info:'user not found'});
         });
-    }else if (req.params.user_type == 'patient'){
+    }else if (req.params.user_type === 'patient'){
         Patient.findOne({username: req.params.username}, function (err, patient) {
             if (patient) res.json(patient);
             else res.status(401).send({status:'failed', info:'user not found'});
@@ -165,22 +165,58 @@ router.get('/:user_type/:username/data', function (req, res, next) {
 });  // tested patient
 
 router.post('/:user_type/:username/data/add', function (req, res, next) {
-    if (req.params.user_type == 'doctor'){
+    if (req.params.user_type === 'doctor'){
         Doctor.findOne({username: req.params.username}, function (err, doctor) {
-            if (doctor) res.json(doctor);
-            else res.status(401).send({status:'failed', info:'user not found'});
+            if (doctor) {
+                // res.json(doctor);
+                Patient.findOne({username:req.body.username}, function (err, patient) {
+                    if (patient){
+                        let duplicate = false;
+                        for (let i = 0; i<doctor.patients.length; i++){
+                            if (doctor.patients[i].id.toString() === patient.id.toString()){
+                                doctor.patients[i].full_name = patient.full_name;
+                                doctor.patients[i].device_id = patient.device_id;
+                                doctor.patients[i].phone_num = patient.my_phone;
+                                duplicate = true;
+                                break;
+                            }
+                        }
+                        if (!duplicate) {
+                            doctor.patients.push({
+                                id: patient.id,
+                                full_name: patient.full_name,
+                                device_id: patient.device_id,
+                                phone_num: patient.my_phone
+                            });
+                        }
+                        doctor.save(function (err) {
+                            if (!err && !duplicate) res.send({status:'success', info:'patient added',
+                                name: patient.username,
+                                is_male: patient.is_male,
+                                device_id: patient.device_id});
+                            else if (duplicate) res.send({status:'success', info:'patient updated',
+                                name: patient.username,
+                                is_male: patient.is_male,
+                                device_id: patient.device_id});
+                            else res.send(err);
+                        });
+                    }else res.status(200).send({status:'failed', info:'Patient not found'});
+                });
+            }
+            else res.status(401).send({status:'failed', info:'Doctor not found'});
         });
-    }else if (req.params.user_type == 'patient'){
+    }else if (req.params.user_type === 'patient'){
         Patient.findOne({username: req.params.username}, function (err, patient) {
             if (patient) {
                 // res.json(patient);
                 Patient.findOne({username:req.body.username}, function (err, friend) {
                     if (friend){
-                        var duplicate = false;
-                        for (var i = 0; i<patient.friends.length; i++){
-                            if (patient.friends[i].id == friend.id){
+                        let duplicate = false;
+                        for (let i = 0; i<patient.friends.length; i++){
+                            if (patient.friends[i].id.toString() === friend.id.toString()){
                                 patient.friends[i].name = friend.username;
                                 patient.friends[i].device_id= friend.device_id;
+
                                 duplicate = true;
                                 break;
                             }
@@ -204,7 +240,7 @@ router.post('/:user_type/:username/data/add', function (req, res, next) {
                                 device_id: friend.device_id});
                             else res.send(err);
                         });
-                    }else res.status(401).send({status:'failed', info:'user not found'});
+                    }else res.status(200).send({status:'failed', info:'user not found'});
                 });
             }
             else res.status(401).send({status:'failed', info:'user not found'});
@@ -216,17 +252,17 @@ router.post('/:user_type/:username/data/add', function (req, res, next) {
 });  // tested patient
 
 router.post('/:user_type/:username/data/remove', function (req, res, next) {
-    if (req.params.user_type == 'doctor'){
+    if (req.params.user_type === 'doctor'){
         Doctor.findOne({username: req.params.username}, function (err, doctor) {
             if (doctor) res.json(doctor);
             else res.status(401).send({status:'failed', info:'user not found'});
         });
-    }else if (req.params.user_type == 'patient'){
+    }else if (req.params.user_type === 'patient'){
         Patient.findOne({username: req.params.username}, function (err, patient) {
             if (patient){
-                var found = false;
-                for (var i = 0; i<patient.friends.length; i++){
-                    if (patient.friends[i].name == req.body.username){
+                let found = false;
+                for (let i = 0; i<patient.friends.length; i++){
+                    if (patient.friends[i].name === req.body.username){
                         patient.friends.splice(i, 1);
                         found = true;
                         break;

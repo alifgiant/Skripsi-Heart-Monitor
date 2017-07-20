@@ -1,12 +1,18 @@
-var mongoose = require('mongoose');
-var uniqueValidator = require('mongoose-unique-validator');
-var Schema = mongoose.Schema;
-var passportLocalMongoose = require('passport-local-mongoose');
+let mongoose = require('mongoose');
+let Schema = mongoose.Schema;
 
-var Doctor = new Schema({
-    username: { type: 'string', unique: true },
+let uniqueValidator = require('mongoose-unique-validator');
+let passportLocalMongoose = require('passport-local-mongoose');
+
+let Doctor = new Schema({
+    username: { type: String, unique: true },
     full_name: String,
-    patients : [{ type: Schema.Types.ObjectId, ref: 'Patient'}],
+    patients : [{
+        _id: false,
+        id: {type: Schema.Types.ObjectId, ref: 'Patient'},
+        full_name: String,
+        device_id: String,
+        phone_num: String}], //single reference to a patient\
     address: String
     // password: String auth handling with passport-local
 });

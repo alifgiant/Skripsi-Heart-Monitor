@@ -1,48 +1,51 @@
-var express = require('express');
-var router = express.Router();
-var Patient = require('../models/patient');
-var Doctor = require('../models/doctor');
-var Device = require('../models/device');
-var passport = require('passport');
+/**
+ * Created by Muhammad Alif on 05/28/2016.
+ */
+let express = require('express');
+let router = express.Router();
+let Doctor = require('../models/doctor');
+let Device = require('../models/device');
+let utils = require('./utils');
+let passport = require('passport');
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
+router.get('/', (req, res) => {
     if (req.isAuthenticated())
         res.redirect('/dashboard');
     else
         res.redirect('/login');
 });
 
-router.get('/dashboard', function(req, res, next) {
-    res.render('dashboard', {title: 'JANTUNG web apps', username:'Alif Akbar'});
+/* Do login, create session */
+router.get('/login', (req, res) => {
+    if (req.isAuthenticated())
+        res.redirect('/dashboard');
+    else
+        res.render('login', {title: 'JANTUNG - Doctor Login', has_error: false});
 });
 
-router.get('/login', function(req, res, next) {
-    res.render('login', {title: 'JANTUNG web apps'});
-});
-
-router.post('/login', function(req, res, next) {
-    var strategy = 'sign-in-doctor';
-    passport.authenticate(strategy, function(err, user) {
+router.post('/login', (req, res, next) => {
+    let strategy = 'sign-in-doctor';
+    passport.authenticate(strategy, (err, user) => {
         if (err) { return next(err); }
         else if (!user) {
             res.status(401);
-            Doctor.findOne({username: req.body.username}, function (err, data) {
+            Doctor.findOne({username: req.body.username}, (err, data) => {
                 if(!data){
-                    return res.send({status:'failed', info:'username'});
+                    return res.render('login', { title: 'JANTUNG - Doctor Login', has_error: 'username'});
                 }else {
-                    return res.send({status:'failed', info:'password'});
+                    return res.render('login', { title: 'JANTUNG - Doctor Login', has_error: 'password'});
                 }
             })
         }
         else {
-            req.logIn(user, function (err) {
+            req.logIn(user, (err) => {
                 if (err) {
                     res.status(err.status || 503);
                     return next(err);
                 }else {
-                    // return user info
-                    Doctor.findOne({username: req.body.username}, function (err, data) {
+                    // res.send(user);
+                    Doctor.findOne({username: req.body.username}, (err, data) => {
                         res.redirect('/dashboard');
                         // return res.json({status:"success", type: 'doctor', username: data.username});
                     })
@@ -52,20 +55,50 @@ router.post('/login', function(req, res, next) {
     })(req, res, next);
 });
 
-/* GET register page. */
-router.get('/register', function(req, res, next) {
-    res.render('register', { title: 'Express' });
+/* DO logout, remove session */
+router.get('/logout', utils.isAuthenticated, (req, res) => {
+    req.logout();
+    res.redirect('/');
 });
 
 /* GET register page. */
-router.get('/dashboard', function(req, res, next) {
-    res.render('register', { title: 'Express' });
+router.get('/register', (req, res, next) => {
+    res.render('register', { title: 'JANTUNG - Doctor Registration', has_error: false });
 });
 
-/* GET users listing. */
-router.get('/send', function(req, res, next) {
-    res.send('respond with a resource');
+router.post('/register', (req, res, next) => {
+    Doctor.register(new Doctor({
+        username : req.body.username,
+        full_name : req.body.full_name,
+        address : req.body.address
+    }), req.body.password, (err, account) => {
+        if (err) {
+            res.status(err.status || 422);
+            switch (err.name){
+                case 'UserExistsError':
+                    return res.render('register', { title: 'JANTUNG - Doctor Registration', has_error: true});
+            }
+        }else{
+            return res.redirect('/login');
+        }
+    });
 });
 
+/* GET register page. */
+router.get('/device-add', (req, res, next) => {
+    res.render('device_add', { title: 'JANTUNG - Device Add', has_error: false });
+});
+
+router.post('/device-add', function (req, res, next) {
+    let newDevice = new Device({
+        device_id : req.body.device_id
+    });
+    newDevice.save(function (err, newDevice) {
+        if (err) {
+            return res.status(422).render('device_add', { title: 'JANTUNG - Device Add', has_error: true });
+        }
+        res.render('device_add', { title: 'JANTUNG - Device Add', has_error: false });
+    });
+});  // Tested
 
 module.exports = router;

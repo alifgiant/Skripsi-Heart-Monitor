@@ -1,17 +1,33 @@
-extends layout
+extends component/layout
 block head_bar
     link(rel='stylesheet', href='/stylesheets/signin.css')
 block content
-    div.container
-        form.form-signin(method='POST')
-            // action='/api/doctor/login'
-            | Welcome to
-            h2.form-signin-heading  #{title}
-            input(type="text", name='username' placeholder='Username', required=true, autofocus=true)#inputUsername.form-control
-            input(type="password", name='password', placeholder='Password', required=true)#inputPassword.form-control
-            div.checkbox
-                label
-                    input(type="checkbox" value="remember-me")
-                    | Remember me
-            button.btn.btn-sm.btn-primary.btn-block(type='submit') Sign In
-            button.btn.btn-sm.btn-block(type='submit') Register
+    .col-xs-6.col-md-4.col-xs-offset-3.col-md-offset-4(style='padding-top: 20px;')
+        .box.box-info
+            .box-header.with-border
+                h3.box-title= title
+            // /.box-header
+            // form start
+            form.form-horizontal(method='POST')
+                .box-body
+                    .form-group
+                        label.col-sm-2.control-label Username
+                        .col-sm-10
+                            input.form-control(name='username', type='text', required=true, placeholder='username')
+                    .form-group
+                        label.col-sm-2.control-label Password
+                        .col-sm-10
+                            input.form-control(name='password', type='password', required=true, placeholder='Password')
+                // /.box-body
+                .box-footer
+                    .col-xs-6.col-md-6.col-xs-offset-3.col-md-offset-3
+                        button.btn.btn-sm.btn-primary.btn-block(type='submit') Sign In
+                        a.btn.btn-sm.btn-block(href='/register') Register
+
+            if (has_error === 'username')
+                script.
+                    alert('Username Tidak Terdaftar');
+            else if (has_error === 'password')
+                script.
+                    alert('Password Anda Salah');
+

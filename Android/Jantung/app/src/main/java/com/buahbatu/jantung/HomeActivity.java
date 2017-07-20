@@ -93,8 +93,8 @@ public class HomeActivity extends AppCompatActivity{
                         AppSetting.dismissProgressDialog();
                         try {
                             Toast.makeText(HomeActivity.this, response.getString("info"), Toast.LENGTH_SHORT).show();
-                            // nama asli, dan gender minta dari response server
-                            items.add(new ItemDevice(response.getString("name"), DEVICE, response.getString("device_id"), response.getBoolean("is_male")));
+                            items.add(new ItemDevice(response.getString("name"), response.getString("full_name"), DEVICE, response.getString("device_id"), response.getBoolean("is_male")));
+                            viewAdapter.notifyDataSetChanged();
                         }catch (JSONException ex){
                             ex.printStackTrace();
                         }
@@ -151,7 +151,7 @@ public class HomeActivity extends AppCompatActivity{
                             subscribedTopic.add(deviceId+"/bpm");
 
                             // add my device
-                            items.add(new ItemDevice(full_name, DEVICE, deviceId, is_male));
+                            items.add(new ItemDevice(accountInfo.username, full_name, DEVICE, deviceId, is_male));
 
                             // add friend list header
                             items.add(new Item("Friend Device", HEADER));
@@ -160,25 +160,22 @@ public class HomeActivity extends AppCompatActivity{
                             JSONArray friendArray = response.getJSONArray("friends");
                             for (int i = 0; i < friendArray.length(); i++) {
                                 JSONObject object = friendArray.getJSONObject(i);
-                                items.add(new ItemDevice(object.getString("name"),
+                                items.add(new ItemDevice(object.getString("name"), object.getString("full_name"),
                                         DEVICE, object.getString("device_id"), object.getBoolean("is_male")));
                                 subscribedTopic.add(object.getString("device_id")+"/bpm");
                             }
+
                             // notify all view
                             viewAdapter.notifyDataSetChanged();
                         }catch (JSONException ex){
                             ex.printStackTrace();
                         }
-                        items.add(new ItemDevice("husna", DEVICE, "A001", false));
-                        subscribedTopic.add("A001"+"/bpm");
                         onResume();
                     }
                     @Override
                     public void onError(ANError anError) {
                         AppSetting.dismissProgressDialog();
                         Log.i("HOME", "onError: "+anError.getErrorBody());
-                        items.add(new ItemDevice("husna", DEVICE, "A001", false));
-                        subscribedTopic.add("A001"+"/bpm");
                         onResume();
                     }
                 });
@@ -194,7 +191,7 @@ public class HomeActivity extends AppCompatActivity{
 
             @Override
             public void messageArrived(String topic, MqttMessage message) throws Exception {
-                System.out.println("Message Arrived!: " + topic + ": " + new String(message.getPayload()));
+//                System.out.println("Message Arrived!: " + topic + ": " + new String(message.getPayload()));
                 String[] splitedTopic = topic.split("/");
                 switch (splitedTopic[1]) {
                     case "bpm":
@@ -232,9 +229,9 @@ public class HomeActivity extends AppCompatActivity{
             }
         }
     }
-//
-@Override
-protected void onDestroy() {
+
+    @Override
+    protected void onDestroy() {
     Log.i("Detail", "onDestroy: ");
     for (String topic:subscribedTopic){
         Log.i("Detail", "onDestroy: "+topic);
@@ -300,8 +297,10 @@ protected void onDestroy() {
             final Item item = items.get(position);
             TextView textName = (TextView) holder.itemView.findViewById(R.id.item_name);
             textName.setText(item.getName());
+
             if (item.getItemType() == DEVICE){
                 final ItemDevice device = (ItemDevice)item;
+                textName.setText(device.getFull_name());
                 ImageView image = (ImageView) holder.itemView.findViewById(R.id.item_image);
                 if (device.isMale()){
                     switch (device.getCondition()){
@@ -354,6 +353,7 @@ protected void onDestroy() {
                 ).toBundle();
 
                 Intent intent = new Intent(HomeActivity.this, DetailActivity.class);
+                intent.putExtra(getString(R.string.key_user_name), accountInfo.username);
                 intent.putExtra(getString(R.string.key_name), itemDevice.getName());
                 intent.putExtra(getString(R.string.key_id), itemDevice.getDeviceId());
                 intent.putExtra(getString(R.string.key_gender), itemDevice.isMale());

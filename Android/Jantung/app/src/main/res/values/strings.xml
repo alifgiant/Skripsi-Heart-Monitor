@@ -63,6 +63,7 @@
 
     <!--DETAIL PAGE-->
     <string name="card_transition">Card Transition</string>
+    <string name="key_user_name">keyUserName</string>
     <string name="key_name">keyName</string>
     <string name="key_id">keyId</string>
     <string name="key_gender">keyGender</string>

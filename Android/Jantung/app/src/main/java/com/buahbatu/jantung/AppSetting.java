@@ -113,8 +113,10 @@ class AppSetting {
     }
 
     static class AccountInfo{
-        String username;
+        public String full_name;
         String password;
+        String username;
+
         AccountInfo(String username, String password) {
             this.username = username;
             this.password = password;

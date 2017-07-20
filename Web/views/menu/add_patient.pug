@@ -1,0 +1,28 @@
+// Content Header (Page header)
+section.content-header
+    h1
+        | Add Patient
+        small Get your patient Device ID
+    ol.breadcrumb
+        li
+            i.fa.fa-dashboard  Patient
+        li.active Add
+// Main content
+section.content
+    // Your Page Content Here
+    .col-md-offset-3.col-md-6(style='padding-top: 25px;')
+        // general form elements
+        .box.box-primary
+            .box-header.with-border
+                h3.box-title Input Patient Credential
+            // /.box-header
+            // form start
+            form(role='form')
+                .box-body
+                    .form-group
+                        label Patient Username
+                        input.form-control(type='text', required=true, placeholder='Patient Username')#add-patient-username
+                // /.box-body
+                .box-footer
+                    a.btn.btn-primary(href= 'javascript: setupPatientAdd()') Submit
+// /.content

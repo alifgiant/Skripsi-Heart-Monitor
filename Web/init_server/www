@@ -18,6 +18,10 @@ app.set('port', port);
  * Create HTTP server.
  */
 var server = http.createServer(app);
+/**
+ * Setup Socket.Io instance
+ */
+var io = require('socket.io')(server);
 
 /**
  * Listen on provided port, on all network interfaces.
@@ -82,35 +86,37 @@ function onListening() {
 
 
 // /*---------------------MQTT AREA---------------------------*/
-// var mosca = require('mosca');
-// var configDatabase = require('../config/database');
-// var moscaBroker = new mosca.Server( {
-//     port : normalizePort(configServer.mqtt_port),
-//     persistence: {
-//         factory: mosca.persistence.Mongo,
-//         url: configDatabase.base_url
-//     }
-// } );
-//
-// var app_mqtt = require('../app_mqtt');
-// var mqtt = new app_mqtt(moscaBroker);
-//
-// // log when mosca broker running.
-// moscaBroker.on('ready', function () {
-//     console.log('MQTT broker is up and running in port '+configServer.mqtt_port);
-// });
-//
-// // log client connected
-// moscaBroker.on('clientConnected', function(client) {
-//     // clientID = client.id;  // log a connected device
-//     console.log('MQTT: ClientConnected: ', client.id);
-// });
-//
-// // log client connected
-// moscaBroker.on('clientDisconnected', function(client) {
-//     // clientID = client.id;  // log a disconnected device
-//     console.log('MQTT: ClientDisconnected: ', client.id);
-// });
-//
-// // Forward mqtt data to socket
-// moscaBroker.on('published', mqtt.receivedDataCallBack);
+var mosca = require('mosca');
+var configDatabase = require('../config/database');
+var moscaBroker = new mosca.Server( {
+    port : normalizePort(configServer.mqtt_port),
+    persistence: {
+        factory: mosca.persistence.Mongo,
+        url: configDatabase.base_url
+    }
+} );
+
+var MQttApp = require('../app_mqtt');
+var mqtt = new MQttApp(moscaBroker, io);
+
+// log when mosca broker running.
+moscaBroker.on('ready', function () {
+    console.log('MQTT broker is up and running in port '+configServer.mqtt_port);
+});
+
+// log client connected
+moscaBroker.on('clientConnected', function(client) {
+    // clientID = client.id;  // log a connected device
+    console.log('MQTT: ClientConnected: ', client.id);
+});
+
+// log client connected
+moscaBroker.on('clientDisconnected', function(client) {
+    // clientID = client.id;  // log a disconnected device
+    console.log('MQTT: ClientDisconnected: ', client.id);
+});
+
+// Forward mqtt data to socket
+moscaBroker.on('published', (packet, client) => {
+  mqtt.receivedDataCallBack(packet, client);
+});

@@ -3,11 +3,11 @@
  */
 
 // load all the things we need
-var LocalStrategy   = require('passport-local').Strategy;
+let LocalStrategy   = require('passport-local').Strategy;
 
 // load up the user model
-var Doctor = require('../models/doctor');
-var Patient = require('../models/patient');
+let Doctor = require('../models/doctor');
+let Patient = require('../models/patient');
 
 function configPassport(passport) {
     // =========================================================================
