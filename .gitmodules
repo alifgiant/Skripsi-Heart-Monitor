@@ -1,0 +1,15 @@
+[submodule "TA-Buku"]
+	path = TA-Buku
+	url = https://github.com/alifgiant/TA-Buku.git
+[submodule "TA-Sensor"]
+	path = TA-Sensor
+	url = https://github.com/alifgiant/TA-Sensor.git
+[submodule "TA-Web"]
+	path = TA-Web
+	url = https://github.com/alifgiant/TA-Web.git
+[submodule "TA-Android"]
+	path = TA-Android
+	url = https://github.com/alifgiant/TA-Android.git
+[submodule "TA-Python"]
+	path = TA-Python
+	url = https://github.com/alifgiant/TA-Python.git

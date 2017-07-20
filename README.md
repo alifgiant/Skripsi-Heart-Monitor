@@ -46,6 +46,11 @@ The result will be forwarded to [web](https://github.com/alifgiant/HeartRate-Mon
 ![web screen shoot](https://raw.githubusercontent.com/alifgiant/HeartRate-Monitor/NewTA/public/images/web.jpg)
 ![phone screen shoot](https://raw.githubusercontent.com/alifgiant/HeartRate-Monitor/NewTA/public/images/phone.jpg)
 
+Git Submodule
+-----------------------
+My other repo about this project
+[Sensor](https://github.com/alifgiant/TA-Sensor), [Web](https://github.com/alifgiant/TA-Web), [Android](https://github.com/alifgiant/TA-Android), [Report](https://github.com/alifgiant/TA-Buku), [Python](https://github.com/alifgiant/TA-Python).
+
 License
 -------
 	Copyright 2016 Muhammad Alif Akbar
