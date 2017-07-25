@@ -13,9 +13,6 @@
 [submodule "TA-Python"]
 	path = TA-Python
 	url = https://github.com/alifgiant/TA-Python.git
-[submodule "TA-DATA"]
-	path = TA-DATA
-	url = https://github.com/alifgiant/TA-DATA.git
 [submodule "TA-Data"]
 	path = TA-Data
 	url = https://github.com/alifgiant/TA-Data.git
