@@ -16,3 +16,6 @@
 [submodule "TA-Data"]
 	path = TA-Data
 	url = https://github.com/alifgiant/TA-Data.git
+[submodule "TA-Paper"]
+	path = TA-Paper
+	url = https://github.com/alifgiant/TA-Paper.git
